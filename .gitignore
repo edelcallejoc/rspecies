@@ -1,4 +1,4 @@
-.Rproj.user
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
@@ -6,7 +6,15 @@
 /vignettes/*.html
 /vignettes/*.rds
 wc2-5/*
-workflow.txt
+workflow
 pruebas.R
 README.rmd
 README.html
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
