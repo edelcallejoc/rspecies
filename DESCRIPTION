@@ -26,7 +26,8 @@ Imports:
     RColorBrewer,
     leaflet,
     DT,
-    methods
+    methods,
+    httr
 URL: https://github.com/edelcallejoc/rspecies
 BugReports: https://github.com/edelcallejoc/rspecies/issues
 License: GPL-3.0+
