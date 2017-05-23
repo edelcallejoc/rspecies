@@ -28,7 +28,7 @@
 #' @docType package
 #' @name rspecies
 #'
-#' @import methods grDevices devtools
+#' @import methods grDevices
 #'
 #'
 NULL
