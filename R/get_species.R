@@ -11,11 +11,14 @@
 #'
 #' @param date logical. If TRUE the recolection date is added.
 #'
+#' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
 #' @export
 #'
-#' @import httr jsonlite
+#' @import httr
 #'
+
+
 get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
 
   if(is.null(species)){stop("Species must be especified.")}
@@ -42,6 +45,3 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
   return(coords)
  }
 
-# debug(get_species)
-
-# a <- get_species("Lynx rufus")
