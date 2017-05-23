@@ -115,7 +115,7 @@
 #'
 #' @export
 #'
-#' @import raster parallel doParallel foreach
+#' @import parallel doParallel foreach
 #'
 #'
 #'
