@@ -1,10 +1,17 @@
+# RStudio files
 .Rproj.user/
+
+# R history and RData
 .Rhistory
 .RData
 .Ruserdata
-.Rbuildignore
-/vignettes/*.html
-/vignettes/*.rds
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+vignettes/*.rds
+
+# Other things
 wc2-5/*
 workflow
 pruebas.R
