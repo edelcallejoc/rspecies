@@ -1,0 +1,66 @@
+Package: rspecies
+Type: Package
+Title: A Spatial Data Mining Framework for Species Distribution
+    Modelling
+Version: 0.0.1
+Authors@R: person("Del Callejo-Canal", "Enrique", email =
+    "edelcallejoc@gmail.com", role = c("aut","cre"))
+Maintainer: Enrique Del Callejo-Canal <edelclalejoc@gmail.com>
+Description: An implementation of Spatial Data Mining for Species Distribution
+    Modelling. It combines Spatial Data Mining Philosophy and Bayesian Statistic
+    Theory for handling large volumes of spatial data. It also implements
+    Generalized Naive Bayes algorithms in order to extract useful knowledge from
+    occurrence spatial information. The main goal is to use rspecies with presence/
+    absence and environmental data for species distribution modelling. However, It
+    can use for other modelling purposes.
+Depends:
+    R (>= 3.4.0)
+Imports:
+    sp,
+    rgeos,
+    rgdal,
+    maptools,
+    doParallel,
+    foreach,
+    parallel,
+    RColorBrewer,
+    leaflet,
+    DT,
+    methods
+URL: https://github.com/edelcallejoc/rspecies
+BugReports: https://github.com/edelcallejoc/rspecies/issues
+License: GPL-3.0+
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Suggests:
+    knitr,
+    rmarkdown,
+    ggplot2,
+    plotly,
+    testthat
+VignetteBuilder: knitr
+Collate:
+    'BinMat-class.R'
+    'BinMatCount-class.R'
+    'BinMatEps-class.R'
+    'BinMatPred-class.R'
+    'BinMatProb-class.R'
+    'BinMatScore-class.R'
+    'Mex0.R'
+    'counts.R'
+    'epsilon.R'
+    'get-methods.R'
+    'get_species.R'
+    'grd_build.R'
+    'id_pts.R'
+    'laplace.R'
+    'mammals.R'
+    'plot-methods.R'
+    'predict.R'
+    'probs.R'
+    'raster_breaks.R'
+    'rspecies.R'
+    'score.R'
+    'set-methods.R'
+    'zzz.R'

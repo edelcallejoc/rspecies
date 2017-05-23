@@ -1,0 +1,201 @@
+
+#' Counting matrices for spatial data mining
+#'
+#' @description Take a binary matrix from \code{\link[rspecies]{id_pts}}
+#'     and calculates the counting matrices for spatial data mining.
+#'     The counting matrices are for success/success (1/1), success/failure
+#'     (1/0) and failure/failure (0/0).
+#'
+#' @name counts
+#'
+#' @param x.mat a \code{BinMat} object. See documentation of
+#'     \code{\link[rspecies]{id_pts}} when \code{colnames}.
+#' @param target \code{logical}, \code{character}, \code{numeric} or \code{NULL}.
+#'     A vector with names, position (integer) or boolean that especifies the
+#'     columns that should be considered as target.
+#' @param bioclim a \code{BinMat} object. See documentation of
+#'     \code{\link[rspecies]{id_pts}} when \code{colnames}.
+#'     This matrix represents the cells identification for bioclim
+#'     variables (see \code{\link[rspecies]{raster_breaks}}()).
+#'
+#' @return This function returns a \code{list} object with 9 elements. The elements are:
+#'     N, Nc, Nnc, Nx, Nnx, Ncx, Ncnx, Nncx, Nncnx (see Details for further explanation.
+#'
+#' @details The elements of the list are defined as follow.
+#'
+#'     \strong{N} an integer. It corresponds to the number of rows in the matrix model
+#'     \code{x.mat}. \strong{Nc} an integer vector. If \code{target = NULL} then
+#'     it calculates \code{crossprod(x.mat, ones)}, where ones is a vector of ones with
+#'     the same rows as \code{x.mat}. If \code{target} is different from \code{NULL}
+#'     then it calculates \code{crossprod(x.mat[,target], ones)}. \strong{Nnc} an integer
+#'     vector. The complement of Nc, (\code{N - Nc}). \strong{Nx} an integer vector.
+#'     If \code{target = NULL} then it calculates \code{crossprod(x.mat, ones)},
+#'     where ones is a vector of ones with the same rows as \code{x.mat} (Notice that
+#'     in this case Nc = Nx). If \code{target} is different from \code{NULL} then
+#'     it calculates \code{crossprod(x.mat[,-target], ones)}. \strong{Nnx} an integer
+#'     vector. The complement of Nx, (\code{N - Nx}). \strong{Ncx} an integer matrix. If
+#'     \code{target = NULL} then it calculates \code{crossprod(x.mat, x.mat)}. If
+#'     \code{target} is different from \code{NULL} then it calculates
+#'     \code{crossprod(x.mat[,target], x.mat[,-target])}. \strong{Ncnx} an integer matrix.
+#'     If \code{target = NULL} then it calculates \code{crossprod(x.mat, (ones-x.mat))}. If
+#'     \code{target} is different from \code{NULL} then it calculates
+#'     \code{crossprod(x.mat[,target], (ones - x.mat[,-target]))}. \strong{Ncnx} an integer
+#'     matrix. If \code{target = NULL} then it calculates \code{crossprod((ones-x.mat), x.mat)}
+#'     (Notice that in this case Nncx is the transpose matrix of Ncnx). If \code{target} is
+#'     different from \code{NULL} then it calculates \code{crossprod((ones - x.mat[, target]), x.mat[,-target])}.
+#'     \strong{Nncnx} an integer matrix. If \code{target = NULL} then it calculates
+#'     \code{crossprod((ones-x.mat), (ones-x.mat))}. If \code{target} is different from
+#'     \code{NULL} then it calculates \code{crossprod((ones - x.mat[, target]), (ones - x.mat[,-target]))}.
+#'
+#'     If \code{bioclim} is different from \code{NULL} similar calculation as above.
+#'     If \code{target = NULL} the matrices used for calculation are \code{x.mat} and
+#'     \code{bioclim}. If \code{target} id different from \code{NULL} then the matrices
+#'     used for calculation are \code{x.mat[, target]} and \code{bioclim}. After the
+#'     claculation, \code{rbind} and \code{cbind} function are used for proper binding.
+#'
+#' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
+#'
+#' @seealso \code{\link[base]{crossprod}}, \code{\link[base]{rbind}},
+#'     \code{\link[base]{cbind}}, \code{\link[rspecies]{id_pts}},
+#'     \code{\link[rspecies]{grd_build}}, \code{\link[rspecies]{raster_breaks}}.
+#'
+#' @examples
+#' library(sp)
+#' library(rgeos)
+#' load('./data/Mex0.rda')
+#' load('./data/mammals.RData')
+#'
+#' # Generating de grid from Mex0 data
+#' Mex0.grd <- grd_build(Mex0)
+#'
+#' # Identification points of mammals with colnames especified.
+#' names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
+#'
+#' x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
+#'
+#' # Counting matrices
+#' system.time(count.mat <- counts(x.mat))
+#' getN(count.mat)
+#' head(getNc(count.mat))
+#' head(getNx(count.mat))
+#' head(getNcx(Count.mat))
+#'
+#'
+#' # including target
+#'
+#' system.time(count.mat <- counts(x.mat, target = c("X1","X2")))
+#' getN(count.mat)
+#' head(getNc(count.mat))
+#' head(getNx(count.mat))
+#' head(getNcx(Count.mat))
+#'
+#' # including target and bioclim
+#' library(raster)
+#' bioclim<-getData('worldclim', var='bio', res=2.5)
+#'
+#' # Extracting values from 19 bioclim variables
+#' bio.sp <- raster_breaks(bioclim, Mex0.grd)
+#' bnames <- as.character(levels(as.factor(bio.sp@data$nameID)))
+#' bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
+#'
+#' system.time(count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat))
+#' count.bmat$N
+#' getN(count.bmat)
+#' head(getNc(count.bmat))
+#' head(getNx(count.bmat))
+#' head(getNcx(Count.bmat))
+#'
+NULL
+
+# Generic definition ------------------------------------------------------
+
+setGeneric("counts",function(x.mat, target = NULL, bioclim = NULL){standardGeneric ("counts")})
+
+#' @rdname counts
+#' @name counts
+#' @docType methods
+#' @export
+
+
+setMethod("counts", c("BinMat", "ANY", "ANY"),
+          definition = function(x.mat, target = NULL, bioclim = NULL){
+  name_ID <- x.mat@name_ID
+  DMNB <- x.mat@DMNB
+  BMNB <- x.mat@BMNB
+
+  N <- dim(BMNB)[1]
+  ones <- rep(1, N)
+
+  if(!is.null(target)){
+    chartar <- is.character(target)
+    numtar <- is.numeric(target)
+    logtar <- is.logical(target)
+
+    if(!any(chartar, numtar, logtar)){
+      stop("target must be of type character, numeric or logical.")
+    }
+
+    if(chartar){
+      tar_aux <- (rownames(x.mat@name_ID) %in% target)
+      if(any(tar_aux)){
+        target <- which(tar_aux)
+      }else{
+        tar_aux <- (x.mat@name_ID[,1] %in% target)
+        if(any(tar_aux)){
+          target <- which(tar_aux)
+        }else{
+          stop("Can not find the target. Verify possible targets
+               through getName_ID(x.mat)")
+        }
+      }
+
+    }else{
+      if(numtar){
+        target <- target
+      }else{
+        target <- which(target)
+      }
+    }
+    tmat <- as.matrix(BMNB[,target])
+    colnames(tmat) <- rownames(name_ID)[target]
+    xmat <- BMNB[,-target]
+  }else{
+    tmat <- BMNB
+    xmat <- BMNB
+  }
+
+
+    Nc <- crossprod(tmat, ones)
+    colnames(Nc) <- "Success"
+    rownames(Nc) <- colnames(tmat)
+    Nx <- crossprod(xmat, ones)
+    colnames(Nx) <- "Success"
+    rownames(Nx) <- colnames(xmat)
+    Ncx <- crossprod(tmat, xmat)
+
+    if(!is.null(bioclim)){
+      if(!is(bioclim, "BinMat")){
+        stop("bioclim must be and object of class BinMat. See documentation")
+      }else{
+      bmat <- bioclim@BMNB
+
+      ## Calculates the counts when target and bioclim is different from NULL ###
+      Nb <- crossprod(bmat, ones)
+      Nx <- rbind(Nx, Nb)
+      Ncx <- cbind(Ncx, crossprod(tmat, bmat))
+
+      name_ID <- rbind(name_ID, bioclim@name_ID)
+      DMNB <- cbind(DMNB, bioclim@DMNB)
+      BMNB <- cbind(BMNB, bioclim@BMNB)
+
+      }}
+
+    output <- BinMatCount( name_ID = name_ID, DMNB = DMNB, BMNB = BMNB,
+                           Count = list(N = N, Nc = Nc, Nx = Nx, Ncx = Ncx))
+
+
+  return(output)
+
+})
+
+

@@ -1,0 +1,107 @@
+#'
+#' An S4 subclass from BinMat class.
+#'
+#' @include BinMat-class.R
+#'
+#' @name BinMatEps-class
+#'
+#' @slot Epsilon a list object whit 2 elements, Ecx and Encx.
+#'
+#' @details The elements of the list are defined as follow.
+#'
+#'     \strong{Ecx}: numeric matrix. With s rows and m columns
+#'
+#'     \strong{Pcnx}a numeric matrix. With s rows and m columns.
+#'
+#' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
+#'
+#' @examples
+#'
+#' name_ID<-data.frame(name = c("carlos", "pepe"), row.names = c("X1","X2"), stringsAsFactors = F)
+#' DMNB<-matrix(rbinom(10,10, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
+#' BMNB<-matrix(rbinom(10,1, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
+#'
+#' BinMatProb(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, Prob = list(Pc = matrix(1:2,2),
+#'            Px = matrix(1:3,3), Pcx = matrix(1:6,2,3), Pcnx = matrix(1:6,2,3),
+#'            Pxc = matrix(1:6,3,2), Pxnc = matrix(1:6,3,2), Pnxc = matrix(1:6,3,2),
+#'             Pnxnc = matrix(1:6,3,2)))
+#'
+
+NULL
+
+# Class definition ---------------------------------------------------
+
+.BinMatEps <- setClass(Class = "BinMatEps", contains = "BinMat",
+         slots = list(Epsilon = "list"))
+
+
+# Create a validity function -------------------------------------------
+# Set the validity function as default inspector -------------------------
+
+setValidity("BinMatEps", function(object){
+  obj_lis <- is.list(object@Epsilon)
+  obj_len <- (length(object@Epsilon) == 2)
+  obj_nam <- all(names(object@Epsilon) == c("Ecx", "Encx"))
+  obj_eps <- all(dim(object@Epsilon$Ecx) == dim(object@Epsilon$Encx))
+
+  obj_val <- c(obj_lis, obj_len, obj_nam, obj_eps)
+
+  if(!all(obj_val)){
+    stop("Slot Epsilon is not of the correct type. See documentation of BinMatEps class.")
+  }else{
+    return(TRUE)
+  }
+})
+
+# Create an constructor method for class BinMatCount --------------------------
+
+#' @rdname BinMatEps-class
+#' @name Contstructor
+#' @docType methods
+#' @export
+
+BinMatEps <- function(name_ID, DMNB, BMNB, Epsilon, ...){
+  obj<-BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB)
+  .BinMatEps(obj, Epsilon = Epsilon, ...)
+}
+
+#
+# setMethod(f = "initialize",
+#           signature = "BinMatCount",
+#           definition = function(.Object, ..., Count){
+#             .Object@Count <- Count
+#             callNextMethod(.Object, ...)
+#             validObject(.Object)
+#             return(.Object)
+#           }
+# )
+
+
+
+# Create a show method for class BinMat ----------------------------------
+
+setMethod(f = "show",
+          signature = "BinMatEps",
+          definition = function(object){
+            cat("An object of class 'BinMatEps'.\n")
+            cat("Slot: Epsilon\n", "Type:",  class(object@Epsilon), "\n",
+                "names: ", names(object@Epsilon),"\n",
+                "types:", class(object@Epsilon$Ecx), class(object@Epsilon$Encx),"\n")}
+)
+
+
+# Create a print method for class BinMat ------------------------------------
+
+#' @rdname BinMatEps-class
+#' @name print
+#' @docType methods
+#' @export
+
+setMethod (f = "print",
+           signature = "BinMatEps",
+           definition = function(x,...){
+             cat("An object of class 'BinMatEps'.\n")
+             cat("Ecx:", class(x@Epsilon$Ecx),"\n"); print(head(x@Epsilon$Ecx[,1:6]))
+             cat("Encx:", class(x@Epsilon$Encx),"\n"); print(head(x@Epsilon$Encx[,1:6]))
+           }
+)

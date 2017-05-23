@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+/vignettes/*.html
+/vignettes/*.rds
+wc2-5/*
+workflow.txt
+pruebas.R
