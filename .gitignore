@@ -2,10 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rbuildignore
 /vignettes/*.html
 /vignettes/*.rds
 wc2-5/*
-workflow.txt
+/workflow.txt
 pruebas.R
 README.rmd
 README.html
