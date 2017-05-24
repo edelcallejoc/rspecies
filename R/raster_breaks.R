@@ -1,16 +1,16 @@
 
 #' Extract pixels from raster object and breaks it into n bins.
 
-#' @description Take a \code{raster} object (\code{\link[raster]{RasterLayer}},
-#'     \code{\link[raster]{RasterStack}}, \code{\link[raster]{RasterBrick}}),
+#' @description Take a \code{raster} object (\code{\link{RasterLayer}},
+#'     \code{\link{RasterStack}}, \code{\link{RasterBrick}}),
 #'     and extract pixels values contain by \code{\link[sp]{SpatialPolygonsDataFrame}}
 #'     object. Then, \code{raster_break()} generates bins, given by \code{breaks}
 #'     argument, from pixels values. Finally, it converts all bins into a
 #'     \code{\link[sp]{SpatialPointsDataFrame}} object. See details for further
 #'     explanation
 #'
-#' @param x.ras A \code{raster} object (\code{\link[raster]{RasterLayer}},
-#'     \code{\link[raster]{RasterStack}}, \code{\link[raster]{RasterBrick}}).
+#' @param x.ras A \code{raster} object (\code{\link{RasterLayer}},
+#'     \code{\link{RasterStack}}, \code{\link{RasterBrick}}).
 #' @param pol.ext A \code{SpatialPolygonsDataFrame} object. An object from
 #'     \code{\link[rspecies]{grd_build}()} is recommended.
 #' @param bb A integer vector of the form \code{c(min['long'], max['long'],
@@ -115,8 +115,9 @@
 #'
 #' @export
 #'
-#' @import parallel doParallel foreach raster
+#' @import parallel doParallel foreach
 #'
+#' @importFrom raster crop mask nlayers values
 #' @importFrom stats quantile
 #'
 #'
