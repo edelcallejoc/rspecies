@@ -4,5 +4,8 @@
 ^wc2-5$
 ^pruebas.R$
 ^README.html$
-^README.rdm$
+^README.rmd$
+^README.md$
+^LICENSE.txt$
 ^.gitignore$
+^figure$

@@ -29,6 +29,7 @@
 #' @name rspecies
 #'
 #' @import methods grDevices
+#' @importFrom utils head
 #'
 #'
 NULL

@@ -18,7 +18,7 @@
 #' @param breaks \code{NULL}, integer or numeric vector. A vector of
 #'     length >= 3, indicating the lower limit and upper limit of each bin.
 #'     If breaks has length = 3, 2 bins are created. By default \code{breaks = NULL},
-#'     if NULL or integer bins are calculated with \code{\link[base]{quantile}()}.
+#'     if NULL or integer bins are calculated with \code{\link{quantile}()}.
 #'     Se details for further explanation.
 #' @param breaks.by double. A value between 0 and 1. Argument pass to quantile function, it requires
 #'     \code{breaks = NULL}.
@@ -115,7 +115,9 @@
 #'
 #' @export
 #'
-#' @import parallel doParallel foreach raster stats
+#' @import parallel doParallel foreach raster
+#'
+#' @importFrom stats quantile
 #'
 #'
 #'
@@ -162,6 +164,7 @@ raster_breaks <- function(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks =
         xras.ext <- aux_foo(xras.msk, breaks = breaks, breaks.by = breaks.by,
                             proj4string = sp::proj4string(pol.ext))
     } else {
+        i<-NULL
         nlay <- raster::nlayers(xras.msk)
         cores <- parallel::detectCores() - 1
         cl <- parallel::makeCluster(cores)

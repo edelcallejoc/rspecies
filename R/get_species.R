@@ -15,7 +15,7 @@
 #'
 #' @export
 #'
-#' @import httr
+#' @import httr jsonlite
 #'
 
 

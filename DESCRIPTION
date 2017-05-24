@@ -27,7 +27,10 @@ Imports:
     leaflet,
     DT,
     methods,
-    httr
+    httr,
+    raster,
+    jsonlite,
+    stats
 URL: https://github.com/edelcallejoc/rspecies
 BugReports: https://github.com/edelcallejoc/rspecies/issues
 License: GPL-3

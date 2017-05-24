@@ -8,8 +8,8 @@ raster_breaks(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks = NULL,
   breaks.by = 0.1)
 }
 \arguments{
-\item{x.ras}{A \code{raster} object (\code{\link[raster]{RasterLayer}},
-\code{\link[raster]{RasterStack}}, \code{\link[raster]{RasterBrick}}).}
+\item{x.ras}{A \code{raster} object (\code{\link[raster:RasterLayer]{RasterLayer}},
+\code{\link[raster:RasterStack]{RasterStack}}, \code{\link[raster:RasterBrick]{RasterBrick}}).}
 
 \item{pol.ext}{A \code{SpatialPolygonsDataFrame} object. An object from
 \code{\link[rspecies]{grd_build}()} is recommended.}
@@ -20,7 +20,7 @@ min['lat'], max['lat'])}. By default \code{bb = c(t(sp::bbox(po.ext)))}.}
 \item{breaks}{\code{NULL}, integer or numeric vector. A vector of
 length >= 3, indicating the lower limit and upper limit of each bin.
 If breaks has length = 3, 2 bins are created. By default \code{breaks = NULL},
-if NULL or integer bins are calculated with \code{\link[base]{quantile}()}.
+if NULL or integer bins are calculated with \code{\link[base:quantile]{quantile}()}.
 Se details for further explanation.}
 
 \item{breaks.by}{double. A value between 0 and 1. Argument pass to quantile function, it requires
@@ -31,8 +31,8 @@ A \code{SpatialPointsDataFrame} object. It includes all raster values and
     its coordinates, and the bin associated.
 }
 \description{
-Take a \code{raster} object (\code{\link[raster]{RasterLayer}},
-    \code{\link[raster]{RasterStack}}, \code{\link[raster]{RasterBrick}}),
+Take a \code{raster} object (\code{\link[raster:RasterLayer]{RasterLayer}},
+    \code{\link[raster:RasterStack]{RasterStack}}, \code{\link[raster:RasterBrick]{RasterBrick}}),
     and extract pixels values contain by \code{\link[sp]{SpatialPolygonsDataFrame}}
     object. Then, \code{raster_break()} generates bins, given by \code{breaks}
     argument, from pixels values. Finally, it converts all bins into a

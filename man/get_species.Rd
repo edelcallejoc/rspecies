@@ -17,4 +17,7 @@ web SPECIES platform shows.}
 \description{
 a function to extract data from SPECIES WEB framework.
 }
+\author{
+Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
+}
 

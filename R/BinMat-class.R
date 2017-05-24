@@ -42,7 +42,7 @@ NULL
 
 # Class definition ----------------------------------------------------
 
-setClass(Class = "BinMat",
+.BinMat<-setClass(Class = "BinMat",
          slots = list(name_ID = "data.frame", DMNB = "matrix", BMNB = "matrix")
          )
 
@@ -82,7 +82,7 @@ setValidity("BinMat", function(object){
 #' @export
 
 BinMat <- function(name_ID, DMNB, BMNB, ...){
-  new(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, ...)
+  .BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, ...)
 }
 
 

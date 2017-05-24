@@ -96,6 +96,7 @@ id_pts<-function(grd, pts, contain = c("simple", "properly"), colnames = NULL){
   ####################################
 
   pts.level<-levels(as.factor(pts@data$nameID))
+  i<-NULL
   m.c<-length(pts.level)
   auxcolnames<-colnames
   if(is.null(colnames)){
