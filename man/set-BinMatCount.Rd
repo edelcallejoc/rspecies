@@ -2,6 +2,8 @@
 % Please edit documentation in R/set-BinMatCount.R
 \name{set-BinMatCount}
 \alias{set-BinMatCount}
+\alias{setN,BinMatCount}
+\alias{setNc,BinMatCount}
 \alias{setNcx,BinMatCount}
 \alias{setNx,BinMatCount}
 \title{Replace methods for BinMat class and subclass}

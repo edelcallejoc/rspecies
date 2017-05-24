@@ -24,6 +24,7 @@ NULL
 
 #' @name set-BinMatCount
 #' @rdname set-BinMatCount
+#' @aliases setN,BinMatCount
 #' @exportMethod setN<-
 
 setGeneric("setN<-",function(object, value){standardGeneric ("setN<-")})
@@ -39,6 +40,7 @@ setReplaceMethod (f = "setN",
 
 #' @name set-BinMatCount
 #' @rdname set-BinMatCount
+#' @aliases setNc,BinMatCount
 #' @exportMethod setNc<-
 
 setGeneric("setNc<-",function(object, value){standardGeneric ("setNc<-")})
