@@ -2,5 +2,7 @@
 ^\.Rproj\.user$
 ^workflow$
 ^wc2-5$
-^pruebas$
+^pruebas.R$
+^README.html$
+^README.rdm$
 ^.gitignore$
