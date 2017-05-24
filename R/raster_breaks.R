@@ -115,7 +115,7 @@
 #'
 #' @export
 #'
-#' @import parallel doParallel foreach
+#' @import parallel doParallel foreach raster stats
 #'
 #'
 #'
@@ -198,10 +198,10 @@ aux_foo <- function(x, breaks, breaks.by, proj4string = sp::proj4string(x)) {
     ######## Calculando los cuantiles ###############
 
     if (is.null(breaks)) {
-        breakst <- quantile(foo_data$val.bio, probs = seq(0, 1, by = breaks.by), na.rm = TRUE)
+        breakst <- stats::quantile(foo_data$val.bio, probs = seq(0, 1, by = breaks.by), na.rm = TRUE)
     } else {
         if (length(breaks) == 1) {
-            breakst <- quantile(foo_data$val.bio, probs = seq(0, 1, length = (breaks +
+            breakst <- stats::quantile(foo_data$val.bio, probs = seq(0, 1, length = (breaks +
                 1)), na.rm = TRUE)
         } else {
             breakst <- breaks
