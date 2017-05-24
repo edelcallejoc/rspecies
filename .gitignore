@@ -27,3 +27,4 @@ README.html
 *.utf8.md
 *.knit.md
 
+.Rproj.user
