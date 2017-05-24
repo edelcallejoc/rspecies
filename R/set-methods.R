@@ -23,13 +23,20 @@ NULL
 # Setters ----------------------------------------------------
 
 #' @rdname set
+#' @name setN-gen
+#' @aliases setN-gen
+#' @docType methods
+#' @export
+#'
+
+setGeneric("setN<-",function(object, value){standardGeneric ("setN<-")})
+
+
+#' @rdname set
 #' @name setN
 #' @aliases setN
 #' @docType methods
 #' @export
-
-
-setGeneric("setN<-",function(object, value){standardGeneric ("setN<-")})
 
 setReplaceMethod (f = "setN",
            signature = "BinMatCount",
@@ -42,13 +49,20 @@ setReplaceMethod (f = "setN",
 
 
 #' @rdname set
+#' @name setNc-gen
+#' @aliases setNc-gen
+#' @docType methods
+#' @export
+#'
+
+setGeneric("setNc<-",function(object, value){standardGeneric ("setNc<-")})
+
+
+#' @rdname set
 #' @name setNc
 #' @aliases setNc
 #' @docType methods
 #' @export
-
-
-setGeneric("setNc<-",function(object, value){standardGeneric ("setNc<-")})
 
 setReplaceMethod (f = "setNc",
                   signature = "BinMatCount",
@@ -61,12 +75,18 @@ setReplaceMethod (f = "setNc",
 
 
 #' @rdname set
-#' @name setNx
+#' @name setNx-gen
+#' @aliases setNx-gen
 #' @docType methods
 #' @export
 
-
 setGeneric("setNx<-",function(object, value){standardGeneric ("setNx<-")})
+
+#' @rdname set
+#' @name setNx
+#' @aliases setNx
+#' @docType methods
+#' @export
 
 setReplaceMethod (f = "setNx",
                   signature = "BinMatCount",
@@ -79,12 +99,20 @@ setReplaceMethod (f = "setNx",
 
 
 #' @rdname set
-#' @name setNcx
+#' @name setNcx-gen
+#' @aliases setNcx-gen
 #' @docType methods
 #' @export
 
 
 setGeneric("setNcx<-",function(object, value){standardGeneric ("setNcx<-")})
+
+
+#' @rdname set
+#' @name setNcx
+#' @aliases setNcx
+#' @docType methods
+#' @export
 
 setReplaceMethod (f = "setNcx",
                   signature = "BinMatCount",
