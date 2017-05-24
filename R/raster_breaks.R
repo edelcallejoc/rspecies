@@ -84,8 +84,8 @@
 #'         popup = paste(bio1.sp$nameID, bio1.sp$val.p, sep = ' '))
 #'
 #' @details This function extract all pixels values and its coordinates from
-#'     raster object. Valid raster objects are (\code{\link[raster]{RasterLayer}},
-#'     \code{\link[raster]{RasterStack}}, \code{\link[raster]{RasterBrick}}).
+#'     raster object. Valid raster objects are (\code{\link[raster:Raster-class]{RasterLayer}},
+#'     \code{\link[raster:Raster-class]{RasterStack}}, \code{\link[raster:Raster-class]{RasterBrick}}).
 #'     Then, divides values into bins given by \code{breaks} argument. Finally, it
 #'     converts this data into a \code{\link[sp]{SpatialPointsDataFrame}}.
 #'
@@ -100,7 +100,7 @@
 #'
 #'     \code{breaks} argument can be pass as \code{NULL}, integer or double vector.
 #'     If \code{breaks = NULL}, the bins are calculated trough
-#'     \code{\link[base]{quantile}(x, probs, na.rm = TRUE)} function,
+#'     \code{\link[stats]{quantile}(x, probs, na.rm = TRUE)} function,
 #'     where \code{x} argument is \code{values(rasterobj)},
 #'     \code{probs = seq(0, 1, by = breaks.by)}. If \code{breaks = integer} >= 1, the
 #'     bins are calculated in similar way as \code{breaks = NULL}, but
