@@ -25,8 +25,8 @@
 #' @examples
 #' library(sp)
 #' library(rgeos)
-#' load('./data/Mex0.rda')
-#' load('./data/mammals.RData')
+#' load(Mex0)
+#' load(mammals)
 #'
 #' # Generating de grid from Mex0 data
 #' Mex0.grd<-grd_build(Mex0)
@@ -47,10 +47,8 @@
 #' pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
 #'
 #' # See map with leaflet - "Lynx rufus"
-#' library(leaflet)
-#' library(RColorBrewer)
 #'
-#' plot(pred.grd, pred.mat, target = "Lynx rufus", leaflet = T)
+#' plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = T)
 #'
 #' # See data with DT package
 #' library(DT)

@@ -2,18 +2,24 @@
 % Please edit documentation in R/BinMatScore-class.R
 \docType{methods}
 \name{BinMatScore-class}
+\alias{.BinMatScore}
 \alias{BinMatScore}
+\alias{BinMatScore-Contstructor}
 \alias{BinMatScore-class}
-\alias{Contstructor}
-\alias{print}
+\alias{new-BinMatScore}
+\alias{print-BinMatScore}
+\alias{show-BinMatScore}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatScore(name_ID, DMNB, BMNB, Score, ...)
 
+\S4method{show}{BinMatScore}(object)
+
 \S4method{print}{BinMatScore}(x, ...)
 }
 \description{
-An S4 subclass from BinMat class.
+This is a class associated to score method applied to
+    BinMatProb objects (See \code{\link[rspecies]{score}}).
 }
 \details{
 The elements of the list are defined as follow.
@@ -27,6 +33,26 @@ The elements of the list are defined as follow.
 \item{\code{Score}}{a list object whit 3 elements, Apriori, Scx and Scnx.}
 }}
 \examples{
+
+#' library(sp)
+library(rgeos)
+data(Mex0)
+data(mammals)
+
+# Generating de grid from Mex0 data
+Mex0.grd<-grd_build(Mex0)
+
+# Identification points of mammals with colnames = NULL.
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+
+# Counting matrices
+count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+
+# Probability matrices
+prob.mat<-probs(count.mat, lap_fac = 0.1)
+
+#score function
+score.mat<-score(prob.mat, count.mat)
 
 }
 \author{

@@ -4,13 +4,14 @@
 #'
 #' @name plot-methods
 #'
-#' @description
+#' @description A plot methods for classes "SpatialPolygonsDataFrame", "BinMat".
 #'
 #' @param x A \code{SpatialPolygonsDataFrame} object from
 #'     \code{\link[rspecies]{grd_build}} function.
 #'
 #' @param y A \code{\linkS4class{BinMat}} object from
-#'     \code{\link[rspecies]{id_pts}} function.
+#'     \code{\link[rspecies]{id_pts}} function or \code{\linkS4class{BinMatPred}}
+#'     object from \code{\link[rspecies]{predict}} function .
 #'
 #' @param target \code{logical}, \code{character}, \code{numeric} or \code{NULL}.
 #'     A vector with names, position (integer or boolean) that especifies the
@@ -30,6 +31,21 @@
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
+#' @examples
+#' library(sp)
+#' library(rgeos)
+#' data(Mex0)
+#' data(mammals)
+#'
+#' # Generating de grid from Mex0 data
+#' Mex0.grd<-grd_build(Mex0)
+#'
+#' # Identification points of mammals with colnames = NULL.
+#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#'
+#' # plot - BinMat Class
+#' plot(Mex0.grd, x.mat, leaflet = TRUE)
+#'
 #' @import leaflet RColorBrewer
 #'
 #'
@@ -39,7 +55,7 @@ NULL
 # Plot method for "SpatialPolygonsDataFrame" and "BinMat" objects ------------------
 
 #' @rdname plot-methods
-#' @name plot
+#' @name plot-BinMat
 #' @docType methods
 #' @export
 
@@ -131,12 +147,29 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
 
 
 #' @rdname plot-methods
-#' @name plot
+#' @name plot-BinMatPred
+#'
+#' @description A plot methods for classes "SpatialPolygonsDataFrame", "BinMatPred".
+#'
+#'
+#' @examples
+#' # Counting matrices
+#' count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+#'
+#' # Probability matrices
+#' prob.mat<-probs(count.mat, lap_fac = 0.1)
+#'
+#' # score function
+#' score.mat<-score(prob.mat, count.mat)
+#'
+#' # Prediction
+#' pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
+#'
+#' # plot - BinMatPred class
+#' plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = T)
+#'
 #' @docType methods
 #' @export
-
-# plot method for SpatialPolygonsDataFrame and target
-#
 
 setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
           function(x, y, target = NULL, leaflet = FALSE, ...) {

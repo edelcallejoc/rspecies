@@ -2,7 +2,8 @@
 % Please edit documentation in R/plot-methods.R
 \docType{methods}
 \name{plot-methods}
-\alias{plot}
+\alias{plot-BinMat}
+\alias{plot-BinMatPred}
 \alias{plot-methods}
 \title{An S4 method for SpatialPolygonsDataFrame and BinMat classes objects.}
 \usage{
@@ -17,7 +18,8 @@
 \code{\link[rspecies]{grd_build}} function.}
 
 \item{y}{A \code{\linkS4class{BinMat}} object from
-\code{\link[rspecies]{id_pts}} function.}
+\code{\link[rspecies]{id_pts}} function or \code{\linkS4class{BinMatPred}}
+object from \code{\link[rspecies]{predict}} function .}
 
 \item{target}{\code{logical}, \code{character}, \code{numeric} or \code{NULL}.
 A vector with names, position (integer or boolean) that especifies the
@@ -35,6 +37,39 @@ slot from \code{\linkS4class{BinMat}} object. If \code{FALSE} the color
 palette is based in BMNB slot from \code{\linkS4class{BinMat}} object.}
 }
 \description{
+A plot methods for classes "SpatialPolygonsDataFrame", "BinMat".
+
+A plot methods for classes "SpatialPolygonsDataFrame", "BinMatPred".
+}
+\examples{
+library(sp)
+library(rgeos)
+data(Mex0)
+data(mammals)
+
+# Generating de grid from Mex0 data
+Mex0.grd<-grd_build(Mex0)
+
+# Identification points of mammals with colnames = NULL.
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+
+# plot - BinMat Class
+plot(Mex0.grd, x.mat, leaflet = TRUE)
+
+# Counting matrices
+count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+
+# Probability matrices
+prob.mat<-probs(count.mat, lap_fac = 0.1)
+
+# score function
+score.mat<-score(prob.mat, count.mat)
+
+# Prediction
+pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
+
+# plot - BinMatPred class
+plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = T)
 
 }
 \author{

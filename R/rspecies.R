@@ -11,19 +11,27 @@
 #' can use for other modelling purposes.
 #'
 #' @section rspecies functions:
-#'     \code{\link[rspecies]{grd_build}()}:
-#'     \code{\link[rspecies]{raster_breaks}()}:
-#'     \code{\link[rspecies]{get_species}()}:
+#'     \code{\link[rspecies]{grd_build}()}
+#'     \code{\link[rspecies]{raster_breaks}()}
+#'     \code{\link[rspecies]{get_species}()}
 #'
 #' @section rspecies S4 classes:
-#'     \code{\link[rspecies]{BinMat}}:
-#'     \code{\link[rspecies]{BinMatCount}}:
-#'     \code{\link[rspecies]{BinMatProb}}:
-#'     \code{\link[rspecies]{BinMatEps}}:
-#'     \code{\link[rspecies]{BinMatScore}}:
-#'     \code{\link[rspecies]{BinMatPred}}:
+#'     \code{\link[rspecies]{BinMat}}
+#'     \code{\link[rspecies]{BinMatCount}}
+#'     \code{\link[rspecies]{BinMatProb}}
+#'     \code{\link[rspecies]{BinMatEps}}
+#'     \code{\link[rspecies]{BinMatScore}}
+#'     \code{\link[rspecies]{BinMatPred}}
 #'
-#' @section rspecies S4 mehtods
+#' @section rspecies S4 mehtods:
+#'     \code{\link[rspecies]{id_pts}}
+#'     \code{\link[rspecies]{counts}}
+#'     \code{\link[rspecies]{probs}}
+#'     \code{\link[rspecies]{epsilon}}
+#'     \code{\link[rspecies]{score}}
+#'     \code{\link[rspecies]{predict}}
+#'     \code{\link[rspecies]{plot}}
+#'     \code{\link[rspecies]{print}}
 #'
 #' @docType package
 #' @name rspecies
