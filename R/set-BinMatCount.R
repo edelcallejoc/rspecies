@@ -28,18 +28,14 @@ NULL
 
 setGeneric("setN<-",function(object, value){standardGeneric ("setN<-")})
 
-
-#' @rdname set-BinMatCount
-#' @aliases setN,BinMatCount
 setReplaceMethod (f = "setN",
-           signature = "BinMatCount",
-           definition = function(object, value){
-             object@Count$N <- value
-             validObject(object)
-             return(object)
-           }
+                  signature = "BinMatCount",
+                  definition = function(object, value){
+                    object@Count$N <- value
+                    validObject(object)
+                    return(object)
+                  }
 )
-
 
 #' @name set-BinMatCount
 #' @rdname set-BinMatCount
@@ -47,9 +43,6 @@ setReplaceMethod (f = "setN",
 
 setGeneric("setNc<-",function(object, value){standardGeneric ("setNc<-")})
 
-
-#' @rdname set-BinMatCount
-#' @aliases setNc,BinMatCount
 setReplaceMethod (f = "setNc",
                   signature = "BinMatCount",
                   definition = function(object, value){
@@ -62,13 +55,11 @@ setReplaceMethod (f = "setNc",
 
 #' @name set-BinMatCount
 #' @rdname set-BinMatCount
+#' @aliases setNx,BinMatCount
 #' @exportMethod setNx<-
-#'
+
 setGeneric("setNx<-",function(object, value){standardGeneric ("setNx<-")})
 
-#' @rdname set-BinMatCount
-#' @aliases setNx,BinMatCount
-#'
 setReplaceMethod (f = "setNx",
                   signature = "BinMatCount",
                   definition = function(object, value){
@@ -78,16 +69,13 @@ setReplaceMethod (f = "setNx",
                   }
 )
 
-
 #' @name set-BinMatCount
 #' @rdname set-BinMatCount
+#' @aliases setNcx,BinMatCount
 #' @exportMethod setNcx<-
 
 setGeneric("setNcx<-",function(object, value){standardGeneric ("setNcx<-")})
 
-
-#' @rdname set-BinMatCount
-#' @aliases setNcx,BinMatCount
 setReplaceMethod (f = "setNcx",
                   signature = "BinMatCount",
                   definition = function(object, value){

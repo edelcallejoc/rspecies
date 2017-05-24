@@ -66,5 +66,5 @@ Collate:
     'raster_breaks.R'
     'rspecies.R'
     'score.R'
-    'set-methods.R'
+    'set-BinMatCount.R'
     'zzz.R'
