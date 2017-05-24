@@ -56,6 +56,7 @@ setGeneric("laplace",function(count.mat, lap_fac = 0.1){standardGeneric ("laplac
 
 #' @rdname laplace
 #' @name laplace
+#' @aliases laplace
 #' @docType methods
 #' @export
 

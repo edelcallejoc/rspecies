@@ -19,6 +19,7 @@ NULL
 
 #' @rdname get
 #' @name getName_ID
+#' @aliases getName_ID
 #' @docType methods
 #' @export
 
@@ -34,6 +35,7 @@ setMethod (f = "getName_ID",
 
 #' @rdname get
 #' @name getDMNB
+#' @aliases getDMNB
 #' @docType methods
 #' @export
 
@@ -49,6 +51,7 @@ setMethod (f = "getDMNB",
 
 #' @rdname get
 #' @name getBMNB
+#' @aliases getBMNB
 #' @docType methods
 #' @export
 
@@ -64,6 +67,7 @@ setMethod (f = "getBMNB",
 
 #' @rdname get
 #' @name getN
+#' @aliases getN
 #' @docType methods
 #' @export
 
@@ -78,6 +82,7 @@ setMethod (f = "getN",
 
 #' @rdname get
 #' @name getNc
+#' @aliases getNc
 #' @docType methods
 #' @export
 
@@ -92,6 +97,7 @@ setMethod (f = "getNc",
 
 #' @rdname get
 #' @name getNx
+#' @aliases getNx
 #' @docType methods
 #' @export
 
@@ -106,6 +112,7 @@ setMethod (f = "getNx",
 
 #' @rdname get
 #' @name getNcx
+#' @aliases getNcx
 #' @docType methods
 #' @export
 
@@ -121,6 +128,7 @@ setMethod (f = "getNcx",
 
 #' @rdname get
 #' @name getPc
+#' @aliases getPc
 #' @docType methods
 #' @export
 
@@ -136,6 +144,7 @@ setMethod (f = "getPc",
 
 #' @rdname get
 #' @name getPx
+#' @aliases getPx
 #' @docType methods
 #' @export
 
@@ -150,6 +159,7 @@ setMethod (f = "getPx",
 
 #' @rdname get
 #' @name getPcx
+#' @aliases getPcx
 #' @docType methods
 #' @export
 
@@ -165,6 +175,7 @@ setMethod (f = "getPcx",
 
 #' @rdname get
 #' @name getPcnx
+#' @aliases getPcnx
 #' @docType methods
 #' @export
 
@@ -179,6 +190,7 @@ setMethod (f = "getPcnx",
 
 #' @rdname get
 #' @name getPxc
+#' @aliases getPxc
 #' @docType methods
 #' @export
 
@@ -194,6 +206,7 @@ setMethod (f = "getPxc",
 
 #' @rdname get
 #' @name getPxnc
+#' @aliases getPxnc
 #' @docType methods
 #' @export
 
@@ -208,6 +221,7 @@ setMethod (f = "getPxnc",
 
 #' @rdname get
 #' @name getPnxc
+#' @aliases getPnxc
 #' @docType methods
 #' @export
 
@@ -222,6 +236,7 @@ setMethod (f = "getPnxc",
 
 #' @rdname get
 #' @name getPnxnc
+#' @aliases getPnxnc
 #' @docType methods
 #' @export
 
@@ -237,6 +252,7 @@ setMethod (f = "getPnxnc",
 
 #' @rdname get
 #' @name getEcx
+#' @aliases getEcx
 #' @docType methods
 #' @export
 
@@ -252,6 +268,7 @@ setMethod (f = "getEcx",
 
 #' @rdname get
 #' @name getEncx
+#' @aliases getEncx
 #' @docType methods
 #' @export
 
@@ -281,6 +298,7 @@ setMethod (f = "getApr",
 
 #' @rdname get
 #' @name getScx
+#' @aliases getScx
 #' @docType methods
 #' @export
 
@@ -296,6 +314,7 @@ setMethod (f = "getScx",
 
 #' @rdname get
 #' @name getScnx
+#' @aliases getScnx
 #' @docType methods
 #' @export
 

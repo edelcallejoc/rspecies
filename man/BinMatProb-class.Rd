@@ -17,8 +17,16 @@ BinMatProb(name_ID, DMNB, BMNB, Prob, ...)
 
 \S4method{print}{BinMatProb}(x, ...)
 }
+\arguments{
+\item{...}{pass to another methods.}
+
+\item{object}{an object of class BinMatProb.}
+
+\item{x}{an object of class BinMatProb.}
+}
 \description{
-An S4 subclass from BinMat class.
+This is a class associated to probability methods applied to
+    BinMatCount objects (See \code{\link[rspecies]{probs}}).
 }
 \details{
 The elements of the list are defined as follow.
@@ -42,6 +50,16 @@ The elements of the list are defined as follow.
 \section{Slots}{
 
 \describe{
+\item{\code{name_ID}}{a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+A data containing the ID's for column names in slots DMNB and BMNB.}
+
+\item{\code{DMNB}}{a matrix of integers. Contains the number of observations per cells
+per column. The number of columns must be identical to the number of rows
+in name_ID.}
+
+\item{\code{BMNB}}{a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+The number of columns must be identical to the number of rows in name_ID.}
+
 \item{\code{Prob}}{a list object whit 8 elements, Pc, Px, Pcx, Pcnx, Pxc, Pxnc,
 Pnxc and Pnxnc. See details.}
 }}

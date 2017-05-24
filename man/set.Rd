@@ -19,6 +19,11 @@ setNcx(object) <- value
 }
 \arguments{
 \item{object}{A \code{\link[rspecies]{BinMatCount}} object.}
+
+\item{value}{An object for replacement the slots of BinMatCount.
+'setN' an integer vector of length 1. 'setNc' an integer vector.
+'setNx' an integer vector. 'setNcx' an integer matrix. (See
+\code{\link[rspecies]{BinMatCount}} for more details.)}
 }
 \value{
 return a slot of BinMat object.

@@ -5,6 +5,19 @@
 #'
 #' @name BinMatEps-class
 #'
+#' @description This is a class associated to epsilon methods applied to
+#'     BinMatCount and BinMatProb objects (See \code{\link[rspecies]{epsilon}}).
+#'
+#' @slot name_ID a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+#'     A data containing the ID's for column names in slots DMNB and BMNB.
+#'
+#' @slot DMNB a matrix of integers. Contains the number of observations per cells
+#'     per column. The number of columns must be identical to the number of rows
+#'     in name_ID.
+#'
+#' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+#'     The number of columns must be identical to the number of rows in name_ID.
+#'
 #' @slot Epsilon a list object whit 2 elements, Ecx and Encx.
 #'
 #' @details The elements of the list are defined as follow.
@@ -72,6 +85,9 @@ setValidity("BinMatEps", function(object){
 
 #' @rdname BinMatEps-class
 #' @name BinMatEps-Contstructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -85,6 +101,9 @@ BinMatEps <- function(name_ID, DMNB, BMNB, Epsilon, ...){
 
 #' @rdname BinMatEps-class
 #' @name show-BinMatEps
+#'
+#' @param object an object of class BinMatEps.
+#'
 #' @docType methods
 #' @export
 
@@ -102,6 +121,10 @@ setMethod(f = "show",
 
 #' @rdname BinMatEps-class
 #' @name print-BinMatEps
+#' @aliases print-BinMatEps
+#'
+#' @param x an object of class BinMatEps.
+#'
 #' @docType methods
 #' @export
 

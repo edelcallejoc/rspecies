@@ -5,6 +5,19 @@
 #'
 #' @name BinMatCount-class
 #'
+#' @description This is a class associated to count methods applied to
+#'     BinMat objects (See \code{\link[rspecies]{counts}}).
+#'
+#' @slot name_ID a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+#'     A data containing the ID's for column names in slots DMNB and BMNB.
+#'
+#' @slot DMNB a matrix of integers. Contains the number of observations per cells
+#'     per column. The number of columns must be identical to the number of rows
+#'     in name_ID.
+#'
+#' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+#'     The number of columns must be identical to the number of rows in name_ID.
+#'
 #' @slot Count a list object whit 4 elements, N, Nc, Nx and Ncx. See details
 #'
 #' @details The elements of the list are defined as follow.
@@ -71,6 +84,9 @@ setValidity("BinMatCount", function(object){
 
 #' @rdname BinMatCount-class
 #' @name BinMatCount-Contstructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -83,6 +99,10 @@ BinMatCount <- function(name_ID, DMNB, BMNB, Count, ...){
 
 #' @rdname BinMatCount-class
 #' @name show-BinMatCount
+#' @aliases show-BinMatCount
+#'
+#' @param object an object of class BinMatCount.
+#'
 #' @docType methods
 #' @export
 
@@ -102,6 +122,10 @@ setMethod(f = "show",
 
 #' @rdname BinMatCount-class
 #' @name print-BinMatCount
+#' @aliases print-BinMatCount
+#'
+#' @param x an object of class BinMatCount.
+#'
 #' @docType methods
 #' @export
 

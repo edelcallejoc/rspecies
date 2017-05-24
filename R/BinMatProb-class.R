@@ -5,6 +5,19 @@
 #'
 #' @name BinMatProb-class
 #'
+#' @description This is a class associated to probability methods applied to
+#'     BinMatCount objects (See \code{\link[rspecies]{probs}}).
+#'
+#' @slot name_ID a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+#'     A data containing the ID's for column names in slots DMNB and BMNB.
+#'
+#' @slot DMNB a matrix of integers. Contains the number of observations per cells
+#'     per column. The number of columns must be identical to the number of rows
+#'     in name_ID.
+#'
+#' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+#'     The number of columns must be identical to the number of rows in name_ID.
+#'
 #' @slot Prob a list object whit 8 elements, Pc, Px, Pcx, Pcnx, Pxc, Pxnc,
 #'     Pnxc and Pnxnc. See details.
 #'
@@ -100,6 +113,9 @@ setValidity("BinMatProb", function(object){
 
 #' @rdname BinMatProb-class
 #' @name BinMatProb-Contstructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -113,6 +129,10 @@ BinMatProb <- function(name_ID, DMNB, BMNB, Prob, ...){
 
 #' @rdname BinMatProb-class
 #' @name show-BinMatProb
+#' @aliases show-BinMatProb
+#'
+#' @param object an object of class BinMatProb.
+#'
 #' @docType methods
 #' @export
 
@@ -133,6 +153,10 @@ setMethod(f = "show",
 
 #' @rdname BinMatProb-class
 #' @name print-BinMatProb
+#'
+#' @param x an object of class BinMatProb.
+#'
+#' @aliases print-BinMatProb
 #' @docType methods
 #' @export
 

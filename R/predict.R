@@ -2,11 +2,12 @@
 #' Function to calculate predictions form BinMatScore Class
 #'
 #' @name predict
+#' @aliases predict-BinMatScore
 #'
 #' @description This function allows to calculate the classifier of each cell in the
 #'     grid of the polygon defined for spatial data mining.
 #'
-#' @param x A \code{\link[rspecies]{BinMatScore}} object from
+#' @param object A \code{\link[rspecies]{BinMatScore}} object from
 #'     \code{\link[rspecies]{score}} function.
 #'
 #' @param apr_inc logical. If TRUE the apriori score is included for
@@ -99,6 +100,3 @@ setMethod("predict", c("BinMatScore"),
          return(output)
 })
 
-# trace("predict", browser, exit=browser, signature = c("BinMatScore"))
-
-# DT::datatable(predict(score.mat)[,1:6])

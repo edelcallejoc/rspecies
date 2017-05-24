@@ -9,6 +9,11 @@
 #'
 #' @param object A \code{\link[rspecies]{BinMatCount}} object.
 #'
+#' @param value  An object for replacement the slots of BinMatCount.
+#'     'setN' an integer vector of length 1. 'setNc' an integer vector.
+#'     'setNx' an integer vector. 'setNcx' an integer matrix. (See
+#'     \code{\link[rspecies]{BinMatCount}} for more details.)
+#'
 #' @return return a slot of BinMat object.
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).

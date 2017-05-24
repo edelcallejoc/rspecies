@@ -56,6 +56,7 @@ NULL
 
 #' @rdname plot-methods
 #' @name plot-BinMat
+#' @aliases plot-BinMat
 #' @docType methods
 #' @export
 
@@ -148,6 +149,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
 
 #' @rdname plot-methods
 #' @name plot-BinMatPred
+#' @aliases plot-BinMatPred
 #'
 #' @description A plot methods for classes "SpatialPolygonsDataFrame", "BinMatPred".
 #'

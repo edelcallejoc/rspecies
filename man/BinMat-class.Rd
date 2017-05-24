@@ -18,6 +18,13 @@ BinMat(name_ID, DMNB, BMNB, ...)
 
 \S4method{print}{BinMat}(x, ...)
 }
+\arguments{
+\item{...}{pass to another methods.}
+
+\item{object}{an object of class BinMat.}
+
+\item{x}{an object of class BinMat.}
+}
 \description{
 An S4 class to represent a matrix model for naive bayes spatial
 data mining model.

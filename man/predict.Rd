@@ -3,20 +3,21 @@
 \docType{methods}
 \name{predict}
 \alias{predict}
+\alias{predict-BinMatScore}
 \title{Function to calculate predictions form BinMatScore Class}
 \usage{
 \S4method{predict}{BinMatScore}(object, apr_inc = TRUE, comp_inc = TRUE,
   ...)
 }
 \arguments{
+\item{object}{A \code{\link[rspecies]{BinMatScore}} object from
+\code{\link[rspecies]{score}} function.}
+
 \item{apr_inc}{logical. If TRUE the apriori score is included for
 prediction calculation.}
 
 \item{comp_inc}{logical. If TRUE the complement of explanatory variables
 included for prediction claculation}
-
-\item{x}{A \code{\link[rspecies]{BinMatScore}} object from
-\code{\link[rspecies]{score}} function.}
 }
 \description{
 This function allows to calculate the classifier of each cell in the

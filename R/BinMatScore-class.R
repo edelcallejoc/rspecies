@@ -8,6 +8,16 @@
 #' @description This is a class associated to score method applied to
 #'     BinMatProb objects (See \code{\link[rspecies]{score}}).
 #'
+#' @slot name_ID a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+#'     A data containing the ID's for column names in slots DMNB and BMNB.
+#'
+#' @slot DMNB a matrix of integers. Contains the number of observations per cells
+#'     per column. The number of columns must be identical to the number of rows
+#'     in name_ID.
+#'
+#' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+#'     The number of columns must be identical to the number of rows in name_ID.
+#'
 #' @slot Score a list object whit 3 elements, Apriori, Scx and Scnx.
 #'
 #' @details The elements of the list are defined as follow.
@@ -76,6 +86,9 @@ setValidity("BinMatScore", function(object){
 
 #' @rdname BinMatScore-class
 #' @name BinMatScore-Contstructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -88,6 +101,10 @@ BinMatScore <- function(name_ID, DMNB, BMNB, Score, ...){
 
 #' @rdname BinMatScore-class
 #' @name show-BinMatScore
+#' @aliases show-BinMatScore
+#'
+#' @param object an object of class BinMatScore.
+#'
 #' @docType methods
 #' @export
 
@@ -106,6 +123,10 @@ setMethod(f = "show",
 
 #' @rdname BinMatScore-class
 #' @name print-BinMatScore
+#' @aliases print-BinMatScore
+#'
+#' @param object an object of class BinMatScore.
+#'
 #' @docType methods
 #' @export
 

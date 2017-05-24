@@ -3,8 +3,12 @@
 \docType{methods}
 \name{epsilon}
 \alias{epsilon}
+\alias{epsilon-gen}
+\alias{epsilon-generic}
 \title{Epsilon function for NB Hypothesis Testing for Spatial Data Mining}
 \usage{
+epsilon(prob.mat, count.mat, lap_fac = 0.1)
+
 \S4method{epsilon}{BinMatProb,BinMatCount}(prob.mat, count.mat, lap_fac = 0.1)
 
 \S4method{score}{BinMatProb,BinMatCount}(prob.mat, count.mat, lap_fac = 0.1,
@@ -15,7 +19,7 @@
 
 \item{count.mat}{a \code{list} object from \code{\link[rspecies]{counts}}.}
 
-\item{laplace}{numeric. See \code{\link[rspecies]{laplace}}.}
+\item{lap_fac}{numeric. See \code{\link[rspecies]{laplace}}.}
 }
 \value{
 This function returns a \code{list} object with 2 elements.

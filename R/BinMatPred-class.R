@@ -8,6 +8,16 @@
 #' @description This is a class associated to prediction methods applied to
 #'     BinMatScore objects (See \code{\link[rspecies]{predict}}).
 #'
+#' @slot name_ID a data.frame. rownames(name_ID) = colnames(DMNB) = colnames(BMNB).
+#'     A data containing the ID's for column names in slots DMNB and BMNB.
+#'
+#' @slot DMNB a matrix of integers. Contains the number of observations per cells
+#'     per column. The number of columns must be identical to the number of rows
+#'     in name_ID.
+#'
+#' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
+#'     The number of columns must be identical to the number of rows in name_ID.
+#'
 #' @slot Prediction a matrix object.
 #'
 #' @details The elements of the list are defined as follow.
@@ -73,6 +83,9 @@ setValidity("BinMatPred", function(object){
 
 #' @rdname BinMatPred-class
 #' @name BinMatPred-Constructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -86,6 +99,10 @@ BinMatPred <- function(name_ID, DMNB, BMNB, Prediction, ...){
 
 #' @rdname BinMatPred-class
 #' @name show-BinMatPred
+#' @aliases show-BinMatPred
+#'
+#' @param object an object of class BinMatPred.
+#'
 #' @docType methods
 #' @export
 #'
@@ -103,6 +120,10 @@ setMethod(f = "show",
 
 #' @rdname BinMatPred-class
 #' @name print-BinMatPred
+#'
+#' @param x an object of class BinMatPred.
+#'
+#' @aliases print-BinMatPred
 #' @docType methods
 #' @export
 

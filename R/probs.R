@@ -60,6 +60,8 @@ setGeneric("probs",function(count.mat, lap_fac = 0.1){standardGeneric ("probs")}
 
 #' @rdname probs
 #' @name probs
+#' @aliases probs-BinMatCount
+#'
 #' @docType methods
 #' @export
 

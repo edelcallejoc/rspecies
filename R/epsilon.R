@@ -10,7 +10,7 @@
 #'
 #' @param prob.mat a \code{list} object from \code{\link[rspecies]{probs}}.
 #' @param count.mat a \code{list} object from \code{\link[rspecies]{counts}}.
-#' @param laplace numeric. See \code{\link[rspecies]{laplace}}.
+#' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
 #'
 #' @return This function returns a \code{list} object with 2 elements.
 #'     The elements are: Ecx and Ecnx (see Details for further explanation).
@@ -69,8 +69,14 @@
 
 NULL
 
-
 # Generic definition ------------------------------------------------------
+
+#' @rdname epsilon
+#' @name epsilon-gen
+#' @aliases epsilon-generic
+#' @docType methods
+#' @export
+
 
 setGeneric("epsilon",function(prob.mat, count.mat, lap_fac = 0.1){
            standardGeneric ("epsilon")})
@@ -78,6 +84,7 @@ setGeneric("epsilon",function(prob.mat, count.mat, lap_fac = 0.1){
 
 #' @rdname epsilon
 #' @name epsilon
+#' @aliases epsilon
 #' @docType methods
 #' @export
 #'

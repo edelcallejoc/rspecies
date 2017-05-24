@@ -113,6 +113,7 @@ setGeneric("counts",function(x.mat, target = NULL, bioclim = NULL){standardGener
 
 #' @rdname counts
 #' @name counts
+#' @aliases counts
 #' @docType methods
 #' @export
 

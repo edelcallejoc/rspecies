@@ -83,6 +83,9 @@ setValidity("BinMat", function(object){
 
 #' @rdname BinMat-class
 #' @name BinMat-Contstructor
+#'
+#' @param ... pass to another methods.
+#'
 #' @docType methods
 #' @export
 
@@ -94,6 +97,10 @@ BinMat <- function(name_ID, DMNB, BMNB, ...){
 
 #' @rdname BinMat-class
 #' @name show-BinMat
+#' @aliases show-BinMat
+#'
+#' @param object an object of class BinMat.
+#'
 #' @docType methods
 #' @export
 
@@ -122,6 +129,10 @@ setMethod(f = "show",
 
 #' @rdname BinMat-class
 #' @name print-BinMat
+#' @aliases print-BinMat
+#'
+#' @param x an object of class BinMat.
+#'
 #' @docType methods
 #' @export
 

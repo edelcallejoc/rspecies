@@ -3,6 +3,7 @@
 \docType{methods}
 \name{probs}
 \alias{probs}
+\alias{probs-BinMatCount}
 \title{Probability matrices for spatial data mining.}
 \usage{
 \S4method{probs}{BinMatCount}(count.mat, lap_fac = 0.1)
