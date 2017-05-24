@@ -5,6 +5,8 @@
 \alias{counts}
 \title{Counting matrices for spatial data mining}
 \usage{
+counts(x.mat, target = NULL, bioclim = NULL)
+
 \S4method{counts}{BinMat}(x.mat, target = NULL, bioclim = NULL)
 }
 \arguments{

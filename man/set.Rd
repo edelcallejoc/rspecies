@@ -4,18 +4,30 @@
 \name{set}
 \alias{set}
 \alias{setN}
+\alias{setN-gen}
 \alias{setNc}
+\alias{setNc-gen}
 \alias{setNcx}
+\alias{setNcx-gen}
 \alias{setNx}
+\alias{setNx-gen}
 \title{Replace methods for BinMat class and subclass}
 \usage{
 setN(object) <- value
 
+\S4method{setN}{BinMatCount}(object) <- value
+
 setNc(object) <- value
+
+\S4method{setNc}{BinMatCount}(object) <- value
 
 setNx(object) <- value
 
+\S4method{setNx}{BinMatCount}(object) <- value
+
 setNcx(object) <- value
+
+\S4method{setNcx}{BinMatCount}(object) <- value
 }
 \arguments{
 \item{object}{A \code{\link[rspecies]{BinMatCount}} object.}

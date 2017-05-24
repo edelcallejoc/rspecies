@@ -105,7 +105,6 @@
 #' head(getNx(count.bmat))
 #' head(getNcx(Count.bmat))
 #'
-NULL
 
 # Generic definition ------------------------------------------------------
 
