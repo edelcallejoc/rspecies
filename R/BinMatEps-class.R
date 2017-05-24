@@ -16,20 +16,35 @@
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
 #' @examples
+#' library(sp)
+#' library(rgeos)
+#' load(Mex0)
+#' load(mammals)
 #'
-#' name_ID<-data.frame(name = c("carlos", "pepe"), row.names = c("X1","X2"), stringsAsFactors = F)
-#' DMNB<-matrix(rbinom(10,10, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
-#' BMNB<-matrix(rbinom(10,1, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
+#' # Generating de grid from Mex0 data
+#' Mex0.grd<-grd_build(Mex0)
 #'
-#' BinMatProb(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, Prob = list(Pc = matrix(1:2,2),
-#'            Px = matrix(1:3,3), Pcx = matrix(1:6,2,3), Pcnx = matrix(1:6,2,3),
-#'            Pxc = matrix(1:6,3,2), Pxnc = matrix(1:6,3,2), Pnxc = matrix(1:6,3,2),
-#'             Pnxnc = matrix(1:6,3,2)))
+#' # Identification points of mammals with colnames = NULL.
+#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#'
+#' # Counting matrices
+#' count.mat<-counts(x.mat)
+#'
+#' # Probability matrices
+#' prob.mat<-probs(count.mat, laplace = 0.1)
+#'
+#' # Epsilon function
+#' epsilon.mat<-epsilon(prob.mat, count.mat)
 #'
 
 NULL
 
 # Class definition ---------------------------------------------------
+
+#' @rdname BinMatEps-class
+#' @name new-BinMatEps
+#' @docType methods
+#' @export
 
 .BinMatEps <- setClass(Class = "BinMatEps", contains = "BinMat",
          slots = list(Epsilon = "list"))
@@ -56,29 +71,22 @@ setValidity("BinMatEps", function(object){
 # Create an constructor method for class BinMatCount --------------------------
 
 #' @rdname BinMatEps-class
-#' @name Contstructor
+#' @name BinMatEps-Contstructor
 #' @docType methods
 #' @export
+
 
 BinMatEps <- function(name_ID, DMNB, BMNB, Epsilon, ...){
   obj<-BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB)
   .BinMatEps(obj, Epsilon = Epsilon, ...)
 }
 
-#
-# setMethod(f = "initialize",
-#           signature = "BinMatCount",
-#           definition = function(.Object, ..., Count){
-#             .Object@Count <- Count
-#             callNextMethod(.Object, ...)
-#             validObject(.Object)
-#             return(.Object)
-#           }
-# )
-
-
-
 # Create a show method for class BinMat ----------------------------------
+
+#' @rdname BinMatEps-class
+#' @name show-BinMatEps
+#' @docType methods
+#' @export
 
 setMethod(f = "show",
           signature = "BinMatEps",
@@ -93,7 +101,7 @@ setMethod(f = "show",
 # Create a print method for class BinMat ------------------------------------
 
 #' @rdname BinMatEps-class
-#' @name print
+#' @name print-BinMatEps
 #' @docType methods
 #' @export
 

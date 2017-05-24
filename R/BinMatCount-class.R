@@ -37,6 +37,12 @@ NULL
 
 # Class definition -------------------------------------
 
+#' @rdname BinMatCount-class
+#' @name new-BinMatCount
+#' @docType methods
+#' @export
+
+
 .BinMatCount <- setClass(Class = "BinMatCount", contains = "BinMat",
          slots = list(Count = "list"))
 
@@ -64,7 +70,7 @@ setValidity("BinMatCount", function(object){
 # Create an constructor method for class BinMatCount --------------------------
 
 #' @rdname BinMatCount-class
-#' @name Contstructor
+#' @name BinMatCount-Contstructor
 #' @docType methods
 #' @export
 
@@ -73,20 +79,13 @@ BinMatCount <- function(name_ID, DMNB, BMNB, Count, ...){
   .BinMatCount(obj, Count = Count, ...)
 }
 
-#
-# setMethod(f = "initialize",
-#           signature = "BinMatCount",
-#           definition = function(.Object, ..., Count){
-#             .Object@Count <- Count
-#             callNextMethod(.Object, ...)
-#             validObject(.Object)
-#             return(.Object)
-#           }
-# )
-
-
-
 # Create a show method for class BinMat ----------------------------------
+
+#' @rdname BinMatCount-class
+#' @name show-BinMatCount
+#' @docType methods
+#' @export
+
 
 setMethod(f = "show",
           signature = "BinMatCount",
@@ -102,7 +101,7 @@ setMethod(f = "show",
 # Create a print method for class BinMat ------------------------------------
 
 #' @rdname BinMatCount-class
-#' @name print
+#' @name print-BinMatCount
 #' @docType methods
 #' @export
 

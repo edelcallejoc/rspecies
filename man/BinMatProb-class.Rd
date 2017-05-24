@@ -2,13 +2,18 @@
 % Please edit documentation in R/BinMatProb-class.R
 \docType{methods}
 \name{BinMatProb-class}
+\alias{.BinMatProb}
 \alias{BinMatProb}
+\alias{BinMatProb-Contstructor}
 \alias{BinMatProb-class}
-\alias{Contstructor}
-\alias{print}
+\alias{new-BinMatProb}
+\alias{print-BinMatProb}
+\alias{show-BinMatProb}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatProb(name_ID, DMNB, BMNB, Prob, ...)
+
+\S4method{show}{BinMatProb}(object)
 
 \S4method{print}{BinMatProb}(x, ...)
 }
@@ -41,16 +46,24 @@ The elements of the list are defined as follow.
 Pnxc and Pnxnc. See details.}
 }}
 \examples{
+#' #' library(sp)
+library(rgeos)
+data(Mex0)
+data(mammals)
 
-name_ID<-data.frame(name = c("carlos", "pepe"), row.names = c("X1","X2"), stringsAsFactors = F)
-DMNB<-matrix(rbinom(10,10, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
-BMNB<-matrix(rbinom(10,1, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
+# Generating de grid from Mex0 data
+Mex0.grd<-grd_build(Mex0)
 
-BinMatProb(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, Prob = list(Pc = matrix(1:2,2),
-           Px = matrix(1:3,3), Pcx = matrix(1:6,2,3), Pcnx = matrix(1:6,2,3),
-           Pxc = matrix(1:6,3,2), Pxnc = matrix(1:6,3,2), Pnxc = matrix(1:6,3,2),
-            Pnxnc = matrix(1:6,3,2)))
+# Identification points of mammals with colnames = NULL.
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
 
+# Counting matrices
+count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+
+# Probability matrices
+prob.mat<-probs(count.mat, lap_fac = 0.1)
+
+print(prob.mat)
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).

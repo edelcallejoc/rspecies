@@ -2,13 +2,18 @@
 % Please edit documentation in R/BinMatCount-class.R
 \docType{methods}
 \name{BinMatCount-class}
+\alias{.BinMatCount}
 \alias{BinMatCount}
+\alias{BinMatCount-Contstructor}
 \alias{BinMatCount-class}
-\alias{Contstructor}
-\alias{print}
+\alias{new-BinMatCount}
+\alias{print-BinMatCount}
+\alias{show-BinMatCount}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatCount(name_ID, DMNB, BMNB, Count, ...)
+
+\S4method{show}{BinMatCount}(object)
 
 \S4method{print}{BinMatCount}(x, ...)
 }

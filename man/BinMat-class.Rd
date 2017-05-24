@@ -2,13 +2,19 @@
 % Please edit documentation in R/BinMat-class.R
 \docType{methods}
 \name{BinMat-class}
+\alias{.BinMat}
 \alias{BinMat}
+\alias{BinMat-Contstructor}
 \alias{BinMat-class}
-\alias{print}
+\alias{new-BinMat}
+\alias{print-BinMat}
+\alias{show-BinMat}
 \title{An S4 class to represent a matrix model for naive bayes spatial
 data mining model.}
 \usage{
 BinMat(name_ID, DMNB, BMNB, ...)
+
+\S4method{show}{BinMat}(object)
 
 \S4method{print}{BinMat}(x, ...)
 }

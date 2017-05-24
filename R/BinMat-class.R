@@ -42,6 +42,11 @@ NULL
 
 # Class definition ----------------------------------------------------
 
+#' @rdname BinMat-class
+#' @name new-BinMat
+#' @docType methods
+#' @export
+
 .BinMat<-setClass(Class = "BinMat",
          slots = list(name_ID = "data.frame", DMNB = "matrix", BMNB = "matrix")
          )
@@ -77,7 +82,7 @@ setValidity("BinMat", function(object){
 # Create a constructor method for class BinMat --------------------------
 
 #' @rdname BinMat-class
-#' @name BinMat
+#' @name BinMat-Contstructor
 #' @docType methods
 #' @export
 
@@ -85,22 +90,13 @@ BinMat <- function(name_ID, DMNB, BMNB, ...){
   .BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, ...)
 }
 
-
-
-# setMethod(f = "initialize",
-#           signature = "BinMat",
-#           definition = function(.Object, DMNB, BMNB, name_ID){
-#               .Object@DMNB <- DMNB
-#               .Object@BMNB <- BMNB
-#               .Object@name_ID <- name_ID
-#               callNextMethod(.Object)
-#               validObject(.Object)
-#               return(.Object)
-#           }
-# )
-
-
 # Create a show method for class BinMat ----------------------------------
+
+#' @rdname BinMat-class
+#' @name show-BinMat
+#' @docType methods
+#' @export
+
 
 setMethod(f = "show",
           signature = "BinMat",
@@ -125,7 +121,7 @@ setMethod(f = "show",
 # Create a print method for class BinMat ------------------------------------
 
 #' @rdname BinMat-class
-#' @name print
+#' @name print-BinMat
 #' @docType methods
 #' @export
 

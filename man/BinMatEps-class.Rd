@@ -2,13 +2,18 @@
 % Please edit documentation in R/BinMatEps-class.R
 \docType{methods}
 \name{BinMatEps-class}
+\alias{.BinMatEps}
 \alias{BinMatEps}
+\alias{BinMatEps-Contstructor}
 \alias{BinMatEps-class}
-\alias{Contstructor}
-\alias{print}
+\alias{new-BinMatEps}
+\alias{print-BinMatEps}
+\alias{show-BinMatEps}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatEps(name_ID, DMNB, BMNB, Epsilon, ...)
+
+\S4method{show}{BinMatEps}(object)
 
 \S4method{print}{BinMatEps}(x, ...)
 }
@@ -28,15 +33,25 @@ The elements of the list are defined as follow.
 \item{\code{Epsilon}}{a list object whit 2 elements, Ecx and Encx.}
 }}
 \examples{
+library(sp)
+library(rgeos)
+load(Mex0)
+load(mammals)
 
-name_ID<-data.frame(name = c("carlos", "pepe"), row.names = c("X1","X2"), stringsAsFactors = F)
-DMNB<-matrix(rbinom(10,10, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
-BMNB<-matrix(rbinom(10,1, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
+# Generating de grid from Mex0 data
+Mex0.grd<-grd_build(Mex0)
 
-BinMatProb(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, Prob = list(Pc = matrix(1:2,2),
-           Px = matrix(1:3,3), Pcx = matrix(1:6,2,3), Pcnx = matrix(1:6,2,3),
-           Pxc = matrix(1:6,3,2), Pxnc = matrix(1:6,3,2), Pnxc = matrix(1:6,3,2),
-            Pnxnc = matrix(1:6,3,2)))
+# Identification points of mammals with colnames = NULL.
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+
+# Counting matrices
+count.mat<-counts(x.mat)
+
+# Probability matrices
+prob.mat<-probs(count.mat, laplace = 0.1)
+
+# Epsilon function
+epsilon.mat<-epsilon(prob.mat, count.mat)
 
 }
 \author{
