@@ -26,3 +26,6 @@ README.html
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# figure directory
+figure/
