@@ -30,8 +30,8 @@
 #'     \code{\link[rspecies]{epsilon}}
 #'     \code{\link[rspecies]{score}}
 #'     \code{\link[rspecies]{predict}}
-#'     \code{\link[rspecies]{plot}}
-#'     \code{\link[rspecies]{print}}
+#'     \code{\link[rspecies:plot-methods]{plot}}
+#'     \code{print}
 #'
 #' @docType package
 #' @name rspecies

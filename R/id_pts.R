@@ -76,6 +76,9 @@
 #'
 #' @references \url{http://species.conabio.gob.mx/}
 #'
+#' @docType methods
+#' @export
+#'
 #' @import sp rgdal rgeos maptools parallel doParallel foreach
 
 id_pts<-function(grd, pts, contain = c("simple", "properly"), colnames = NULL){

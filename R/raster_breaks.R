@@ -1,16 +1,16 @@
 
 #' Extract pixels from raster object and breaks it into n bins.
 
-#' @description Take a \code{raster} object (\code{\link{RasterLayer}},
-#'     \code{\link{RasterStack}}, \code{\link{RasterBrick}}),
+#' @description Take a \code{raster} object (\code{\link[raster:Raster-class]{RasterLayer}},
+#'     \code{\link[raster:Raster-class]{RasterStack}}, \code{\link[raster:Raster-class]{RasterBrick}}),
 #'     and extract pixels values contain by \code{\link[sp]{SpatialPolygonsDataFrame}}
 #'     object. Then, \code{raster_break()} generates bins, given by \code{breaks}
 #'     argument, from pixels values. Finally, it converts all bins into a
 #'     \code{\link[sp]{SpatialPointsDataFrame}} object. See details for further
 #'     explanation
 #'
-#' @param x.ras A \code{raster} object (\code{\link{RasterLayer}},
-#'     \code{\link{RasterStack}}, \code{\link{RasterBrick}}).
+#' @param x.ras A \code{raster} object (\code{\link[raster:Raster-class]{RasterLayer}},
+#'     \code{\link[raster:Raster-class]{RasterStack}}, \code{\link[raster:Raster-class]{RasterBrick}}).
 #' @param pol.ext A \code{SpatialPolygonsDataFrame} object. An object from
 #'     \code{\link[rspecies]{grd_build}()} is recommended.
 #' @param bb A integer vector of the form \code{c(min['long'], max['long'],
@@ -18,7 +18,7 @@
 #' @param breaks \code{NULL}, integer or numeric vector. A vector of
 #'     length >= 3, indicating the lower limit and upper limit of each bin.
 #'     If breaks has length = 3, 2 bins are created. By default \code{breaks = NULL},
-#'     if NULL or integer bins are calculated with \code{\link{quantile}()}.
+#'     if NULL or integer bins are calculated with \code{\link[stats]{quantile}()}.
 #'     Se details for further explanation.
 #' @param breaks.by double. A value between 0 and 1. Argument pass to quantile function, it requires
 #'     \code{breaks = NULL}.
