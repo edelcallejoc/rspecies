@@ -5,6 +5,9 @@
 #'
 #' @name BinMatScore-class
 #'
+#' @description This is a class associated to score method applied to
+#'     BinMatProb objects (See \code{\link[rspecies]{score}}).
+#'
 #' @slot Score a list object whit 3 elements, Apriori, Scx and Scnx.
 #'
 #' @details The elements of the list are defined as follow.
@@ -16,9 +19,34 @@
 #'
 #' @examples
 #'
+#' #' library(sp)
+#' library(rgeos)
+#' data(Mex0)
+#' data(mammals)
+#'
+#' # Generating de grid from Mex0 data
+#' Mex0.grd<-grd_build(Mex0)
+#'
+#' # Identification points of mammals with colnames = NULL.
+#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#'
+#' # Counting matrices
+#' count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+#'
+#' # Probability matrices
+#' prob.mat<-probs(count.mat, lap_fac = 0.1)
+#'
+#' #score function
+#' score.mat<-score(prob.mat, count.mat)
+#'
 NULL
 
 # Class definition ---------------------------------------------------
+
+#' @rdname BinMatScore-class
+#' @name new-BinMatScore
+#' @docType methods
+#' @export
 
 .BinMatScore <- setClass(Class = "BinMatScore", contains = "BinMat",
          slots = list(Score = "list"))
@@ -47,7 +75,7 @@ setValidity("BinMatScore", function(object){
 # Create an constructor method for class BinMatCount --------------------------
 
 #' @rdname BinMatScore-class
-#' @name Contstructor
+#' @name BinMatScore-Contstructor
 #' @docType methods
 #' @export
 
@@ -56,20 +84,12 @@ BinMatScore <- function(name_ID, DMNB, BMNB, Score, ...){
   .BinMatScore(obj, Score = Score, ...)
 }
 
-#
-# setMethod(f = "initialize",
-#           signature = "BinMatCount",
-#           definition = function(.Object, ..., Count){
-#             .Object@Count <- Count
-#             callNextMethod(.Object, ...)
-#             validObject(.Object)
-#             return(.Object)
-#           }
-# )
-
-
-
 # Create a show method for class BinMat ----------------------------------
+
+#' @rdname BinMatScore-class
+#' @name show-BinMatScore
+#' @docType methods
+#' @export
 
 setMethod(f = "show",
           signature = "BinMatScore",
@@ -85,7 +105,7 @@ setMethod(f = "show",
 # Create a print method for class BinMat ------------------------------------
 
 #' @rdname BinMatScore-class
-#' @name print
+#' @name print-BinMatScore
 #' @docType methods
 #' @export
 
