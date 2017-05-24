@@ -5,7 +5,7 @@
 #' @description The setters methods for BinMatCount-class, each function is a
 #'     method to acces to each slot in BinMat-class
 #'
-#' @name set
+#' @name set-BinMatCount
 #'
 #' @param object A \code{\link[rspecies]{BinMatCount}} object.
 #'
@@ -22,22 +22,15 @@ NULL
 
 # Setters ----------------------------------------------------
 
-#' @rdname set
-#' @name setN-gen
-#' @aliases setN-gen
-#' @docType methods
-#' @export
-#'
+#' @name set-BinMatCount
+#' @rdname set-BinMatCount
+#' @exportMethod setN<-
 
 setGeneric("setN<-",function(object, value){standardGeneric ("setN<-")})
 
 
-#' @rdname set
-#' @name setN
-#' @aliases setN
-#' @docType methods
-#' @export
-
+#' @rdname set-BinMatCount
+#' @aliases setN,BinMatCount
 setReplaceMethod (f = "setN",
            signature = "BinMatCount",
            definition = function(object, value){
@@ -48,22 +41,15 @@ setReplaceMethod (f = "setN",
 )
 
 
-#' @rdname set
-#' @name setNc-gen
-#' @aliases setNc-gen
-#' @docType methods
-#' @export
-#'
+#' @name set-BinMatCount
+#' @rdname set-BinMatCount
+#' @exportMethod setNc<-
 
 setGeneric("setNc<-",function(object, value){standardGeneric ("setNc<-")})
 
 
-#' @rdname set
-#' @name setNc
-#' @aliases setNc
-#' @docType methods
-#' @export
-
+#' @rdname set-BinMatCount
+#' @aliases setNc,BinMatCount
 setReplaceMethod (f = "setNc",
                   signature = "BinMatCount",
                   definition = function(object, value){
@@ -74,20 +60,15 @@ setReplaceMethod (f = "setNc",
 )
 
 
-#' @rdname set
-#' @name setNx-gen
-#' @aliases setNx-gen
-#' @docType methods
-#' @export
-
+#' @name set-BinMatCount
+#' @rdname set-BinMatCount
+#' @exportMethod setNx<-
+#'
 setGeneric("setNx<-",function(object, value){standardGeneric ("setNx<-")})
 
-#' @rdname set
-#' @name setNx
-#' @aliases setNx
-#' @docType methods
-#' @export
-
+#' @rdname set-BinMatCount
+#' @aliases setNx,BinMatCount
+#'
 setReplaceMethod (f = "setNx",
                   signature = "BinMatCount",
                   definition = function(object, value){
@@ -98,22 +79,15 @@ setReplaceMethod (f = "setNx",
 )
 
 
-#' @rdname set
-#' @name setNcx-gen
-#' @aliases setNcx-gen
-#' @docType methods
-#' @export
-
+#' @name set-BinMatCount
+#' @rdname set-BinMatCount
+#' @exportMethod setNcx<-
 
 setGeneric("setNcx<-",function(object, value){standardGeneric ("setNcx<-")})
 
 
-#' @rdname set
-#' @name setNcx
-#' @aliases setNcx
-#' @docType methods
-#' @export
-
+#' @rdname set-BinMatCount
+#' @aliases setNcx,BinMatCount
 setReplaceMethod (f = "setNcx",
                   signature = "BinMatCount",
                   definition = function(object, value){
