@@ -38,7 +38,7 @@
 #' # Prediction
 #' pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
 #'
-#'
+#' print(pred.mat)
 #'
 NULL
 
@@ -95,7 +95,7 @@ setMethod(f = "show",
             cat("An object of class 'BinMatPred'.\n")
             cat("Slot: Prediction\n", "Type:",  class(object@Prediction), "\n",
                 "target: ", colnames(object@Prediction),"\n",
-                "dimension:", dim(object@Score$Prediction), "\n")}
+                "dimension:", dim(object@Prediction), "\n")}
 )
 
 
@@ -110,6 +110,6 @@ setMethod (f = "print",
            signature = "BinMatPred",
            definition = function(x,...){
              cat("An object of class 'BinMatPred'.\n")
-             cat("Prediction:", class(x@Score$Apriori),"\n"); print(head(x@Prediction[,head(1:ncol(x@Prediction))]))
+             cat("Prediction:", class(x@Prediction),"\n"); print(head(x@Prediction[,head(1:ncol(x@Prediction))]))
            }
 )

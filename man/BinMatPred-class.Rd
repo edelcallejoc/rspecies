@@ -2,18 +2,24 @@
 % Please edit documentation in R/BinMatPred-class.R
 \docType{methods}
 \name{BinMatPred-class}
+\alias{.BinMatPred}
 \alias{BinMatPred}
+\alias{BinMatPred-Constructor}
 \alias{BinMatPred-class}
-\alias{Contstructor}
-\alias{print}
+\alias{new-BinMatPred}
+\alias{print-BinMatPred}
+\alias{show-BinMatPred}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatPred(name_ID, DMNB, BMNB, Prediction, ...)
 
+\S4method{show}{BinMatPred}(object)
+
 \S4method{print}{BinMatPred}(x, ...)
 }
 \description{
-An S4 subclass from BinMat class.
+This is a class associated to prediction methods applied to
+    BinMatScore objects (See \code{\link[rspecies]{predict}}).
 }
 \details{
 The elements of the list are defined as follow.
@@ -24,6 +30,30 @@ The elements of the list are defined as follow.
 \item{\code{Prediction}}{a matrix object.}
 }}
 \examples{
+library(sp)
+library(rgeos)
+data(Mex0)
+data(mammals)
+
+# Generating de grid from Mex0 data
+Mex0.grd<-grd_build(Mex0)
+
+# Identification points of mammals with colnames = NULL.
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+
+# Counting matrices
+count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+
+# Probability matrices
+prob.mat<-probs(count.mat, lap_fac = 0.1)
+
+#score function
+score.mat<-score(prob.mat, count.mat)
+
+# Prediction
+pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
+
+print(pred.mat)
 
 }
 \author{
