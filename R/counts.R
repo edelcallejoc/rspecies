@@ -85,7 +85,7 @@
 #' getN(count.mat)
 #' head(getNc(count.mat))
 #' head(getNx(count.mat))
-#' head(getNcx(Count.mat))
+#' head(getNcx(count.mat))
 #'
 #' # including target and bioclim
 #' library(raster)
@@ -101,7 +101,7 @@
 #' getN(count.bmat)
 #' head(getNc(count.bmat))
 #' head(getNx(count.bmat))
-#' head(getNcx(Count.bmat))
+#' head(getNcx(count.bmat))
 #'
 
 #' @name counts-methods
