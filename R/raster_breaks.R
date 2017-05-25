@@ -113,6 +113,10 @@
 #'
 #' @references \url{http://species.conabio.gob.mx/}
 #'
+#'
+#' @name raster_breaks
+#' @rdname raster_breaks
+#' @aliases predict,BinMatScore
 #' @export
 #'
 #' @import parallel doParallel foreach
@@ -188,6 +192,9 @@ raster_breaks <- function(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks =
 
 ########## Función auxiliar #############
 
+#' @rdname raster_breaks
+#' @aliases aux_foo
+#' @export
 aux_foo <- function(x, breaks, breaks.by, proj4string = sp::proj4string(x)) {
     nms <- names(x)
     foo_data <- data.frame(sp::coordinates(x), raster::values(x),
