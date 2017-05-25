@@ -51,7 +51,7 @@ library(sp)
 library(rgeos)
 
 data(Mex0)
-load(mammals)
+data(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd<-grd_build(Mex0)

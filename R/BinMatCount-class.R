@@ -52,7 +52,7 @@
 #' getN(count.mat)
 #' head(getNc(count.mat))
 #' head(getNx(count.mat))
-#' head(getNcx(Count.mat))
+#' head(getNcx(count.mat))
 NULL
 
 # Class definition -------------------------------------

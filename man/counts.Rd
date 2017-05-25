@@ -70,8 +70,8 @@ The elements of the list are defined as follow.
 \examples{
 library(sp)
 library(rgeos)
-load('./data/Mex0.rda')
-load('./data/mammals.RData')
+data(Mex0)
+data(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd <- grd_build(Mex0)
@@ -86,7 +86,7 @@ system.time(count.mat <- counts(x.mat))
 getN(count.mat)
 head(getNc(count.mat))
 head(getNx(count.mat))
-head(getNcx(Count.mat))
+head(getNcx(count.mat))
 
 
 # including target
