@@ -39,8 +39,8 @@
 #' library(sp)
 #' library(rgeos)
 #'
-#' load('./data/Mex0.rda')
-#' load('./data/mammals.RData')
+#' data(Mex0)
+#' load(mammals)
 #'
 #' # Generating de grid from Mex0 data
 #' Mex0.grd<-grd_build(Mex0)
@@ -112,7 +112,7 @@ id_pts<-function(grd, pts, contain = c("simple", "properly"), colnames = NULL){
     }
   }
 
-  cores <- parallel::detectCores() - 1
+  cores <- 2 # parallel::detectCores() - 1
   cl <- parallel::makeCluster(cores)
   parallel::clusterExport(cl = cl, varlist = c("grd", "pts",
       "pts.level"), envir = environment())

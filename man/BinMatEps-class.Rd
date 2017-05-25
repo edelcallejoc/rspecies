@@ -66,7 +66,7 @@ x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
 count.mat<-counts(x.mat)
 
 # Probability matrices
-prob.mat<-probs(count.mat, laplace = 0.1)
+prob.mat<-probs(count.mat, lap_fac = 0.1)
 
 # Epsilon function
 epsilon.mat<-epsilon(prob.mat, count.mat)

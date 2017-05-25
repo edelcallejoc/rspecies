@@ -1,9 +1,6 @@
 
 #' Function to calculate predictions form BinMatScore Class
 #'
-#' @name predict
-#' @aliases predict-BinMatScore
-#'
 #' @description This function allows to calculate the classifier of each cell in the
 #'     grid of the polygon defined for spatial data mining.
 #'
@@ -58,7 +55,11 @@
 #'     caption = "laplace factor: 0.1")%>%
 #'     formatRound(1:6,digits = 3)
 #'
-
+#' @name predict-methods
+#' @rdname predict
+#' @aliases predict,BinMatScore
+#' @exportMethod predict
+#'
 # Method definition  --------------------------------------------------
 
 setMethod("predict", c("BinMatScore"),

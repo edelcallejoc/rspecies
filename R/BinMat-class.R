@@ -14,6 +14,7 @@
 #' @slot BMNB a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
 #'     The number of columns must be identical to the number of rows in name_ID.
 #'
+#' @param object an object of class BinMat.
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
@@ -26,7 +27,6 @@
 #' x.mat<-BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB)
 #'
 #' x.mat
-#' print(x.mat)
 #'
 #' # Bad example
 #' \dontrun{
@@ -43,9 +43,8 @@ NULL
 # Class definition ----------------------------------------------------
 
 #' @rdname BinMat-class
-#' @name new-BinMat
-#' @docType methods
-#' @export
+#' @name BinMat-class
+#' @exportClass BinMat
 
 .BinMat<-setClass(Class = "BinMat",
          slots = list(name_ID = "data.frame", DMNB = "matrix", BMNB = "matrix")
@@ -81,14 +80,9 @@ setValidity("BinMat", function(object){
 
 # Create a constructor method for class BinMat --------------------------
 
+#' @name BinMat
 #' @rdname BinMat-class
-#' @name BinMat-Contstructor
-#'
-#' @param ... pass to another methods.
-#'
-#' @docType methods
 #' @export
-
 BinMat <- function(name_ID, DMNB, BMNB, ...){
   .BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, ...)
 }
@@ -97,12 +91,8 @@ BinMat <- function(name_ID, DMNB, BMNB, ...){
 
 #' @rdname BinMat-class
 #' @name show-BinMat
-#' @aliases show-BinMat
-#'
-#' @param object an object of class BinMat.
-#'
-#' @docType methods
-#' @export
+#' @aliases show,BinMat
+#' @exportMethod show
 
 
 setMethod(f = "show",
@@ -127,23 +117,18 @@ setMethod(f = "show",
 
 # Create a print method for class BinMat ------------------------------------
 
-#' @rdname BinMat-class
-#' @name print-BinMat
-#' @aliases print-BinMat
-#'
-#' @param x an object of class BinMat.
-#'
-#' @docType methods
-#' @export
-
-
-setMethod (f = "print",
-           signature = "BinMat",
-           definition = function(x,...){
-             cat("An object of class 'BinMat'.\n")
-             cat("Slot name_ID: data.frame\n"); print (x@name_ID)
-             cat("Slot DMNB: matrix\n"); print (x@DMNB)
-             cat("Slot BMNB: matrix\n"); print (x@BMNB)
-             }
-           )
-
+# @rdname BinMat-class
+# @name print-BinMat
+# @aliases print,BinMat
+# @export
+#
+# setMethod (f = "print",
+#            signature = "BinMat",
+#            definition = function(x,...){
+#              cat("An object of class 'BinMat'.\n")
+#              cat("Slot name_ID: data.frame\n"); print (x@name_ID)
+#              cat("Slot DMNB: matrix\n"); print (x@DMNB)
+#              cat("Slot BMNB: matrix\n"); print (x@BMNB)
+#              }
+#            )
+#

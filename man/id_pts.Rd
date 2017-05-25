@@ -50,8 +50,8 @@ This function creates a binary matrix with N rows associated to the
 library(sp)
 library(rgeos)
 
-load('./data/Mex0.rda')
-load('./data/mammals.RData')
+data(Mex0)
+load(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd<-grd_build(Mex0)

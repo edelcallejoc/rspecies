@@ -6,10 +6,8 @@
 #'     calculates the Epsilon values for Naive Bayes Hypothesis Testing
 #'     for Spatial Data Mining.
 #'
-#' @name epsilon
-#'
-#' @param prob.mat a \code{list} object from \code{\link[rspecies]{probs}}.
-#' @param count.mat a \code{list} object from \code{\link[rspecies]{counts}}.
+#' @param prob.mat a \code{BinMatProb} object from \code{\link[rspecies]{probs}}.
+#' @param count.mat a \code{BinMatCount} object from \code{\link[rspecies]{counts}}.
 #' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
 #'
 #' @return This function returns a \code{list} object with 2 elements.
@@ -67,28 +65,17 @@
 #'     caption = "Target: X1 - Laplace's factor: 0.1")%>%
 #'     formatRound(1:5,digits = 3)
 
-NULL
-
 # Generic definition ------------------------------------------------------
 
+#' @name epsilon-methods
 #' @rdname epsilon
-#' @name epsilon-gen
-#' @aliases epsilon-generic
-#' @docType methods
-#' @export
-
+#' @exportMethod epsilon
 
 setGeneric("epsilon",function(prob.mat, count.mat, lap_fac = 0.1){
            standardGeneric ("epsilon")})
 
-
 #' @rdname epsilon
-#' @name epsilon
-#' @aliases epsilon
-#' @docType methods
-#' @export
-#'
-
+#' @aliases epsilon,BinMatProb,BinMatCount,ANY-method
 setMethod("epsilon", c("BinMatProb", "BinMatCount", "ANY"),
            function(prob.mat, count.mat, lap_fac = 0.1){
 

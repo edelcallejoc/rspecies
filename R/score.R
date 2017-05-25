@@ -1,10 +1,8 @@
 
 #' Score function for NB classifier for Spatial Data Mining
 #'
-#' @name score
-#'
-#' @param prob.mat A \code{list} object from \code{\link[rspecies]{probs}}.
-#' @param count.mat A \code{list} object from \code{\link[rspecies]{counts}}.
+#' @param prob.mat A \code{BinMatProb} object from \code{\link[rspecies]{probs}}.
+#' @param count.mat A \code{BinMatCount} object from \code{\link[rspecies]{counts}}.
 #' @param laplace numeric. See \code{\link[rspecies]{laplace}}.
 #'
 #' @return This function returns a \code{list} object with 11 elements.
@@ -72,22 +70,18 @@
 #'     caption = "Target: X1 - Laplace's factor: 0.1")%>%
 #'     formatRound(1:5,digits = 3)
 
-
-
-NULL
-
-
 # Generic definition ------------------------------------------------------
+
+#' @name score-methods
+#' @rdname score
+#' @exportMethod score
 
 setGeneric("score",function(prob.mat, count.mat, lap_fac = 0.1,...){
   standardGeneric ("score")})
 
 
-#' @rdname epsilon
-#' @name epsilon
-#' @docType methods
-#' @export
-#'
+#' @rdname score
+#' @aliases score,BinMatProb,BinMatCount,ANY-method
 
 setMethod("score", c("BinMatProb", "BinMatCount", "ANY"),
            function(prob.mat, count.mat, lap_fac = 0.1, ...){

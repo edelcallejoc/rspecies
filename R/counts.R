@@ -6,8 +6,6 @@
 #'     The counting matrices are for success/success (1/1), success/failure
 #'     (1/0) and failure/failure (0/0).
 #'
-#' @name counts
-#'
 #' @param x.mat a \code{BinMat} object. See documentation of
 #'     \code{\link[rspecies]{id_pts}} when \code{colnames}.
 #' @param target \code{logical}, \code{character}, \code{numeric} or \code{NULL}.
@@ -106,17 +104,16 @@
 #' head(getNcx(Count.bmat))
 #'
 
+#' @name counts-methods
+#' @rdname counts
+#' @exportMethod counts
+
 # Generic definition ------------------------------------------------------
 
 setGeneric("counts",function(x.mat, target = NULL, bioclim = NULL){standardGeneric ("counts")})
 
 #' @rdname counts
-#' @name counts
-#' @aliases counts
-#' @docType methods
-#' @export
-
-
+#' @aliases counts,BinMat,ANY-method,ANY-method
 setMethod("counts", c("BinMat", "ANY", "ANY"),
           definition = function(x.mat, target = NULL, bioclim = NULL){
   name_ID <- x.mat@name_ID
