@@ -243,7 +243,7 @@ aux_foo <- function(x, breaks, breaks.by, proj4string = sp::proj4string(x)) {
     dimnames(pts)[[1]] <- seq(1, nrow(pts))
     df <- foo_data[, c("val.bio", "bio.var", "nameID", "val.p")]
     rownames(df) <- seq(1, nrow(pts))
-    foo_data <- sp::SpatialPointsDataFrame(pts, df, match.ID = TRUE, proj4string = asp::CRS(proj4string))
+    foo_data <- sp::SpatialPointsDataFrame(pts, df, match.ID = TRUE, proj4string = sp::CRS(proj4string))
 
 
     return(foo_data)
