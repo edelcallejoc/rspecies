@@ -95,7 +95,7 @@ system.time(count.mat <- counts(x.mat, target = c("X1","X2")))
 getN(count.mat)
 head(getNc(count.mat))
 head(getNx(count.mat))
-head(getNcx(Count.mat))
+head(getNcx(count.mat))
 
 # including target and bioclim
 library(raster)
@@ -111,7 +111,7 @@ count.bmat$N
 getN(count.bmat)
 head(getNc(count.bmat))
 head(getNx(count.bmat))
-head(getNcx(Count.bmat))
+head(getNcx(count.bmat))
 
 }
 \author{

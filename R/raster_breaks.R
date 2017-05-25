@@ -167,7 +167,7 @@ raster_breaks <- function(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks =
     } else {
         i<-NULL
         nlay <- raster::nlayers(xras.msk)
-        cores <- parallel::detectCores() - 1
+        cores <- 2 # parallel::detectCores() - 1
         cl <- parallel::makeCluster(cores)
         parallel::clusterExport(cl = cl, varlist = c("aux_foo"), envir = globalenv())
         doParallel::registerDoParallel(cl)
