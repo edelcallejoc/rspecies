@@ -97,7 +97,6 @@
 #' bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
 #'
 #' system.time(count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat))
-#' count.bmat$N
 #' getN(count.bmat)
 #' head(getNc(count.bmat))
 #' head(getNx(count.bmat))
