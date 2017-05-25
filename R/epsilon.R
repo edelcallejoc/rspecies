@@ -46,6 +46,8 @@
 #'
 #' # Including bioclim
 #' # Extracting values from 19 bioclim variables
+#' library(raster)
+#' bioclim <- getData('worldclim', var='bio', res=2.5)
 #' bio.sp <- raster_breaks(bioclim, Mex0.grd)
 #' bnames <- as.character(levels(as.factor(bio.sp@data$nameID)))
 #' bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
