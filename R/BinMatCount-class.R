@@ -34,18 +34,25 @@
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
 #' @examples
+#' library(sp)
+#' library(rgeos)
+#' data(Mex0)
+#' data(mammals)
 #'
-#' name_ID<-data.frame(name = c("carlos", "pepe"), row.names = c("X1","X2"), stringsAsFactors = FALSE)
-#' DMNB<-matrix(rbinom(10,10, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
-#' BMNB<-matrix(rbinom(10,1, 0.5), ncol = nrow(name_ID), dimnames = list(1:5,rownames(name_ID)))
-#' x.mat<-BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB)
+#' # Generating de grid from Mex0 data
+#' Mex0.grd <- grd_build(Mex0)
 #'
-#' x.mat
+#' # Identification points of mammals with colnames especified.
+#' names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
 #'
-#' Count.mat<-list(N=10L, Nc = t(t(c(1L, 2L))), Nx = t(t(c(1L, 2L, 3L))), Ncx = matrix(1L:6L,2,3))
+#' x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
 #'
-#' c.mat<-BinMatCount(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB, Count = Count.mat)
-
+#' # Counting matrices
+#' system.time(count.mat <- counts(x.mat))
+#' getN(count.mat)
+#' head(getNc(count.mat))
+#' head(getNx(count.mat))
+#' head(getNcx(Count.mat))
 NULL
 
 # Class definition -------------------------------------
