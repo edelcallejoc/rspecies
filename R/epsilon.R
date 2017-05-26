@@ -38,11 +38,12 @@
 #' # Generating de grid from Mex0 data
 #' Mex0.grd<-grd_build(Mex0)
 #'
-#' # Identification points of mammals with colnames = NULL.
-#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#' # Identification points of mammals with colnames especified.
+#' names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
 #'
+#' x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
 #' # Counting matrices
-#' count.mat<-counts(x.mat)
+#' count.mat<-counts(x.mat, target = c("X1","X2"))
 #'
 #' # Including bioclim
 #' # Extracting values from 19 bioclim variables
@@ -54,8 +55,8 @@
 #' count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat)
 #'
 #' # Probability matrices
-#' prob.mat<-probs(count.mat, laplace = 0.1)
-#' prob.bmat<-probs(count.bmat, laplace = 0.1)
+#' prob.mat<-probs(count.mat, lap_fac = 0.1)
+#' prob.bmat<-probs(count.bmat, lap_fac = 0.1)
 #'
 #' # Epsilon function
 #' system.time(epsilon.mat<-epsilon(prob.mat, count.mat))
@@ -63,9 +64,18 @@
 #'
 #' #' # See data with DT package
 #' library(DT)
-#' datatable(data.frame(Ecx = epsilon.mat$Ecx[,1]),
-#'     caption = "Target: X1 - Laplace's factor: 0.1")%>%
-#'     formatRound(1:5,digits = 3)
+#'
+#' datatable(data.frame(Scx = t(getEcx(epsilon.mat))[,c(1,2)]),
+#'     rownames = getName_ID(epsilon.mat)[-c(1,2),1],
+#'     colnames = getName_ID(epsilon.mat)[c(1,2),1],
+#'     caption = "Epsilon - laplace factor: 0.1")%>%
+#'     formatRound(1:2,digits = 3)
+#'
+#' datatable(data.frame(Scx = t(getEcx(epsilon.bmat))[,c(1,2)]),
+#'     rownames = getName_ID(epsilon.bmat)[-c(1,2),1],
+#'     colnames = getName_ID(epsilon.bmat)[c(1,2),1],
+#'     caption = "Epsilon - laplace factor: 0.1 - Bioclim")%>%
+#'     formatRound(1:2,digits = 3)
 
 # Generic definition ------------------------------------------------------
 

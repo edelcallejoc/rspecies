@@ -33,9 +33,10 @@
 #' # Generating de grid from Mex0 data
 #' Mex0.grd<-grd_build(Mex0)
 #'
-#' # Identification points of mammals with colnames = NULL.
-#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#' # Identification points of mammals with colnames especified.
+#' names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
 #'
+#' x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
 #' # Counting matrices
 #' count.mat<-counts(x.mat)
 #'
@@ -58,19 +59,19 @@
 #'
 #' # See data with DT package
 #' library(DT)
-#' datatable(data.frame(Scx = score.mat@Score$Scx[169,]),
-#'     rownames = score.mat@name_ID$Name,
-#'     colnames = score.mat@name_ID$Name[169],
-#'     caption = "laplace factor: 0.1")%>%
-#'     formatRound(1,digits = 3)
 #'
-#' datatable(data.frame(Scx = score.bmat$Scx[,1],
-#'     SEcx = score.bmat$SEcx[,1],
-#'     ZScx = score.bmat$ZScx[,1],
-#'     LLScx = score.bmat$LLScx[,1],
-#'     ULScx = score.bmat$ULScx[,1]),
-#'     caption = "Target: X1 - Laplace's factor: 0.1")%>%
-#'     formatRound(1:5,digits = 3)
+#' datatable(data.frame(Scx = getScx(score.mat)[,c(1,2)]),
+#'     rownames = getName_ID(score.mat)[-c(1,2),1],
+#'     colnames = getName_ID(score.mat)[c(1,2),1],
+#'     caption = "Score - laplace factor: 0.1")%>%
+#'     formatRound(1:2,digits = 3)
+#'
+#' datatable(data.frame(Scx = getScx(score.bmat)[,c(1,2)]),
+#'     rownames = getName_ID(score.bmat)[-c(1,2),1],
+#'     colnames = getName_ID(score.bmat)[c(1,2),1],
+#'     caption = "Score - laplace factor: 0.1")%>%
+#'     formatRound(1:2,digits = 3)
+#'
 
 # Generic definition ------------------------------------------------------
 
