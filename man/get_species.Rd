@@ -2,20 +2,64 @@
 % Please edit documentation in R/get_species.R
 \name{get_species}
 \alias{get_species}
+\alias{get_species_names}
 \title{Get data from SPECIE framework}
 \usage{
 get_species(species = NULL, from = "SPECIES", date = TRUE)
+
+get_species_names(genus = NULL)
 }
 \arguments{
-\item{species}{a character vector. The name of the specie desired as
+\item{species}{a character vector of length 1. The name of the specie desired as
 web SPECIES platform shows.}
 
-\item{from}{The name of web platform to consult data.}
+\item{from}{The name of web platform to consult data. At this point
+it only works for \url{http://species.conabio.gob.mx/geoportal_v0.1.html}.}
 
 \item{date}{logical. If TRUE the recolection date is added.}
+
+\item{genus}{a character vector of length 1. The name of the specie desired as
+web SPECIES platform shows.}
 }
 \description{
 a function to extract data from SPECIES WEB framework.
+}
+\note{
+\code{get_species}. Only one species per query is allowed. This restriction
+    is for memory care purposes. You can use the 'apply' function family to extend
+    your search, but it is recommended to do the search one by one to not exceed
+    the memory limits.
+
+\code{get_species_names}. Only one genus per query is allowed. This restriction
+    is for memory care purposes. You can use the 'apply' function family to extend
+    your search, but it is recommended to do the search one by one to not exceed
+    the memory limits.
+}
+\examples{
+
+library(httr)
+library(jsonlite)
+
+# get_species() examples
+
+# Lynx rufus
+LR<-get_species(species = "Lynx rufus")
+LR
+
+# Aedes aegypti
+AA<-get_species(species = "Aedes aegypti")
+AA
+
+
+# get_species_names() examples
+
+# Initial capital letter
+get_species_names(genus = "Aedes")
+
+# lowercase is allowed
+get_species_names(genus = "aedes")
+
+
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).

@@ -116,6 +116,8 @@ library(RColorBrewer)
 # Not run, it can take time
 pal <- colorFactor('RdYlBu', levels = rev(levels(as.factor(bio1.sp$nameID))))
 
+samp <- sample(1:length(bio1.sp), 1000)
+
 leaflet() \%>\%
     addProviderTiles('OpenStreetMap.Mapnik',
         options = providerTileOptions(noWrap = TRUE))\%>\%
@@ -123,8 +125,8 @@ leaflet() \%>\%
         layerId = Mex0.grd@data$ID, weight = 1, opacity = 0.3,
         fillColor = '#A9A9A9', fillOpacity = 0.6,
         popup = row.names(Mex0.grd@data)) \%>\%
-    addCircleMarkers(data = bio1.sp, radius = 1, color = ~pal(bio1.sp$nameID),
-        popup = paste(bio1.sp$nameID, bio1.sp$val.p, sep = ' '))
+    addCircleMarkers(data = bio1.sp[samp,], radius = 1, color = ~pal(bio1.sp$nameID[samp]),
+        popup = paste(bio1.sp$nameID[samp], bio1.sp$val.p[samp], sep = ' '))
 
 }
 \author{
