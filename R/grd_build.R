@@ -39,7 +39,7 @@
 #' @examples
 #' library(sp)
 #' library(rgeos)
-#' load('./data/Mex0.rda')
+#' data(Mex0)
 #'
 #' # Whithout pretty intersection
 #' # Default resolution is 20 km.
