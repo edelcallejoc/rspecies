@@ -16,7 +16,7 @@
 #'     This matrix represents the cells identification for bioclim
 #'     variables (see \code{\link[rspecies]{raster_breaks}}()).
 #'
-#' @return Returns a \code{\link[rspecies:BinMatCount-clas]{BinMatCount} object.}
+#' @return Returns a \code{\link[rspecies]{BinMatCount} object.}
 #'
 #' @details The elements of the list are defined as follow.
 #'

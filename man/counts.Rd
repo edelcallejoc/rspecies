@@ -25,7 +25,7 @@ This matrix represents the cells identification for bioclim
 variables (see \code{\link[rspecies]{raster_breaks}}()).}
 }
 \value{
-Returns a \code{\link[rspecies:BinMatCount-clas]{BinMatCount} object.}
+Returns a \code{\link[rspecies]{BinMatCount} object.}
 }
 \description{
 Take a binary matrix from \code{\link[rspecies]{id_pts}}
