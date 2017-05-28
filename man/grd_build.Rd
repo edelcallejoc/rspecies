@@ -102,7 +102,7 @@ data(Mex0)
 
 system.time(Mex0.grd<-grd_build(Mex0))
 plot(Mex0.grd)
-plot(Mex0, add=T)
+plot(Mex0, add = TRUE)
 
 # leaflet interaction
 

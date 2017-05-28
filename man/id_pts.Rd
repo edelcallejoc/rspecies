@@ -65,8 +65,10 @@ plot(Mex0.grd, x.mat,  sou_den = TRUE, leaflet = TRUE)
 # Plot sample density - target "Linx rufus"
 plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = TRUE, leaflet = TRUE)
 
-# Plot sample
+# Plot sample - target default
 plot(Mex0.grd, x.mat,  sou_den = FALSE, leaflet = TRUE)
+
+# Plot sample - target "Linx rufus"
 plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = FALSE, leaflet = TRUE)
 
 
