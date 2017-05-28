@@ -49,7 +49,7 @@ pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
 
 # See map with leaflet - "Lynx rufus"
 
-plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = T)
+plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = TRUE)
 
 # See data with DT package
 library(DT)
