@@ -22,9 +22,7 @@ score(prob.mat, count.mat, lap_fac = 0.1, ...)
 \item{...}{pass to another methods.}
 }
 \value{
-This function returns a \code{list} object with 11 elements.
-    The elements are: Apriori, Scx, Scnx, SEcx, SEcnx, ZScx, ZScnx,
-    LLScx, ULScx, LLScx and ULScx, (see Details for further explanation).
+a \code{\link[rspecies:BinMatScore-class]{BinMatScore}} object.
 }
 \description{
 Score function for NB classifier for Spatial Data Mining
@@ -80,7 +78,7 @@ score.bmat<-score(prob.bmat, count.bmat)
 library(DT)
 
 datatable(data.frame(Scx = getScx(score.mat)[,c(1,2)]),
-    rownames = getName_ID(score.mat)[-c(1,2),1],
+    rownames = getName_ID(score.mat)[,1],
     colnames = getName_ID(score.mat)[c(1,2),1],
     caption = "Score - laplace factor: 0.1")\%>\%
     formatRound(1:2,digits = 3)

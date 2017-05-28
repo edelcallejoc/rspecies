@@ -6,9 +6,7 @@
 #' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
 #' @param ... pass to another methods.
 #'
-#' @return This function returns a \code{list} object with 11 elements.
-#'     The elements are: Apriori, Scx, Scnx, SEcx, SEcnx, ZScx, ZScnx,
-#'     LLScx, ULScx, LLScx and ULScx, (see Details for further explanation).
+#' @return a \code{\link[rspecies:BinMatScore-class]{BinMatScore}} object.
 #'
 #' @details The elements of the list are defined as follow.
 #'
@@ -62,7 +60,7 @@
 #' library(DT)
 #'
 #' datatable(data.frame(Scx = getScx(score.mat)[,c(1,2)]),
-#'     rownames = getName_ID(score.mat)[-c(1,2),1],
+#'     rownames = getName_ID(score.mat)[,1],
 #'     colnames = getName_ID(score.mat)[c(1,2),1],
 #'     caption = "Score - laplace factor: 0.1")%>%
 #'     formatRound(1:2,digits = 3)
@@ -76,8 +74,9 @@
 
 # Generic definition ------------------------------------------------------
 
+#' @export
+#' @docType methods
 #' @rdname score
-#' @exportMethod score
 
 setGeneric("score",function(prob.mat, count.mat, lap_fac = 0.1,...){
   standardGeneric ("score")})
