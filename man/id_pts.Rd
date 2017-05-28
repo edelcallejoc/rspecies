@@ -59,27 +59,15 @@ Mex0.grd<-grd_build(Mex0)
 # Identification points of mammals
 system.time(x.mat<-id_pts(grd = Mex0.grd, pts = mammals))
 
-# Plot for testing
-plot(Mex0)
-plot(Mex0.grd, col = adjustcolor(ifelse(x.mat@BMNB[,1]==1,"red","white"),0.5),
-    add = T)
-plot(mammals[mammals@data$nameID == as.character(x.mat@name_ID$Name[1]),],
-    add = T, pch = 20, col = adjustcolor("green", 0.3))
+# Plot sample density - target default
+plot(Mex0.grd, x.mat,  sou_den = TRUE, leaflet = TRUE)
 
-# Leaflet interaction for testing
-library(leaflet)
+# Plot sample density - target "Linx rufus"
+plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = TRUE, leaflet = TRUE)
 
-pal <- colorBin(c("white","red"), domain = c(0,1))
-
-leaflet() \%>\%
- addProviderTiles('OpenStreetMap.Mapnik',
-                  options = providerTileOptions(noWrap = TRUE))\%>\%
- addPolygons(data=Mex0.grd, stroke=TRUE, color = ~pal(as.numeric(x.mat@BMNB[,1])),
-             layerId = Mex0.grd@data$ID, weight = 1, opacity = 0.3,
-             fillColor = ~pal(as.numeric(x.mat@BMNB[,1])), fillOpacity = 0.6,
-             popup = row.names(Mex0.grd@data))\%>\%
- addCircleMarkers(data = mammals[mammals@data$nameID == as.character(x.mat@name_ID$Name[1]),],
-             radius = 1, color = "green", popup = as.character(x.mat@name_ID$Name[1]))
+# Plot sample
+plot(Mex0.grd, x.mat,  sou_den = FALSE, leaflet = TRUE)
+plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = FALSE, leaflet = TRUE)
 
 
 }
@@ -89,5 +77,8 @@ Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
 }
 \references{
 \url{http://species.conabio.gob.mx/}
+}
+\seealso{
+\code{\link[rspecies:plot-methods]{plot}}
 }
 

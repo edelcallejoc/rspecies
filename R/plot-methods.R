@@ -18,7 +18,7 @@
 #'     columns of slots DMNB or BMNB from \code{\linkS4class{BinMat}}
 #'     that should be considered as target.
 #'
-#' @param sou.den logical. If \code{TRUE} the color palette is based on DMNB
+#' @param sou_den logical. If \code{TRUE} the color palette is based on DMNB
 #'     slot from \code{\linkS4class{BinMat}} object. If \code{FALSE} the color
 #'     palette is based in BMNB slot from \code{\linkS4class{BinMat}} object.
 #'
@@ -56,9 +56,8 @@ NULL
 
 #' @rdname plot-methods
 #' @name plot-BinMat
-#' @aliases plot-BinMat
-#' @docType methods
-#' @export
+#' @aliases plot,SpatialPolygonsDataFrame,BinMat
+#' @exportMethod plot
 
 
 setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
@@ -66,7 +65,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
 
             # Argument validation -----------------------------------
             if(is.null(target)){
-              target <- 1
+              taux <- 1
             }else{
               if(length(target)!= 1){
                 stop("target must have length equal to one")
@@ -76,9 +75,12 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
                 }else{
                   name_ID <- getName_ID(y)
                   if(any(rownames(name_ID) %in% target)){
-                    target <- target
+                    taux <- target
                   }else{
-                    target <- rownames(name_ID)[(name_ID$Name %in% target)]
+                    taux <- which(name_ID$Name %in% target)
+                    if(length(taux) == 0){
+                      stop("could not find 'target'.")
+                    }
                   }
                 }
               }
@@ -92,9 +94,9 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
             if(leaflet){
 
               if(sou_den){
-                pal <- colorNumeric("Reds", domain = range(y@DMNB[,target]))
-                col_souden <- ~pal(y@DMNB[,target])
-                col_fac <- rev(levels(as.factor(pal(y@DMNB[,target]))))
+                pal <- colorNumeric("Reds", domain = range(y@DMNB[,taux]))
+                col_souden <- ~pal(y@DMNB[,taux])
+                col_fac <- rev(levels(as.factor(pal(y@DMNB[,taux]))))
 
                 leaflet() %>%
                   addProviderTiles('OpenStreetMap.Mapnik',
@@ -104,14 +106,14 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
                               fillColor = col_souden, fillOpacity = 0.6,
                               popup = row.names(x@data)) %>%
                   addLegend("bottomleft", colors = col_fac,
-                            labels = levels(cut(range(y@DMNB[,target]),
+                            labels = levels(cut(range(y@DMNB[,taux]),
                                                 length(col_fac),
                                                 dig.lab = 1, right = FALSE)),
-                            opacity = 1, title = y@name_ID[target,])
+                            opacity = 1, title = y@name_ID[taux,])
               }else{
-                pal <- colorBin(c("white","red"), domain = range(y@BMNB[,target]))
-                col_souden <- ~pal(as.numeric(y@BMNB[,target]))
-                col_fac <- rev(levels(as.factor(pal(as.numeric(y@BMNB[,target])))))
+                pal <- colorBin(c("white","red"), domain = range(y@BMNB[,taux]))
+                col_souden <- ~pal(as.numeric(y@BMNB[,taux]))
+                col_fac <- rev(levels(as.factor(pal(as.numeric(y@BMNB[,taux])))))
 
                 leaflet() %>%
                   addProviderTiles('OpenStreetMap.Mapnik',
@@ -122,24 +124,24 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
                               popup = row.names(x@data)) %>%
                   addLegend("bottomleft", colors = col_fac,
                             labels = c("Abscence", "Prescence"),
-                            opacity = 1, title = y@name_ID[target,])
+                            opacity = 1, title = y@name_ID[taux,])
               }
 
 
             }else{
               if(sou_den){
-                range_souden <- range(y@DMNB[,target])
+                range_souden <- range(y@DMNB[,taux])
                 diff_range_souden <- diff(range_souden)
                 if(diff_range_souden<10){
                   col_souden <- rev(heat.colors(diff_range_souden+1,
-                                                alpha = 0.8))[cut(y@DMNB[,target], diff_range_souden+1)]
+                                                alpha = 0.8))[cut(y@DMNB[,taux], diff_range_souden+1)]
                 }else{
                   col_souden <- rev(heat.colors(10,
-                                                alpha = 0.8))[cut(y@DMNB[,target], 10)]
+                                                alpha = 0.8))[cut(y@DMNB[,taux], 10)]
                 }
               }else{
                 col_souden <- rev(heat.colors(2,
-                                              alpha = 0.8))[cut(as.numeric(y@BMNB[,target]), 2)]
+                                              alpha = 0.8))[cut(as.numeric(y@BMNB[,taux]), 2)]
               }
               plot(x, col = col_souden, ...)
             }
@@ -149,7 +151,8 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
 
 #' @rdname plot-methods
 #' @name plot-BinMatPred
-#' @aliases plot-BinMatPred
+#' @aliases plot,SpatialPolygonsDataFrame,BinMatPred
+#' @exportMethod plot
 #'
 #' @description A plot methods for classes "SpatialPolygonsDataFrame", "BinMatPred".
 #'
@@ -194,7 +197,10 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
                   if(any(rownames(name_ID) %in% target)){
                     target <- target
                   }else{
-                    target <- rownames(name_ID)[(name_ID$Name %in% target)]
+                    target <- which(name_ID$Name %in% target)
+                    if(length(target) == 0){
+                      stop("could not find 'target'.")
+                    }
                   }
                 }
               }

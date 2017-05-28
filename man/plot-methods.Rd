@@ -2,6 +2,8 @@
 % Please edit documentation in R/plot-methods.R
 \docType{methods}
 \name{plot-methods}
+\alias{plot,SpatialPolygonsDataFrame,BinMat}
+\alias{plot,SpatialPolygonsDataFrame,BinMatPred}
 \alias{plot-BinMat}
 \alias{plot-BinMatPred}
 \alias{plot-methods}
@@ -26,15 +28,15 @@ A vector with names, position (integer or boolean) that especifies the
 columns of slots DMNB or BMNB from \code{\linkS4class{BinMat}}
 that should be considered as target.}
 
+\item{sou_den}{logical. If \code{TRUE} the color palette is based on DMNB
+slot from \code{\linkS4class{BinMat}} object. If \code{FALSE} the color
+palette is based in BMNB slot from \code{\linkS4class{BinMat}} object.}
+
 \item{leaflet}{logical. If \code{TRUE} the function uses the leaflet package
 and methods. If \code{FALSE} the plotting method from sp package are used.}
 
 \item{...}{Parameters passed to other functions (See
 \code{\link[graphics]{par}}).}
-
-\item{sou.den}{logical. If \code{TRUE} the color palette is based on DMNB
-slot from \code{\linkS4class{BinMat}} object. If \code{FALSE} the color
-palette is based in BMNB slot from \code{\linkS4class{BinMat}} object.}
 }
 \description{
 A plot methods for classes "SpatialPolygonsDataFrame", "BinMat".
