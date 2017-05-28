@@ -113,6 +113,7 @@ setGeneric("counts",function(x.mat, target = NULL, bioclim = NULL){standardGener
 
 #' @rdname counts
 #' @aliases counts,BinMat,ANY-method,ANY-method
+#'
 setMethod("counts", c("BinMat", "ANY", "ANY"),
           definition = function(x.mat, target = NULL, bioclim = NULL){
   name_ID <- x.mat@name_ID
