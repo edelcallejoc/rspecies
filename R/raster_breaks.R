@@ -117,8 +117,6 @@
 #'
 #'
 #' @name raster_breaks
-#' @rdname raster_breaks
-#' @aliases predict,BinMatScore
 #' @export
 #'
 #' @import parallel doParallel foreach

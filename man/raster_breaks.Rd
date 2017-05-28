@@ -2,7 +2,6 @@
 % Please edit documentation in R/raster_breaks.R
 \name{raster_breaks}
 \alias{aux_foo}
-\alias{predict,BinMatScore}
 \alias{raster_breaks}
 \title{Extract pixels from raster object and breaks it into n bins.}
 \usage{

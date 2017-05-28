@@ -35,8 +35,8 @@ This function is motivated by the follow formulation:
 \examples{
 #' library(sp)
 library(rgeos)
-load('./data/Mex0.rda')
-load('./data/mammals.RData')
+data(Mex0)
+data(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd <- grd_build(Mex0)

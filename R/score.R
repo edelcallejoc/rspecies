@@ -3,7 +3,8 @@
 #'
 #' @param prob.mat A \code{BinMatProb} object from \code{\link[rspecies]{probs}}.
 #' @param count.mat A \code{BinMatCount} object from \code{\link[rspecies]{counts}}.
-#' @param laplace numeric. See \code{\link[rspecies]{laplace}}.
+#' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
+#' @param ... pass to another methods.
 #'
 #' @return This function returns a \code{list} object with 11 elements.
 #'     The elements are: Apriori, Scx, Scnx, SEcx, SEcnx, ZScx, ZScnx,
@@ -83,7 +84,7 @@ setGeneric("score",function(prob.mat, count.mat, lap_fac = 0.1,...){
   standardGeneric ("score")})
 
 
-#' @rdname score
+#' @rdname score generic
 #' @aliases score,BinMatProb,BinMatCount,ANY-method
 
 setMethod("score", c("BinMatProb", "BinMatCount", "ANY"),
