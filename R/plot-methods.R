@@ -171,7 +171,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
 #' pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
 #'
 #' # plot - BinMatPred class
-#' plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = T)
+#' plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = TRUE)
 #'
 #' @docType methods
 #' @export
