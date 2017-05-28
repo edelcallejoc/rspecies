@@ -61,7 +61,7 @@
 #'
 #' # With Pretty options
 #'
-#' system.time(Mex0.grd.p<-grd_build(Mex0, pretty.int=T))
+#' system.time(Mex0.grd.p<-grd_build(Mex0, pretty.int=TRUE))
 #' plot(Mex0.grd.p)
 #'
 #' @details This function generates a grid from \code{SpatialPolygonsDataFrame}.
