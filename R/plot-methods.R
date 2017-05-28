@@ -77,7 +77,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMat"),
                   if(any(rownames(name_ID) %in% target)){
                     taux <- target
                   }else{
-                    taux <- which(name_ID$Name %in% target)
+                    taux <- rownames(name_ID)[(name_ID$Name %in% target)]
                     if(length(taux) == 0){
                       stop("could not find 'target'.")
                     }
@@ -182,9 +182,9 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
             # Argument validation -----------------------------------
             if(is.null(target)){
               if(dim(y@Prediction)[1] == 1){
-                target <- colnames(y@Prediction)
+                taux <- colnames(y@Prediction)
               }else{
-                target <- colnames(y@Prediction)[1]
+                taux <- colnames(y@Prediction)[1]
               }
             }else{
               if(length(target)!= 1){
@@ -195,10 +195,10 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
                 }else{
                   name_ID <- getName_ID(y)
                   if(any(rownames(name_ID) %in% target)){
-                    target <- target
+                    taux <- target
                   }else{
-                    target <- which(name_ID$Name %in% target)
-                    if(length(target) == 0){
+                    taux <- rownames(name_ID)[(name_ID$Name %in% target)]
+                    if(length(taux) == 0){
                       stop("could not find 'target'.")
                     }
                   }
@@ -212,7 +212,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
 
             #---------------------------------------------------------
 
-            var_tar <- y@Prediction[,target]
+            var_tar <- y@Prediction[,taux]
             ran_vt <- range(var_tar)
 
             if(leaflet){
@@ -234,7 +234,7 @@ setMethod("plot", c("SpatialPolygonsDataFrame", "BinMatPred"),
                   addLegend("bottomleft", pal = pal, values = var_tar,
                             labFormat = labelFormat(prefix = '', suffix = '',
                             between = ', ', digits = 1), bins = 7, opacity = 1,
-                            title = paste("Score:",y@name_ID[target,], sep=" "))
+                            title = paste("Score:",y@name_ID[taux,], sep=" "))
 
             }else{
                   col_souden <- rev(heat.colors(20,

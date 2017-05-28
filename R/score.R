@@ -76,7 +76,6 @@
 
 # Generic definition ------------------------------------------------------
 
-#' @name score-methods
 #' @rdname score
 #' @exportMethod score
 
@@ -84,7 +83,7 @@ setGeneric("score",function(prob.mat, count.mat, lap_fac = 0.1,...){
   standardGeneric ("score")})
 
 
-#' @rdname score generic
+#' @rdname score
 #' @aliases score,BinMatProb,BinMatCount,ANY-method
 
 setMethod("score", c("BinMatProb", "BinMatCount", "ANY"),
