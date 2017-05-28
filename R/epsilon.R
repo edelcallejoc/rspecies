@@ -10,10 +10,10 @@
 #' @param count.mat a \code{BinMatCount} object from \code{\link[rspecies]{counts}}.
 #' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
 #'
-#' @return This function returns a \code{list} object with 2 elements.
-#'     The elements are: Ecx and Ecnx (see Details for further explanation).
+#' @return Returns a \code{\link[rspecies]{BinMatEps} object.}
 #'
-#' @details The elements of the list are defined as follow.
+#' @details The slots Ecx and Ecnx of the \code{BinMatEps} object are
+#'     defined as follow.
 #'
 #'     \strong{Ecx}: numeric matrix. The epsilon value for C given X is
 #'     calculated as \eqn{\frac{Nx(P(C|X)-P(C))}{\sqrt{Nx*P(C)*(1-P(C))}}}.
@@ -78,16 +78,17 @@
 #'     formatRound(1:2,digits = 3)
 
 # Generic definition ------------------------------------------------------
-
-#' @name epsilon-methods
+#'
+#' @export
 #' @rdname epsilon
-#' @exportMethod epsilon
+#' @docType methods
 
 setGeneric("epsilon",function(prob.mat, count.mat, lap_fac = 0.1){
            standardGeneric ("epsilon")})
 
 #' @rdname epsilon
 #' @aliases epsilon,BinMatProb,BinMatCount,ANY-method
+#'
 setMethod("epsilon", c("BinMatProb", "BinMatCount", "ANY"),
            function(prob.mat, count.mat, lap_fac = 0.1){
 
