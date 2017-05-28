@@ -41,7 +41,8 @@
 #'
 #' # Extracting values from 19 bioclim variables
 #' system.time(bio.sp<-raster_breaks(bioclim, Mex0.grd))
-#' x11()
+#'
+#' # Use x11() for new graphic devices.
 #' plot(Mex0.grd)
 #' plot(bio.sp[which(bio.sp$nameID == 'bio1.p01'),], pch = 20,
 #'     col = 'blue', add = TRUE)
