@@ -33,6 +33,9 @@ This package was build in R version 3.4.0, (2017-04-21).
     ##  [9] stringi_1.1.5   rmarkdown_1.5   knitr_1.15.1    stringr_1.2.0  
     ## [13] digest_0.6.12   evaluate_0.10
 
+Intruction for updating R can be found in
+[here](https://www.r-statistics.com/2013/03/updating-r-from-r-on-windows-using-the-installr-package/)
+
 You can install the content of this package through the following code.
 At this time, the information in this file is informative.
 
