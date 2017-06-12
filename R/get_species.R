@@ -54,7 +54,7 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
   if(from == "SPECIES"){
       id_list<-get_species_names(species)
 
-      id_coords <- httr::content(httr::POST("http://species.conabio.gob.mx/niche3/niche/especie",
+      id_coords <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
                      body = list(qtype = "getSpecies", id = as.character(id_list[,"id"]),
                                  sfecha = tolower(date)),
                      encode = "json"))
@@ -104,7 +104,7 @@ get_species_names<-function(genus = NULL){
   # ---------------------------------------------------
 
 
-  id_list <- httr::content(httr::POST("http://species.conabio.gob.mx/niche3/niche/especie",
+  id_list <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
                                    body = list(qtype = "getEntList", searchStr = genus,
                                                nivel = "especievalidabusqueda", source = "1"),
                                    encode = "json"))
