@@ -8,9 +8,9 @@
 #'     web SPECIES platform shows.
 #'
 #' @param from The name of web platform to consult data. At this point
-#'     it only works for \url{http://species.conabio.gob.mx/geoportal_v0.1.html}.
+#'     it only works for \url{http://species.conabio.gob.mx}.
 #'
-#' @param date logical. If TRUE the recolection date is added.
+#' @param date logical. If TRUE the collection date is added.
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
 #'
@@ -72,48 +72,69 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
 
 #' @rdname get_species
 #'
-#' @param genus a character vector of length 1. The name of the specie desired as
+#' @param level a character vector of length 1. The name of the taxonomic rank.
+#'     The allowed values are: "kingdom", "phylum", "class", "order", "family",
+#'     "genus" and "specie". By default "genus".
+#'
+#' @param name a character vector of length 1. The name of the specie desired as
 #'     web SPECIES platform shows.
 #'
-#' @note \code{get_species_names}. Only one genus per query is allowed. This restriction
-#'     is for memory care purposes. You can use the 'apply' function family to extend
-#'     your search, but it is recommended to do the search one by one to not exceed
-#'     the memory limits.
+#' @param limit a integer vector of length 1. The first "limit" elements to get from
+#'     web SPECIES data base. By default is \code{NULL} and extract all data that
+#'     corresponds to the name of the taxonomic rank.
+#'
+#' @note \code{get_species_names}. The data can be very large so proceed with carefull.
 #'
 #' @examples
 #'
 #' # get_species_names() examples
 #'
 #' # Initial capital letter
-#' get_species_names(genus = "Aedes")
+#' get_species_names(name = "Aedes")
 #'
 #' # lowercase is allowed
-#' get_species_names(genus = "aedes")
+#' get_species_names(name = "aedes")
 #'
 #'
 #' @export
 
-get_species_names<-function(genus = NULL){
+get_species_names<-function(level = "genus", name = NULL, limit = NULL){
 
   # args validation -----------------------------------
 
-  if(is.null(genus)){stop("gender must be especified.")}
-  if(!is.character(genus)){stop("gender must be character type.")}
-  if(length(genus)!=1){stop("Only one genus per query is allowed.")}
+  if(is.null(level)){stop("level must be especified.")}
+  if(!is.character(level)){stop("level must be character type.")}
+  if(length(level)!=1){stop("level must be of length 1")}
+
+  if(is.null(name)){stop("name must be especified.")}
+  if(!is.character(name)){stop("name must be character type.")}
+  if(length(name)!=1){stop("name must be of length 1")}
+
+  if(!is.null(limit)){
+    if(!is.numeric(limit)){stop("limit must be numeric")}
+  }
 
   # ---------------------------------------------------
+  level_aux<-data.frame(level = c("kingdom", "phylum", "class", "order", "family",
+                                  "genus", "specie"),
+                        qlevel = c("reinovalido", "phylumdivisionvalido", "clasevalida",
+                                   "ordenvalido", "familiavalida", "generovalido",
+                                   "especievalidabusqueda"))
+
 
 
   id_list <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
-                                   body = list(qtype = "getEntList", searchStr = genus,
-                                               nivel = "especievalidabusqueda", source = "1"),
+                                   body = list(qtype = "getEntList", searchStr = name,
+                                               nivel = level_aux$qlevel[level_aux$level == level],
+                                               source = "1"),
                                    encode = "json"))
   if(length(id_list$data)>0){
     output <- t(sapply(id_list$data, as.data.frame, stringsAsFactors = FALSE))
     colnames(output) <-c("id", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus",
                          "Specie")
+    output <- output[!output[,"Specie"] == "",]
   }else{
-      stop(paste("Could not find the name ", genus, ".", sep = ""))
+      stop(paste("Could not find the name ", name, ".", sep = ""))
     }
 
 
