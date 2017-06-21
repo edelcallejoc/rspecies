@@ -63,7 +63,7 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
       colnames(coords) <- c("Long", "Lat")
       rec_date <- sapply(id_coords$data, function(x){x$fechacolecta})
       coords$date <- rec_date
-      coords$name <- id_list$data.especievalidabusqueda[1]
+      coords$name <- id_list$Specie
   }
 
   return(coords)
