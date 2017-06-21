@@ -7,19 +7,27 @@
 \usage{
 get_species(species = NULL, from = "SPECIES", date = TRUE)
 
-get_species_names(genus = NULL)
+get_species_names(level = "genus", name = NULL, limit = NULL)
 }
 \arguments{
 \item{species}{a character vector of length 1. The name of the specie desired as
 web SPECIES platform shows.}
 
 \item{from}{The name of web platform to consult data. At this point
-it only works for \url{http://species.conabio.gob.mx/geoportal_v0.1.html}.}
+it only works for \url{http://species.conabio.gob.mx}.}
 
-\item{date}{logical. If TRUE the recolection date is added.}
+\item{date}{logical. If TRUE the collection date is added.}
 
-\item{genus}{a character vector of length 1. The name of the specie desired as
+\item{level}{a character vector of length 1. The name of the taxonomic rank.
+The allowed values are: "kingdom", "phylum", "class", "order", "family",
+"genus" and "specie". By default "genus".}
+
+\item{name}{a character vector of length 1. The name of the specie desired as
 web SPECIES platform shows.}
+
+\item{limit}{a integer vector of length 1. The first "limit" elements to get from
+web SPECIES data base. By default is \code{NULL} and extract all data that
+corresponds to the name of the taxonomic rank.}
 }
 \description{
 a function to extract data from SPECIES WEB framework.
@@ -30,10 +38,7 @@ a function to extract data from SPECIES WEB framework.
     your search, but it is recommended to do the search one by one to not exceed
     the memory limits.
 
-\code{get_species_names}. Only one genus per query is allowed. This restriction
-    is for memory care purposes. You can use the 'apply' function family to extend
-    your search, but it is recommended to do the search one by one to not exceed
-    the memory limits.
+\code{get_species_names}. The data can be very large so proceed with carefull.
 }
 \examples{
 
@@ -54,10 +59,10 @@ AA
 # get_species_names() examples
 
 # Initial capital letter
-get_species_names(genus = "Aedes")
+get_species_names(name = "Aedes")
 
 # lowercase is allowed
-get_species_names(genus = "aedes")
+get_species_names(name = "aedes")
 
 
 }
