@@ -52,7 +52,7 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
   }
 
   if(from == "SPECIES"){
-      id_list<-get_species_names(species)
+      id_list<-get_species_names(level = "specie", name = species)
 
       id_coords <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
                      body = list(qtype = "getSpecies", id = as.character(id_list[,"id"]),
