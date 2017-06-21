@@ -55,7 +55,7 @@ get_species<-function(species = NULL, from = "SPECIES", date = TRUE){
       id_list<-get_species_names(level = "specie", name = species)
 
       id_coords <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
-                     body = list(qtype = "getSpecies", id = as.character(id_list[,"id"]),
+                     body = list(qtype = "getSpecies", id = as.character(id_list$id),
                                  sfecha = tolower(date)),
                      encode = "json"))
 
