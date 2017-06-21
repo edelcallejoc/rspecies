@@ -110,10 +110,6 @@ get_species_names<-function(level = "genus", name = NULL, limit = NULL){
   if(!is.character(name)){stop("name must be character type.")}
   if(length(name)!=1){stop("name must be of length 1")}
 
-  if(!is.null(limit)){
-    if(!is.numeric(limit)){stop("limit must be numeric")}
-  }
-
   # ---------------------------------------------------
   level_aux<-data.frame(level = c("kingdom", "phylum", "class", "order", "family",
                                   "genus", "specie"),
@@ -122,12 +118,20 @@ get_species_names<-function(level = "genus", name = NULL, limit = NULL){
                                    "especievalidabusqueda"))
 
 
+  if(!is.null(limit)){
+    if(!is.numeric(limit)){stop("limit must be numeric")}
 
+    id_list <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
+                                        body = list(qtype = "getEntList", searchStr = name,
+                                                    nivel = level_aux$qlevel[level_aux$level == level],
+                                                    source = "1", limit = limit),
+                                        encode = "json"))
+  }else{
   id_list <- httr::content(httr::POST("http://species.conabio.gob.mx/api/niche/especie",
                                    body = list(qtype = "getEntList", searchStr = name,
                                                nivel = level_aux$qlevel[level_aux$level == level],
                                                source = "1"),
-                                   encode = "json"))
+                                   encode = "json"))}
   if(length(id_list$data)>0){
     output <- t(sapply(id_list$data, as.data.frame, stringsAsFactors = FALSE))
     colnames(output) <-c("id", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus",
