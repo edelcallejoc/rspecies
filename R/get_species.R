@@ -142,7 +142,7 @@ get_species_names<-function(level = "genus", name = NULL, limit = NULL){
     }
 
 
-  return(output)
+  return(as.data.frame(output))
 
 }
 
