@@ -152,21 +152,14 @@ grd_build<-function(mappol, proj4trans = sp::CRS("+init=epsg:3857"),
 
     bb <- sp::bbox(mappol.trsim)
 
-    bb.sp <- matrix(c(bb["x", "min"], bb["y", "max"], bb["x", "min"], bb["y", "min"], bb["x",
-        "max"], bb["y", "max"], bb["x", "max"], bb["y", "min"]), 4, 2, byrow = T, dimnames = list(c("NO",
-        "SO", "NE", "SE"), c("X", "Y")))
+    bb.dist <- diff(t(bb))
 
-    bb.points <- sp::SpatialPoints(bb.sp, proj4string = CRS(proj4string(mappol.trsim)))
-
-    bb.dist <- (sp::spDists(bb.points, longlat = F)/1000)  # se divide entre mil para pasarlo a kilometros
-    dimnames(bb.dist) <- list(c("NO", "SO", "NE", "SE"), c("NO", "SO", "NE", "SE"))
-
-
-    dist.longlat <- (bb.dist/resolution)[1, c(3, 2)]
+    dist.longlat <- (bb.dist/1000)/resolution # Number of blocks per side
+                    # Divided by 1000 in order to convert the units in Km
 
     # Creating a GridTopoly object --------------------------------------
 
-    cs <- as.vector(diff(t(bb))/dist.longlat)  # cell size.
+    cs <- as.vector(bb.dist/dist.longlat)  # cell size.
     cc <- bb[, 1] + (cs/2)  # cell offset.
     if (r.ceiling) {
         cd <- ceiling(dist.longlat)  # number of cells per direction
