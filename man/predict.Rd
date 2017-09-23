@@ -2,8 +2,8 @@
 % Please edit documentation in R/predict.R
 \docType{methods}
 \name{predict-methods}
-\alias{predict,BinMatScore}
 \alias{predict-methods}
+\alias{predict,BinMatScore}
 \title{Function to calculate predictions form BinMatScore Class}
 \usage{
 \S4method{predict}{BinMatScore}(object, apr_inc = TRUE, comp_inc = TRUE,
@@ -62,4 +62,3 @@ datatable(data.frame(pred.mat@Prediction[,head(1:ncol(pred.mat@Prediction))]),
 \author{
 Enrique Del Callejo-Canal (\email{edelcallejoc@gmail.com}).
 }
-

@@ -2,13 +2,13 @@
 % Please edit documentation in R/BinMatProb-class.R
 \docType{methods}
 \name{BinMatProb-class}
-\alias{.BinMatProb}
-\alias{BinMatProb}
-\alias{BinMatProb-Contstructor}
 \alias{BinMatProb-class}
 \alias{new-BinMatProb}
-\alias{print-BinMatProb}
+\alias{.BinMatProb}
+\alias{BinMatProb-Contstructor}
+\alias{BinMatProb}
 \alias{show-BinMatProb}
+\alias{print-BinMatProb}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatProb(name_ID, DMNB, BMNB, Prob, ...)
@@ -63,6 +63,7 @@ The number of columns must be identical to the number of rows in name_ID.}
 \item{\code{Prob}}{a list object whit 8 elements, Pc, Px, Pcx, Pcnx, Pxc, Pxnc,
 Pnxc and Pnxnc. See details.}
 }}
+
 \examples{
 #' #' library(sp)
 library(rgeos)
@@ -86,4 +87,3 @@ print(prob.mat)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

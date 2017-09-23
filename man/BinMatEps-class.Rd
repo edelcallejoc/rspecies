@@ -2,13 +2,13 @@
 % Please edit documentation in R/BinMatEps-class.R
 \docType{methods}
 \name{BinMatEps-class}
-\alias{.BinMatEps}
-\alias{BinMatEps}
-\alias{BinMatEps-Contstructor}
 \alias{BinMatEps-class}
 \alias{new-BinMatEps}
-\alias{print-BinMatEps}
+\alias{.BinMatEps}
+\alias{BinMatEps-Contstructor}
+\alias{BinMatEps}
 \alias{show-BinMatEps}
+\alias{print-BinMatEps}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatEps(name_ID, DMNB, BMNB, Epsilon, ...)
@@ -50,6 +50,7 @@ The number of columns must be identical to the number of rows in name_ID.}
 
 \item{\code{Epsilon}}{a list object whit 2 elements, Ecx and Encx.}
 }}
+
 \examples{
 library(sp)
 library(rgeos)
@@ -75,4 +76,3 @@ epsilon.mat<-epsilon(prob.mat, count.mat)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

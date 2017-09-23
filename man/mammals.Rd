@@ -31,4 +31,3 @@ from 443 species of mammals in Mexico. See \code{mammals@data$nameID}
 for exact specie's names.
 }
 \keyword{datasets}
-

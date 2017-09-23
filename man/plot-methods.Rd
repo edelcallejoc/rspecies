@@ -2,11 +2,11 @@
 % Please edit documentation in R/plot-methods.R
 \docType{methods}
 \name{plot-methods}
-\alias{plot,SpatialPolygonsDataFrame,BinMat}
-\alias{plot,SpatialPolygonsDataFrame,BinMatPred}
-\alias{plot-BinMat}
-\alias{plot-BinMatPred}
 \alias{plot-methods}
+\alias{plot-BinMat}
+\alias{plot,SpatialPolygonsDataFrame,BinMat}
+\alias{plot-BinMatPred}
+\alias{plot,SpatialPolygonsDataFrame,BinMatPred}
 \title{An S4 method for SpatialPolygonsDataFrame and BinMat classes objects.}
 \usage{
 \S4method{plot}{SpatialPolygonsDataFrame,BinMat}(x, y, target = NULL,
@@ -77,4 +77,3 @@ plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = TRUE)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

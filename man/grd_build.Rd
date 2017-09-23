@@ -121,11 +121,10 @@ system.time(Mex0.grd.p<-grd_build(Mex0, pretty.int=TRUE))
 plot(Mex0.grd.p)
 
 }
+\references{
+\url{http://species.conabio.gob.mx/}
+}
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
     based on implemented algortihms in web platform SPECIES (see References).
 }
-\references{
-\url{http://species.conabio.gob.mx/}
-}
-

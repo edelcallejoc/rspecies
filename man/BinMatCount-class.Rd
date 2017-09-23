@@ -2,13 +2,13 @@
 % Please edit documentation in R/BinMatCount-class.R
 \docType{methods}
 \name{BinMatCount-class}
-\alias{.BinMatCount}
-\alias{BinMatCount}
-\alias{BinMatCount-Contstructor}
 \alias{BinMatCount-class}
 \alias{new-BinMatCount}
-\alias{print-BinMatCount}
+\alias{.BinMatCount}
+\alias{BinMatCount-Contstructor}
+\alias{BinMatCount}
 \alias{show-BinMatCount}
+\alias{print-BinMatCount}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatCount(name_ID, DMNB, BMNB, Count, ...)
@@ -55,6 +55,7 @@ The number of columns must be identical to the number of rows in name_ID.}
 
 \item{\code{Count}}{a list object whit 4 elements, N, Nc, Nx and Ncx. See details}
 }}
+
 \examples{
 library(sp)
 library(rgeos)
@@ -79,4 +80,3 @@ head(getNcx(count.mat))
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

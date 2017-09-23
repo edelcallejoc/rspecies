@@ -3,6 +3,7 @@
 \docType{methods}
 \name{laplace}
 \alias{laplace}
+\alias{laplace}
 \title{Laplace correction for spatial data mining.}
 \usage{
 \S4method{laplace}{BinMat}(count.mat, lap_fac = 0.1)
@@ -57,4 +58,3 @@ lap.mat <- laplace(count.mat)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

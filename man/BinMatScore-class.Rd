@@ -2,13 +2,13 @@
 % Please edit documentation in R/BinMatScore-class.R
 \docType{methods}
 \name{BinMatScore-class}
-\alias{.BinMatScore}
-\alias{BinMatScore}
-\alias{BinMatScore-Contstructor}
 \alias{BinMatScore-class}
 \alias{new-BinMatScore}
-\alias{print-BinMatScore}
+\alias{.BinMatScore}
+\alias{BinMatScore-Contstructor}
+\alias{BinMatScore}
 \alias{show-BinMatScore}
+\alias{print-BinMatScore}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatScore(name_ID, DMNB, BMNB, Score, ...)
@@ -49,6 +49,7 @@ The number of columns must be identical to the number of rows in name_ID.}
 
 \item{\code{Score}}{a list object whit 3 elements, Apriori, Scx and Scnx.}
 }}
+
 \examples{
 
 #' library(sp)
@@ -75,4 +76,3 @@ score.mat<-score(prob.mat, count.mat)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

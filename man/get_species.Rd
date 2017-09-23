@@ -69,4 +69,3 @@ get_species_names(name = "aedes")
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

@@ -2,11 +2,12 @@
 % Please edit documentation in R/BinMat-class.R
 \docType{class}
 \name{BinMat-class}
+\alias{BinMat-class}
+\alias{BinMat-class}
 \alias{.BinMat}
 \alias{BinMat}
-\alias{BinMat-class}
-\alias{show,BinMat}
 \alias{show-BinMat}
+\alias{show,BinMat}
 \title{An S4 class to represent a matrix model for naive bayes spatial
 data mining model.}
 \usage{
@@ -34,6 +35,7 @@ in name_ID.}
 \item{\code{BMNB}}{a logical matrix. Contains TRUE for all DMNB > 0, FALSE otherwise.
 The number of columns must be identical to the number of rows in name_ID.}
 }}
+
 \examples{
 
 # Good example
@@ -56,4 +58,3 @@ x.mat<-BinMat(name_ID = name_ID, DMNB = DMNB, BMNB = BMNB)}
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

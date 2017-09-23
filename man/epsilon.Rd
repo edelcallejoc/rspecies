@@ -3,8 +3,8 @@
 \docType{methods}
 \name{epsilon}
 \alias{epsilon}
-\alias{epsilon,BinMatProb,BinMatCount,ANY-method}
 \alias{epsilon,BinMatProb,BinMatCount-method}
+\alias{epsilon,BinMatProb,BinMatCount,ANY-method}
 \title{Epsilon function for NB Hypothesis Testing for Spatial Data Mining}
 \usage{
 epsilon(prob.mat, count.mat, lap_fac = 0.1)
@@ -95,4 +95,3 @@ datatable(data.frame(Scx = t(getEcx(epsilon.bmat))[,c(1,2)]),
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

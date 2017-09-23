@@ -3,8 +3,8 @@
 \docType{methods}
 \name{score}
 \alias{score}
-\alias{score,BinMatProb,BinMatCount,ANY-method}
 \alias{score,BinMatProb,BinMatCount-method}
+\alias{score,BinMatProb,BinMatCount,ANY-method}
 \title{Score function for NB classifier for Spatial Data Mining}
 \usage{
 score(prob.mat, count.mat, lap_fac = 0.1, ...)
@@ -93,4 +93,3 @@ datatable(data.frame(Scx = getScx(score.bmat)[,c(1,2)]),
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

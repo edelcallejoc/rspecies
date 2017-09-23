@@ -3,8 +3,8 @@
 \docType{methods}
 \name{counts}
 \alias{counts}
-\alias{counts,BinMat,ANY-method,ANY-method}
 \alias{counts,BinMat-method}
+\alias{counts,BinMat,ANY-method,ANY-method}
 \title{Counting matrices for spatial data mining}
 \usage{
 counts(x.mat, target = NULL, bioclim = NULL)
@@ -101,12 +101,11 @@ head(getNx(count.bmat))
 head(getNcx(count.bmat))
 
 }
-\author{
-Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
-}
 \seealso{
 \code{\link[base]{crossprod}}, \code{\link[base]{rbind}},
     \code{\link[base]{cbind}}, \code{\link[rspecies]{id_pts}},
     \code{\link[rspecies]{grd_build}}, \code{\link[rspecies]{raster_breaks}}.
 }
-
+\author{
+Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
+}

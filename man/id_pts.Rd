@@ -73,14 +73,13 @@ plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = FALSE, leaflet = TRUE)
 
 
 }
-\author{
-Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
-    based on implemented algortihms in web platform SPECIES (see References).
-}
 \references{
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
 \code{\link[rspecies:plot-methods]{plot}}
 }
-
+\author{
+Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
+    based on implemented algortihms in web platform SPECIES (see References).
+}

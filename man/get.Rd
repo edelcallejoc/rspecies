@@ -3,26 +3,26 @@
 \docType{methods}
 \name{get}
 \alias{get}
-\alias{getApr}
-\alias{getBMNB}
-\alias{getDMNB}
-\alias{getEcx}
-\alias{getEncx}
-\alias{getN}
 \alias{getName_ID}
+\alias{getDMNB}
+\alias{getBMNB}
+\alias{getN}
 \alias{getNc}
-\alias{getNcx}
 \alias{getNx}
+\alias{getNcx}
 \alias{getPc}
-\alias{getPcnx}
-\alias{getPcx}
-\alias{getPnxc}
-\alias{getPnxnc}
 \alias{getPx}
+\alias{getPcx}
+\alias{getPcnx}
 \alias{getPxc}
 \alias{getPxnc}
-\alias{getScnx}
+\alias{getPnxc}
+\alias{getPnxnc}
+\alias{getEcx}
+\alias{getEncx}
+\alias{getApr}
 \alias{getScx}
+\alias{getScnx}
 \title{Accesor methods for BinMat class and subclass}
 \usage{
 getName_ID(object)
@@ -78,4 +78,3 @@ The accesor methods for BinMat-class, each function is a
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

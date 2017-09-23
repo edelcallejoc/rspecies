@@ -28,4 +28,3 @@ the function \code{\link[raster]{getData}} from \code{raster} package.
 \code{\link[raster]{getData}} for more details.
 }
 \keyword{datasets}
-

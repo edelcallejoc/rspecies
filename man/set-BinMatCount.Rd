@@ -2,10 +2,14 @@
 % Please edit documentation in R/set-BinMatCount.R
 \name{set-BinMatCount}
 \alias{set-BinMatCount}
+\alias{set-BinMatCount}
 \alias{setN,BinMatCount}
+\alias{set-BinMatCount}
 \alias{setNc,BinMatCount}
-\alias{setNcx,BinMatCount}
+\alias{set-BinMatCount}
 \alias{setNx,BinMatCount}
+\alias{set-BinMatCount}
+\alias{setNcx,BinMatCount}
 \title{Replace methods for BinMat class and subclass}
 \usage{
 setN(object) <- value
@@ -34,4 +38,3 @@ The setters methods for BinMatCount-class, each function is a
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

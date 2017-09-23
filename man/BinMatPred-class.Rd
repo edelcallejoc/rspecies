@@ -2,13 +2,13 @@
 % Please edit documentation in R/BinMatPred-class.R
 \docType{methods}
 \name{BinMatPred-class}
-\alias{.BinMatPred}
-\alias{BinMatPred}
-\alias{BinMatPred-Constructor}
 \alias{BinMatPred-class}
 \alias{new-BinMatPred}
-\alias{print-BinMatPred}
+\alias{.BinMatPred}
+\alias{BinMatPred-Constructor}
+\alias{BinMatPred}
 \alias{show-BinMatPred}
+\alias{print-BinMatPred}
 \title{An S4 subclass from BinMat class.}
 \usage{
 BinMatPred(name_ID, DMNB, BMNB, Prediction, ...)
@@ -46,6 +46,7 @@ The number of columns must be identical to the number of rows in name_ID.}
 
 \item{\code{Prediction}}{a matrix object.}
 }}
+
 \examples{
 library(sp)
 library(rgeos)
@@ -76,4 +77,3 @@ print(pred.mat)
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-

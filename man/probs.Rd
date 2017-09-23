@@ -3,6 +3,7 @@
 \docType{methods}
 \name{probs}
 \alias{probs}
+\alias{probs}
 \alias{probs-BinMatCount}
 \title{Probability matrices for spatial data mining.}
 \usage{
@@ -62,4 +63,3 @@ system.time(prob.mat<-probs(count.mat, lap_fac = 0.1))
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 }
-
