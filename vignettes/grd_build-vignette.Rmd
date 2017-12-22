@@ -149,7 +149,7 @@ knitr::kable(bb_dist)
 Note that the diagonal of the previous matrix contains only zeros. This is because the distance of a point with itself is zero. Also, note that the above matrix is a symmetric matrix, ie the distance between NW and NE is the same as SW and SE. The same happens with the distances NW-SW and NE-SE. Consequently, to obtain the number of cells per direction can be done by dividing the distance $(NW-NE)/resolution$ and $(NW-SW)/resolution$. If we fix a resolution of 20 km per side, the grid associated with this bounding box can be calculated as follows.
 
 ```{r, echo = TRUE, results='hold'}
-resolution <- 20 # fix the resolution to 20
+resolution <- 15 # fix the resolution to 15
 
 dist_longlat <- (bb_dist/resolution)[1, c(3, 2)] # calculation number of cel per
                                                  # dirección.
