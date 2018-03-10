@@ -116,11 +116,7 @@ setMethod("epsilon", c("BinMatProb", "BinMatCount", "ANY"),
   rownames(MPnc) <- rownames(Pnc)
   colnames(MPnc) <- colnames(Pcnx)
 
-  MNx <- matrix(rep(Nx, Pcdim), nrow = Pcdim)
-  rownames(MNx) <- rownames(Pc)
-  colnames(MNx) <- rownames(Nx)
-
-  MNx <- matrix(rep(Nx, Pcdim), nrow = Pcdim)
+  MNx <- matrix(rep(Nx, Pcdim), nrow = Pcdim, byrow = TRUE)
   rownames(MNx) <- rownames(Pc)
   colnames(MNx) <- rownames(Nx)
 
