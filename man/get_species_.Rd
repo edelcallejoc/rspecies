@@ -5,6 +5,7 @@
 \alias{get_species_coords}
 \alias{get_species_names}
 \alias{get_species_grid}
+\alias{get_species_georel}
 \title{Get data from SPECIE framework}
 \usage{
 get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
@@ -12,6 +13,10 @@ get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
 get_species_names(level = "genus", name = NULL, id = TRUE)
 
 get_species_grid(resolution = 16)
+
+get_species_georel(target, start_level, value, grid_res = 16,
+  validation = FALSE, fossil = TRUE, no_date = TRUE, min_occ = 1,
+  bioclim = FALSE)
 }
 \arguments{
 \item{species}{a character vector of length 1. The name of the specie desired as
@@ -33,6 +38,26 @@ web SPECIES platform shows.}
 \code{FALSE} only the names of species are display.}
 
 \item{resolution}{The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.}
+
+\item{target}{a character vector of length 1. The name of the specie desired as
+web SPECIES platform shows.}
+
+\item{start_level}{a character vector of length 1. The name of the taxonomic rank.
+The allowed values are: "kingdom", "phylum", "class", "order", "family",
+"genus" and "specie".}
+
+\item{value}{a character vector of length 1. The taxonomic name associated to
+the taxonomic rank (level argument) as web SPECIES platform shows.}
+
+\item{validation}{logical. If TRUE validation process is applied to the model.}
+
+\item{fossil}{logical. If TRUE fossil data is included in the model.}
+
+\item{no_date}{logical. If TRUE data without recolection date is included.}
+
+\item{min_occ}{numeric. The minimum number of cells occurrences (nj).}
+
+\item{bioclim}{logical. If TRUE bioclim data is included in the model.}
 }
 \value{
 \code{get_species_coords()} returns a \code{data.frame} object.
@@ -41,6 +66,8 @@ web SPECIES platform shows.}
 
 \code{get_species_grid()} returns a \code{SpatialPolygonsDataFrame} object. It includes all the polygons
     that form the grid. Data slot contains the identifiers for each cells.
+
+a data.frame object.
 }
 \description{
 a family functions to extract data from SPECIES WEB framework.
@@ -86,6 +113,12 @@ system.time(a16 <- get_species_grid())
 
 system.time(a32 <- get_species_grid(resolution = 32))
 
+
+
+Model1 <- get_species_georel(target = "Aedes aegypti",
+    start_level = "class", value = "aves", min_occ = 5)
+
+head(Model1)
 
 }
 \references{

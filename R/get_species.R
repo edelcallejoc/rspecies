@@ -244,3 +244,135 @@ get_species_grid<-function(resolution = 16){
 }
 
 
+
+
+#' @rdname get_species_
+#'
+#' @param target a character vector of length 1. The name of the specie desired as
+#'     web SPECIES platform shows.
+#'
+#' @param start_level a character vector of length 1. The name of the taxonomic rank.
+#'     The allowed values are: "kingdom", "phylum", "class", "order", "family",
+#'     "genus" and "specie".
+#'
+#' @param value a character vector of length 1. The taxonomic name associated to
+#'     the taxonomic rank (level argument) as web SPECIES platform shows.
+#'
+#' @param validation logical. If TRUE validation process is applied to the model.
+#'
+#' @param fossil logical. If TRUE fossil data is included in the model.
+#'
+#' @param no_date logical. If TRUE data without recolection date is included.
+#'
+#' @param min_occ numeric. The minimum number of cells occurrences (nj).
+#'
+#' @param bioclim logical. If TRUE bioclim data is included in the model.
+#'
+#' @return a data.frame object.
+#'
+#' @examples
+#'
+#' Model1 <- get_species_georel(target = "Aedes aegypti",
+#'     start_level = "class", value = "aves", min_occ = 5)
+#'
+#' head(Model1)
+#'
+#' @export
+
+
+get_species_georel<-function(target, start_level, value, grid_res = 16,
+                             validation = FALSE, fossil = TRUE, no_date = TRUE,
+                             min_occ = 1, bioclim = FALSE){
+  
+  ## Args validation
+  
+  if(missing(target)){
+    stop("target must be declared.")
+  }else{
+    if(!is.character(target)){stop("name must be character type.")}
+    if(length(target)!=1){stop("name must be of length 1")}
+  }
+  if(missing(start_level)){
+    stop("start_level must be declared. Possible values are: class, order, family and genus")
+  }else{
+    if(!is.character(start_level)){stop("start_level must be character type.")}
+    if(length(start_level)!=1){stop("start_level must be of length 1")}
+    if(all(!c("class", "order", "family", "genus") %in% start_level)){
+      stop("Possible values for start_level argument are: class, order, family and genus")}
+    if(missing(value)){
+      stop("value argument must be declared.")
+    }else{
+      if(!is.character(value)){stop("value must be character type.")}
+      if(length(value)!=1){stop("level must be of length 1")}
+    }
+  }
+  
+  log_args <- c(validation = validation, fossil = fossil, no_date = no_date, bioclim = bioclim)
+  if(any(!is.logical(log_args))){stop(paste("Arguments:", paste(names(log_args), collapse = " "), "should be logical type"))}
+  
+  num_args <- c(grid_res = grid_res, min_occ = min_occ)
+  if(any(!is.numeric(num_args))){stop(paste("Arguments:", paste(names(num_args), collapse = " "), "should be numeric type"))}
+  if(all(!num_args[1] %in% c(8,16,32,64))){stop(paste("Argument grid_res: Allow resolution is 8, 16, 32 and 64 km."))}
+  if(num_args[2] <= 0){stop(paste("Argument min_occ should be a value greater than 0"))}
+  
+  ## --------------------------------------
+  
+  # ---------------------------------------------------
+  level_aux<-data.frame(level = c("kingdom", "phylum", "class", "order", "family",
+                                  "genus", "specie"),
+                        qlevel = c("reinovalido", "phylumdivisionvalido", "clasevalida",
+                                   "ordenvalido", "familiavalida", "generovalido",
+                                   "especievalidabusqueda"),
+                        stringsAsFactors = FALSE)
+  
+  api <- "http://species.conabio.gob.mx/api/niche"
+  
+  id_target<-get_species_names(level = "specie", name = target)$id
+  
+  q_list <- list(id = as.character(id_target),
+                 min_occ = as.character(min_occ),
+                 fossil = tolower(fossil),
+                 sfecha = tolower(no_date),
+                 val_process = tolower(validation),
+                 idtabla = "no_table",
+                 grid_res = as.character(grid_res),
+                 hasBios = "true",
+                 hasRaster = tolower(bioclim))
+  
+  level_order <- which(level_aux$level %in% start_level)
+  
+  
+  value_name <- httr::content(httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
+                                               "getEntList", sep = "/"),
+                                         body = list(searchStr = value,
+                                                     nivel = level_aux$qlevel[level_order],
+                                                     source = "0",
+                                                     limit = "true"),
+                                         encode = "json"))$data
+  
+  if(length(value_name) == 0){
+    stop(paste("Could not find the value ", value, ".", sep = ""))
+  }else{
+    value_name <- value_name[[1]][[level_aux$qlevel[level_order]]]
+  }
+  
+  q_list <- c(q_list, list(
+    "tfilters[0][field]" = level_aux$qlevel[level_order],
+    "tfilters[0][value]" = value_name,
+    "tfilters[0][type]" = "4")
+  )
+  
+  georel_post <- httr::POST(url = paste(api, "/getGeoRel",sep = ""),
+                            query = q_list,
+                            encode = "json")
+  
+  georel_content <- httr::content(georel_post)$data
+  
+  georel_dt <- as.data.frame(do.call(rbind, georel_content), stringsAsFactors = FALSE)
+  
+  georel_dt <- data.frame(lapply(georel_dt, unlist), stringsAsFactors = FALSE)
+  
+  return(georel_dt)
+}
+
+
