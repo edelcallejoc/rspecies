@@ -14,11 +14,8 @@ Description: An implementation of Spatial Data Mining for Species Distribution
     absence and environmental data for species distribution modelling. However, It
     can use for other modelling purposes.
 Depends:
-    R (>= 3.4.3), sp (>= 1.2.7)
+    R (>= 3.4.3), sp (>= 1.2.7), rgeos (>= 0.3.26), rgdal (>= 1.2.16)
 Imports:
-    sp,
-    rgeos,
-    rgdal,
     maptools,
     doParallel,
     foreach,

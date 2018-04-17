@@ -1,0 +1,48 @@
+---
+title: "SPECIES web framework API functions"
+author: "Enrique Del Callejo-Canal"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{get_species_}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+[SPECIES web platform](http://species.conabio.gob.mx) is an interactive tool for
+the analysis of ecological niches and forecast species potential distribution,
+as well as to build Complex Inference Networks to identify potential species interactions.
+SPECIES development is supported by [C3-Centro de Ciencias
+de la Complejidad](http://www.c3.unam.mx/), Universidad Nacional Autónoma de México and the
+Comisión Nacional para el Conocimiento y Uso de la Biodiversidad ([CONABIO](https://www.gob.mx/conabio)).
+
+This tutorial is a basic intriduction to use the r functions that connects to SPECIES api. This functions are contained in the developing package `rspecies`. `rspecies` is allocated in github public repositorie https://github.com/edelcallejoc/rspecies.  
+
+## Vignette Info
+
+The information contained in this vignette is corresponds to the usages of r functions to interact with SPECIES api. There are four functions that allows to extract information about SPECIES database's names. Each function can be used for many porpuses from consulting species names to adjust models in several ways.
+
+
+## Consulting taxon names from SPECIES framework (get_species_names)
+
+The simplest way to use **get_species_names** is for cheking species names available for a specific taxon rank. For example, the names of the species of `Aedes` genus.
+
+```{r getnames1, message=FALSE, results = 'hold'}
+library(rspecies)
+
+aedes <- get_species_names(level = "genus", name = "Aedes", id = FALSE)
+
+head(aedes, n=5)
+
+```
+
+A more complex example is to extract species name from a higher taxon level. For example, The names of the species of `Mammalia` class.
+
+

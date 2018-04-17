@@ -85,6 +85,9 @@ get_species_coords<-function(species = NULL, from = "SPECIES", date = TRUE){
 #' @param name a character vector of length 1. The name of the specie desired as
 #'     web SPECIES platform shows.
 #'
+#' @param sublevel character or NULL. A vector of length 1. The name of taxonomic
+#'     rank sublevel to search names. See examples.
+#'
 #' @param id Logical. If \code{TRUE}, id metada is included in the output. If
 #'     \code{FALSE} only the names of species are display.
 #'
@@ -103,11 +106,20 @@ get_species_coords<-function(species = NULL, from = "SPECIES", date = TRUE){
 #' # lowercase is allowed
 #' get_species_names(name = "aedes")
 #'
+#' # Cheking names of a level
+#' # Cheking class' names of Craniata phylum
+#' get_species_names(level = "phylum", name = "Craniata",
+#'  sublevel = "class", id = FALSE)
+#'
+#' # Cheking class' names of Animalia kingdom
+#' get_species_names(level = "kingdom", name = "Animalia",
+#'  sublevel = "class", id = FALSE)
+#'
 #'
 #' @export
 
 
-get_species_names<-function(level = "genus", name = NULL, id = TRUE){
+get_species_names<-function(level = "genus", name = NULL, sublevel, id = TRUE){
   
   # args validation -----------------------------------
   
@@ -120,6 +132,7 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
   if(length(name)!=1){stop("name must be of length 1")}
   
   # ---------------------------------------------------
+  
   level_aux<-data.frame(level = c("kingdom", "phylum", "class", "order", "family",
                                   "genus", "specie"),
                         qlevel = c("reinovalido", "phylumdivisionvalido", "clasevalida",
@@ -127,10 +140,37 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
                                    "especievalidabusqueda"),
                         stringsAsFactors = FALSE)
   
+  level_which <- (level_aux$level %in% level)
+  
+  if(all(!level_which)){stop(paste0("level not found. Posible values are: ",
+                                    paste0(level_aux$level, collapse = ", ")))}
+  
+  level_order <- which(level_which)
+  
+  # check sublevel arg ---------------------------------
+  if(level_order == nrow(level_aux)){
+    sublevel <- level_aux$qlevel[level_order]
+  }else{
+    if(missing(sublevel)){
+      sublevel <- level_aux$qlevel[level_order+1]
+    }else{
+      if(!is.character(sublevel)){stop("sublevel must be character type.")}
+      
+      sublevel_which <- (level_aux$level %in% sublevel)
+      
+      if(all(!sublevel_which)){stop(paste0("sublevel not found. Posible values are: ",
+                                           paste0(level_aux$level[level_order:7], collapse = ", ")))}
+      
+      sublevel <- level_aux$qlevel[which(sublevel_which)]
+    }
+  }
+  
+  # ---------------------------------------------------
+  
   level_name <- httr::content(httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
                                                "getEntList", sep = "/"),
                                          body = list(searchStr = name,
-                                                     nivel = level_aux$qlevel[level_aux$level == level],
+                                                     nivel = level_aux$qlevel[level_order],
                                                      source = "0",
                                                      limit = "true"),
                                          encode = "json"))$data
@@ -138,15 +178,15 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
   if(length(level_name) == 0){
     stop(paste("Could not find the name ", name, ".", sep = ""))
   }else{
-    level_name <- level_name[[1]][[level_aux$qlevel[level_aux$level == level]]]
+    level_name <- level_name[[1]][[level_aux$qlevel[level_order]]]
   }
   
   
   id_list <- httr::content(httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
                                             "getVariables", sep = "/"),
                                       body = list(parentitem = level_name,
-                                                  field = "especievalidabusqueda",
-                                                  parentfield = level_aux$qlevel[level_aux$level == level]),
+                                                  field = sublevel,
+                                                  parentfield = level_aux$qlevel[level_order]),
                                       encode = "json"))
   
   if(length(id_list$data)>0){
@@ -155,18 +195,29 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
                          stringsAsFactors = FALSE)
     
     if(id){
-      output <- do.call(rbind, sapply(output$name, function(x){
-        aux_out <- as.data.frame(httr::content(httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
-                                                                "getEntList", sep = "/"),
-                                                          body = list(searchStr = x,
-                                                                      nivel = "especievalidabusqueda",
-                                                                      source = "1"),
-                                                          encode = "json"))$data, stringsAsFactors = FALSE)
-      }, simplify = FALSE))
+      
+      aux_list <- lapply(output$name, function(x){
+        aux_out <- httr::content(
+          httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
+                           "getEntList", sep = "/"),
+                     body = list(searchStr = x,
+                                 nivel = sublevel,
+                                 source = "1"),
+                     encode = "json"))$data
+      })
+      
+      aux_list <- lapply(aux_list, function(x){
+        aux_f <- lapply(x, function(y){
+          output <- as.data.frame(y, stringsAsFactors = FALSE)})
+        out_dt <- do.call(rbind, aux_f)
+        return(out_dt)})
+      
+      output <- do.call(rbind, aux_list)
       
       colnames(output) <-c("id", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus",
                            "Specie", "occ")
-      output <- output[!output[,"Specie"] == "",]}
+      #output <- output[!output[,"Specie"] == "",]
+    }
     
   }else{
     stop(paste("Could not find the name ", name, ".", sep = ""))
@@ -178,11 +229,9 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
 }
 
 
-
-
 #' @rdname get_species_
 #'
-#' @param resolution The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.
+#' @param grid_res The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.
 #'
 #' @return \code{get_species_grid()} returns a \code{SpatialPolygonsDataFrame} object. It includes all the polygons
 #'     that form the grid. Data slot contains the identifiers for each cells.
@@ -194,24 +243,24 @@ get_species_names<-function(level = "genus", name = NULL, id = TRUE){
 #' # By default resolution is 16 km.
 #' system.time(a16 <- get_species_grid())
 #'
-#' system.time(a32 <- get_species_grid(resolution = 32))
+#' system.time(a32 <- get_species_grid(grid_res = 32))
 #'
 #'
 #' @export
 
 
-get_species_grid<-function(resolution = 16){
+get_species_grid<-function(grid_res = 16){
   
   # args validation -----------------------------------
   
-  if(sum(c(8,16,32,64) %in% resolution) == 0){
+  if(sum(c(8,16,32,64) %in% grid_res) == 0){
     stop("Allow resolution is 8, 16, 32 and 64 km.")
   }
   
   
   map_data <- httr::content(httr::POST(paste("http://species.conabio.gob.mx/api/niche/especie",
                                              "getGridGeoJson", sep = "/"),
-                                       body = list(grid_res = as.character(resolution)),
+                                       body = list(grid_res = as.character(grid_res)),
                                        encode = "json"))
   
   map_grd <- do.call(rbind,lapply(map_data$features,function(x){
@@ -242,8 +291,6 @@ get_species_grid<-function(resolution = 16){
   return(grd_SPDF)
   
 }
-
-
 
 
 #' @rdname get_species_
@@ -372,7 +419,23 @@ get_species_georel<-function(target, start_level, value, grid_res = 16,
   
   georel_dt <- data.frame(lapply(georel_dt, unlist), stringsAsFactors = FALSE)
   
+  georel_dt <- as.data.frame(lapply(georel_dt, function(x){
+    aux <- suppressWarnings(as.numeric(x))
+    
+    if(all(is.na(aux))){
+      output <- x
+    }else{
+      output <- aux
+    }
+    
+    return(output)
+  }), stringsAsFactors = FALSE)
+  
+  colnames(georel_dt) <- c("spid", "Specie", "nij", "nj", "ni", "n", level_aux$level[1:5],
+                           "Epsilon", "Score")
+  
+  georel_dt <- georel_dt[, c("spid", "Specie", "nij", "nj", "ni", "n", "Epsilon", "Score",
+                             level_aux$level[1:5])]
+  
   return(georel_dt)
 }
-
-

@@ -10,9 +10,9 @@
 \usage{
 get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
 
-get_species_names(level = "genus", name = NULL, id = TRUE)
+get_species_names(level = "genus", name = NULL, sublevel, id = TRUE)
 
-get_species_grid(resolution = 16)
+get_species_grid(grid_res = 16)
 
 get_species_georel(target, start_level, value, grid_res = 16,
   validation = FALSE, fossil = TRUE, no_date = TRUE, min_occ = 1,
@@ -34,10 +34,13 @@ The allowed values are: "kingdom", "phylum", "class", "order", "family",
 \item{name}{a character vector of length 1. The name of the specie desired as
 web SPECIES platform shows.}
 
+\item{sublevel}{character or NULL. A vector of length 1. The name of taxonomic
+rank sublevel to search names. See examples.}
+
 \item{id}{Logical. If \code{TRUE}, id metada is included in the output. If
 \code{FALSE} only the names of species are display.}
 
-\item{resolution}{The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.}
+\item{grid_res}{The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.}
 
 \item{target}{a character vector of length 1. The name of the specie desired as
 web SPECIES platform shows.}
@@ -104,6 +107,15 @@ get_species_names(name = "Aedes")
 # lowercase is allowed
 get_species_names(name = "aedes")
 
+# Cheking names of a level
+# Cheking class' names of Craniata phylum
+get_species_names(level = "phylum", name = "Craniata",
+ sublevel = "class", id = FALSE)
+
+# Cheking class' names of Animalia kingdom
+get_species_names(level = "kingdom", name = "Animalia",
+ sublevel = "class", id = FALSE)
+
 
 
 # get_species_grid() examples
@@ -111,7 +123,7 @@ get_species_names(name = "aedes")
 # By default resolution is 16 km.
 system.time(a16 <- get_species_grid())
 
-system.time(a32 <- get_species_grid(resolution = 32))
+system.time(a32 <- get_species_grid(grid_res = 32))
 
 
 
