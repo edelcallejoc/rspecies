@@ -1,5 +1,5 @@
 
-#' Get data from SPECIE framework
+#' Get data from SPECIES framework
 #'
 #' @description a family functions to extract data from SPECIES WEB framework.
 #'
@@ -67,8 +67,10 @@ get_species_coords<-function(species = NULL, from = "SPECIES", date = TRUE){
     
     coords <- as.data.frame(t(sapply(id_coords$data, function(x){jsonlite::fromJSON(x$json_geom)$coordinates})))
     colnames(coords) <- c("Long", "Lat")
+    if(date){
     rec_date <- sapply(id_coords$data, function(x){x$fechacolecta})
     coords$date <- rec_date
+    }
     coords$name <- id_list$Specie
   }
   

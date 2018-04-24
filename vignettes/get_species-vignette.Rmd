@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r setup, echo = FALSE, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#"
@@ -34,7 +34,7 @@ The information contained in this vignette is corresponds to the usages of r fun
 
 The simplest way to use **get_species_names** is for cheking species names available for a specific taxon rank. For example, the names of the species of `Aedes` genus.
 
-```{r getnames1, message=FALSE, results = 'hold'}
+```{r getnames1, message=FALSE, results = 'markup'}
 library(rspecies)
 
 aedes <- get_species_names(level = "genus", name = "Aedes", id = FALSE)
@@ -43,6 +43,71 @@ head(aedes, n=5)
 
 ```
 
-A more complex example is to extract species name from a higher taxon level. For example, The names of the species of `Mammalia` class.
+A more complex example is to extract species' name from a higher taxon level. For example, The names of the species of `Mammalia` class.
+
+```{r getnames2, message=FALSE, results = 'markup'}
+mammal <- get_species_names(level = "class", name = "Mammalia", sublevel = "specie", id = FALSE)
+
+head(mammal, n=5)
+
+```
+
+It is important to declared `id = FALSE` in order to avoid extensive computation. The `id` argument is intended to be used for individual queries by species. 
+
+## Extracting species' coordinates from SPECIES framework (get_species_coords)
+
+The function **get_species_coords** is made to extract the geographical coordinates of observations by species from the API of the SPECIES framework. The simplest way to use this function is to indicate the `species` argument with the name of a particular species, eg _Lynx rufus_.
+
+```{r getcoords, message=FALSE, results = 'markup'}
+LR_coords <- get_species_coords(species = "Lynx rufus")
+
+head(LR_coords, n=5)
+
+```
+
+The `date` argument is used to add collection date information, by default this argument is defined as TRUE. While the argument `from` is still in development and at this moment it has no use.
+
+```{r getcoords2, message=FALSE, results = 'markup'}
+LR_coords_ndate <- get_species_coords(species = "Lynx rufus", date = FALSE)
+
+head(LR_coords_ndate, n=5)
+
+```
+
+## Downloading the map grid from the SPECIES framework (get_species_grid)
+
+The download of the grid is done with the function **get_species_grid**, which takes as argument the resolution of the grid, (`grid_res`). There are 4 possible values for the argument, 8,16,32 and 64.
+
+```{r getgrid, message=FALSE, results = 'markup', fig.align='left', fig.width=5, fig.show='asis'}
+Mex_grd32 <- get_species_grid(grid_res = 32)
+
+# using ggplot
+library(ggplot2)
+
+ggplot(fortify(Mex_grd32), aes(x = long, y = lat, group = id)) +
+  geom_polygon() +
+  geom_path(color="white") +
+  coord_map()
+
+```
+
+## Download model results from the SPECIES platform. (get_species_georel)
+
+The **get_species_georel** function is used to download the results of the model set in the SPECIES platform. For the moment the function is useful to extract the results of the model for a single species. However, it is possible to use the `apply` family of functions to extract results from different models (do this operation with care since it can take a lot of time).
 
 
+```{r getgeorel, message=FALSE, results = 'markup'}
+
+# Lynx rufus model with all Mammals
+LR_Model <- get_species_georel(target = "Lynx rufus",
+                               start_level = "class",
+                               value = "Mammalia",
+                               validation = FALSE,
+                               fossil = FALSE,
+                               no_date = TRUE,
+                               min_occ = 5,
+                               bioclim = FALSE)
+
+head(LR_Model, n = 5)
+  
+```
