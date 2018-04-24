@@ -90,7 +90,7 @@ ggplot(fortify(Mex_grd32), aes(x = long, y = lat, group = id)) +
   coord_map()
 ```
 
-<img src="C:\Users\enriq\AppData\Local\Temp\RtmpeKisiY\preview-98c31d0505f.dir\get_species-vignette_files/figure-markdown_github/getgrid-1.png" style="display: block; margin: auto auto auto 0;" />
+<img src="figure/getgrid-1.png" style="display: block; margin: auto auto auto 0;" />
 
 Download model results from the SPECIES platform. (get\_species\_georel)
 ------------------------------------------------------------------------
