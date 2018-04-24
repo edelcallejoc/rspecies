@@ -2,7 +2,9 @@
 title: "SPECIES web framework API functions"
 author: "Enrique Del Callejo-Canal"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  md_document:
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{get_species_}
   %\VignetteEngine{knitr::rmarkdown}
