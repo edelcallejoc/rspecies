@@ -71,4 +71,4 @@ Vignettes
 The vignettes that you can explore are:
 
 -   [grd\_build](https://github.com/edelcallejoc/rspecies/blob/master/vignettes/grd_build-vignette.md)
--   [get\_species\_](https://github.com/edelcallejoc/rspecies/blob/master/vignettes/get_species-vignette.Rmd)
+-   [get\_species\_](https://github.com/edelcallejoc/rspecies/blob/master/vignettes/get_species-vignette.md)
