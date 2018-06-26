@@ -7,7 +7,7 @@ output:
     variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{get_species_}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{rmarkdown::render}
   %\VignetteEncoding{UTF-8}
 ---
 

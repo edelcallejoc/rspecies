@@ -378,7 +378,7 @@ get_species_georel<-function(target, start_level, value, grid_res = 16,
   
   id_target<-get_species_names(level = "specie", name = target)$id
   
-  q_list <- list(id = as.character(id_target),
+  q_list <- list(id = as.numeric(id_target),
                  min_occ = as.character(min_occ),
                  fossil = tolower(fossil),
                  sfecha = tolower(no_date),

@@ -6,7 +6,7 @@
 \alias{get_species_names}
 \alias{get_species_grid}
 \alias{get_species_georel}
-\title{Get data from SPECIE framework}
+\title{Get data from SPECIES framework}
 \usage{
 get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
 

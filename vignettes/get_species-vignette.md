@@ -65,12 +65,12 @@ The `date` argument is used to add collection date information, by default this 
 LR_coords_ndate <- get_species_coords(species = "Lynx rufus", date = FALSE)
 
 head(LR_coords_ndate, n=5)
-#        Long      Lat    date       name
-# 1 -100.0494 25.78639 1967-01 Lynx rufus
-# 2 -100.0669 21.50289 2008-10 Lynx rufus
-# 3 -100.0669 21.50289 2008-12 Lynx rufus
-# 4 -100.0669 21.50289 2008-12 Lynx rufus
-# 5 -100.0669 21.50289 2008-12 Lynx rufus
+#        Long      Lat       name
+# 1 -100.0494 25.78639 Lynx rufus
+# 2 -100.0669 21.50289 Lynx rufus
+# 3 -100.0669 21.50289 Lynx rufus
+# 4 -100.0669 21.50289 Lynx rufus
+# 5 -100.0669 21.50289 Lynx rufus
 ```
 
 Downloading the map grid from the SPECIES framework (get\_species\_grid)
@@ -90,7 +90,7 @@ ggplot(fortify(Mex_grd32), aes(x = long, y = lat, group = id)) +
   coord_map()
 ```
 
-<img src="figure/getgrid-1.png" style="display: block; margin: auto auto auto 0;" />
+<img src="get_species-vignette_files/figure-markdown_github/getgrid-1.png" style="display: block; margin: auto auto auto 0;" />
 
 Download model results from the SPECIES platform. (get\_species\_georel)
 ------------------------------------------------------------------------
@@ -110,16 +110,16 @@ LR_Model <- get_species_georel(target = "Lynx rufus",
                                bioclim = FALSE)
 
 head(LR_Model, n = 5)
-#    spid                   Specie nij  nj  ni     n Epsilon Score  kingdom
-# 1 27317            Canis latrans 106 400 238 26944   54.75  3.70 Animalia
-# 2 27321 Urocyon cinereoargenteus  85 535 238 26944   37.09  3.05 Animalia
-# 3 27359            Taxidea taxus  32  87 238 26944   35.79  4.18 Animalia
-# 4 27634       Lepus californicus  64 383 238 26944   33.10  3.11 Animalia
-# 5 27769   Peromyscus maniculatus  99 871 238 26944   33.06  2.67 Animalia
+#    spid                   Specie nij  nj  ni    n Epsilon Score  kingdom
+# 1 27318            Canis latrans 106 400 237 9839   31.43  2.68 Animalia
+# 2 27360            Taxidea taxus  32  87 237 9839   20.91  3.16 Animalia
+# 3 27322 Urocyon cinereoargenteus  85 532 237 9839   20.41  2.04 Animalia
+# 4 27635       Lepus californicus  64 382 237 9839   18.29  2.10 Animalia
+# 5 27770   Peromyscus maniculatus  99 870 237 9839   17.26  1.65 Animalia
 #     phylum    class      order     family
 # 1 Craniata Mammalia  Carnivora    Canidae
-# 2 Craniata Mammalia  Carnivora    Canidae
-# 3 Craniata Mammalia  Carnivora Mustelidae
+# 2 Craniata Mammalia  Carnivora Mustelidae
+# 3 Craniata Mammalia  Carnivora    Canidae
 # 4 Craniata Mammalia Lagomorpha  Leporidae
 # 5 Craniata Mammalia   Rodentia Cricetidae
 ```
