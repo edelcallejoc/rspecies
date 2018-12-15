@@ -1,135 +1,105 @@
 
-#' Epsilon function for NB Hypothesis Testing for Spatial Data Mining
+#' Correlation method for the Spatial Naive Bayes Model
 #'
-#' @description Take a \code{list} object from \code{\link[rspecies]{probs}}
-#'     and a \code{list} object from \code{\link[rspecies]{counts}} and
-#'     calculates the Epsilon values for Naive Bayes Hypothesis Testing
-#'     for Spatial Data Mining.
+#' @description \code{epsilon} is a function to estimates epsilon parameter for
+#'     the Spatial Naive Bayes Model.
 #'
-#' @param prob.mat a \code{BinMatProb} object from \code{\link[rspecies]{probs}}.
-#' @param count.mat a \code{BinMatCount} object from \code{\link[rspecies]{counts}}.
-#' @param lap_fac numeric. See \code{\link[rspecies]{laplace}}.
 #'
-#' @return Returns a \code{\link[rspecies]{BinMatEps} object.}
+#' @author Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
+#'     based on implemented algortihms in web platform SPECIES (see References).
 #'
-#' @details The slots Ecx and Ecnx of the \code{BinMatEps} object are
-#'     defined as follow.
+#' @references \url{http://species.conabio.gob.mx/}
 #'
-#'     \strong{Ecx}: numeric matrix. The epsilon value for C given X is
-#'     calculated as \eqn{\frac{Nx(P(C|X)-P(C))}{\sqrt{Nx*P(C)*(1-P(C))}}}.
-#'     Where \eqn{Nx} is the number of X's successes, \eqn{P(C|X)} is the
-#'     conditional probability of C given X and \eqn{P(C)} is the probability
-#'     of succes of C.
+#' @name epsilon
+#' @rdname epsilon
+#' @usage NULL
+#' @exportMethod epsilon
 #'
-#'     \strong{Ecnx}: numeric matrix. The epsilon value for C given X's
-#'     complement is calculated as \eqn{\frac{Nx'(P(C|X')-P(C))}{\sqrt{Nx'*P(C)*(1-P(C))}}}.
-#'     Where \eqn{Nx'} is the number of X's failures, \eqn{P(C|X')} is the
-#'     conditional probability of C given X's complement and \eqn{P(C)}
-#'     is the probability of succes of C.
+
+setGeneric("epsilon", function(x.counts, x.probs) standardGeneric("epsilon"))
+
+
+#' @rdname epsilon
+#' @aliases epsilon,SpNaba-methods,epsilon-methods
 #'
-#' @author Enrique Del Callejo Canal (\email{edelcallejoc@@gmail.com}).
+#' @param x.counts A \code{\link[rspeciesdev]{SpNaBaCounts}} object.
+#'
+#' @param x.probs A \code{\link[rspeciesdev]{SpNaBaProbs}} object.
+#'
+#' @return \code{epsilon}: An object of class \code{\link[rspeciesdev]{SpNaBaEps}}.
+#'
+#' @seealso \code{\link[rspeciesdev]{SpNaBaCounts}}, \code{\link[rspeciesdev]{SpNaBaProbs}},
+#'      \code{\link[rspeciesdev]{SpNaBa-methods}}
+#'
 #'
 #' @examples
+#' # Using the function id_pts() for spatial data --------
+#'
 #' library(sp)
 #' library(rgeos)
+#' library(rgdal)
+#' library(raster)
+#'
+#' # Loading data
 #' data(Mex0)
 #' data(mammals)
 #'
 #' # Generating de grid from Mex0 data
 #' Mex0.grd<-grd_build(Mex0)
 #'
-#' # Identification points of mammals with colnames especified.
-#' names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
+#' # Identification points of mammals
+#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals)
 #'
-#' x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
-#' # Counting matrices
-#' count.mat<-counts(x.mat, target = c("X1","X2"))
+#' # Without target declaration --------------------------
 #'
-#' # Including bioclim
-#' # Extracting values from 19 bioclim variables
-#' library(raster)
-#' bioclim <- getData('worldclim', var='bio', res=2.5)
-#' bio.sp <- raster_breaks(bioclim, Mex0.grd)
-#' bnames <- as.character(levels(as.factor(bio.sp@data$nameID)))
-#' bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
-#' count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat)
+#' system.time(x.counts <- counts(x.mat))
 #'
-#' # Probability matrices
-#' prob.mat<-probs(count.mat, lap_fac = 0.1)
-#' prob.bmat<-probs(count.bmat, lap_fac = 0.1)
+#' # With target declaration -----------------------------
 #'
-#' # Epsilon function
-#' system.time(epsilon.mat<-epsilon(prob.mat, count.mat))
-#' system.time(epsilon.bmat<-epsilon(prob.bmat, count.bmat))
+#' x.counts <- counts(x.mat, target = 1:10)
 #'
-#' #' # See data with DT package
-#' library(DT)
+#' # Probability matrices -----------------------------------
+#' x.probs <- probs(x.counts, fac.lap = 0.1)
 #'
-#' datatable(data.frame(Scx = t(getEcx(epsilon.mat))[,c(1,2)]),
-#'     rownames = getName_ID(epsilon.mat)[-c(1,2),1],
-#'     colnames = getName_ID(epsilon.mat)[c(1,2),1],
-#'     caption = "Epsilon - laplace factor: 0.1")%>%
-#'     formatRound(1:2,digits = 3)
+#' # Epsilon parameter -----------------------------------
 #'
-#' datatable(data.frame(Scx = t(getEcx(epsilon.bmat))[,c(1,2)]),
-#'     rownames = getName_ID(epsilon.bmat)[-c(1,2),1],
-#'     colnames = getName_ID(epsilon.bmat)[c(1,2),1],
-#'     caption = "Epsilon - laplace factor: 0.1 - Bioclim")%>%
-#'     formatRound(1:2,digits = 3)
-
-# Generic definition ------------------------------------------------------
+#' x.eps <- epsilon(x.counts, x.probs)
 #'
-#' @export
-#' @rdname epsilon
-#' @docType methods
 
-setGeneric("epsilon",function(prob.mat, count.mat, lap_fac = 0.1){
-           standardGeneric ("epsilon")})
 
-#' @rdname epsilon
-#' @aliases epsilon,BinMatProb,BinMatCount,ANY-method
-#'
-setMethod("epsilon", c("BinMatProb", "BinMatCount", "ANY"),
-           function(prob.mat, count.mat, lap_fac = 0.1){
+setMethod("epsilon", c("SpNaBaCounts", "SpNaBaProbs"),
+          function(x.counts, x.probs){
 
-    if(lap_fac != 0){
-    count.mat <- laplace(count.mat = count.mat, lap_fac = lap_fac)
-  }
-  # -------------------------------------------------------------------
+            # Extracting Nx ----------------------------------
 
-  Nx <- getNx(count.mat)
+            Nx <- get_Nx(x.counts)
 
-  Pc <- getPc(prob.mat)
-  Pcdim<- dim(Pc)[1]
-  Pnc <- 1-Pc
-  Pncdim<- dim(Pnc)[1]
+            # Extracting Ps ----------------------------------
 
-  Pcx <- getPcx(prob.mat)
-  Pcxdim<- dim(Pcx)[2]
-  Pcnx <- getPcnx(prob.mat)
+            Pc <- get_Pc(x.probs)
+            Pcdim <- length(Pc)
 
-  MPc <- matrix(rep(Pc, Pcxdim), ncol = Pcxdim)
-  rownames(MPc) <- rownames(Pc)
-  colnames(MPc) <- colnames(Pcx)
+            Pcx <- get_Pcx(x.probs)
+            Pcxdim<- dim(Pcx)[2]
 
-  MPnc <- matrix(rep(Pnc, Pcxdim), ncol = Pcxdim)
-  rownames(MPnc) <- rownames(Pnc)
-  colnames(MPnc) <- colnames(Pcnx)
+            # Creating auxiliar matrices ---------------------
+            MPc <- matrix(rep(Pc, Pcxdim), ncol = Pcxdim,
+                          dimnames = list(names(Pc), colnames(Pcx)))
 
-  MNx <- matrix(rep(Nx, Pcdim), nrow = Pcdim, byrow = TRUE)
-  rownames(MNx) <- rownames(Pc)
-  colnames(MNx) <- rownames(Nx)
+            MNx <- matrix(rep(Nx, Pcdim), nrow = Pcdim, byrow = TRUE,
+                          dimnames = list(names(Pc), names(Nx)))
 
-  NumEcx <- MNx * (Pcx - MPc)
-  NumEncx <- MNx * (Pcx - MPnc)
+            # Calculating the epsilon parameters -------------
 
-  DenE <- sqrt(MNx * MPc * MPnc)
+            NumEcx <- MNx * (Pcx - MPc) # Numerator
 
-  Ecx <- NumEcx/DenE
-  Encx <- NumEncx/DenE
+            DenE <- sqrt(MNx * MPc * (1-MPc)) # denominator
 
-  output <- BinMatEps(name_ID = prob.mat@name_ID, DMNB = prob.mat@DMNB, BMNB = prob.mat@BMNB,
-                      Epsilon = list(Ecx = Ecx, Encx = Encx))
+            Ecx <- NumEcx/DenE # Epsilon matrix
 
-  return(output)
-})
+
+            output <- SpNaBaEps(Ecx = Ecx)
+
+            return(output)
+          })
+

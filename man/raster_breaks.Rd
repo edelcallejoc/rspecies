@@ -5,8 +5,8 @@
 \alias{aux_foo}
 \title{Extract pixels from raster object and breaks it into n bins.}
 \usage{
-raster_breaks(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks = NULL,
-  breaks.by = 0.1)
+raster_breaks(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))),
+  breaks = NULL, breaks.by = 0.1)
 
 aux_foo(x, breaks, breaks.by, proj4string = sp::proj4string(x))
 }

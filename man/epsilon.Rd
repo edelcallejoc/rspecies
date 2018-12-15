@@ -3,95 +3,66 @@
 \docType{methods}
 \name{epsilon}
 \alias{epsilon}
-\alias{epsilon,BinMatProb,BinMatCount-method}
-\alias{epsilon,BinMatProb,BinMatCount,ANY-method}
-\title{Epsilon function for NB Hypothesis Testing for Spatial Data Mining}
+\alias{epsilon,SpNaBaCounts,SpNaBaProbs-method}
+\alias{epsilon,SpNaba-methods,epsilon-methods}
+\title{Correlation method for the Spatial Naive Bayes Model}
 \usage{
-epsilon(prob.mat, count.mat, lap_fac = 0.1)
-
-\S4method{epsilon}{BinMatProb,BinMatCount}(prob.mat, count.mat, lap_fac = 0.1)
+\S4method{epsilon}{SpNaBaCounts,SpNaBaProbs}(x.counts, x.probs)
 }
 \arguments{
-\item{prob.mat}{a \code{BinMatProb} object from \code{\link[rspecies]{probs}}.}
+\item{x.counts}{A \code{\link[rspeciesdev]{SpNaBaCounts}} object.}
 
-\item{count.mat}{a \code{BinMatCount} object from \code{\link[rspecies]{counts}}.}
-
-\item{lap_fac}{numeric. See \code{\link[rspecies]{laplace}}.}
+\item{x.probs}{A \code{\link[rspeciesdev]{SpNaBaProbs}} object.}
 }
 \value{
-Returns a \code{\link[rspecies]{BinMatEps} object.}
+\code{epsilon}: An object of class \code{\link[rspeciesdev]{SpNaBaEps}}.
 }
 \description{
-Take a \code{list} object from \code{\link[rspecies]{probs}}
-    and a \code{list} object from \code{\link[rspecies]{counts}} and
-    calculates the Epsilon values for Naive Bayes Hypothesis Testing
-    for Spatial Data Mining.
-}
-\details{
-The slots Ecx and Ecnx of the \code{BinMatEps} object are
-    defined as follow.
-
-    \strong{Ecx}: numeric matrix. The epsilon value for C given X is
-    calculated as \eqn{\frac{Nx(P(C|X)-P(C))}{\sqrt{Nx*P(C)*(1-P(C))}}}.
-    Where \eqn{Nx} is the number of X's successes, \eqn{P(C|X)} is the
-    conditional probability of C given X and \eqn{P(C)} is the probability
-    of succes of C.
-
-    \strong{Ecnx}: numeric matrix. The epsilon value for C given X's
-    complement is calculated as \eqn{\frac{Nx'(P(C|X')-P(C))}{\sqrt{Nx'*P(C)*(1-P(C))}}}.
-    Where \eqn{Nx'} is the number of X's failures, \eqn{P(C|X')} is the
-    conditional probability of C given X's complement and \eqn{P(C)}
-    is the probability of succes of C.
+\code{epsilon} is a function to estimates epsilon parameter for
+    the Spatial Naive Bayes Model.
 }
 \examples{
+# Using the function id_pts() for spatial data --------
+
 library(sp)
 library(rgeos)
+library(rgdal)
+library(raster)
+
+# Loading data
 data(Mex0)
 data(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd<-grd_build(Mex0)
 
-# Identification points of mammals with colnames especified.
-names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
+# Identification points of mammals
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals)
 
-x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
-# Counting matrices
-count.mat<-counts(x.mat, target = c("X1","X2"))
+# Without target declaration --------------------------
 
-# Including bioclim
-# Extracting values from 19 bioclim variables
-library(raster)
-bioclim <- getData('worldclim', var='bio', res=2.5)
-bio.sp <- raster_breaks(bioclim, Mex0.grd)
-bnames <- as.character(levels(as.factor(bio.sp@data$nameID)))
-bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
-count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat)
+system.time(x.counts <- counts(x.mat))
 
-# Probability matrices
-prob.mat<-probs(count.mat, lap_fac = 0.1)
-prob.bmat<-probs(count.bmat, lap_fac = 0.1)
+# With target declaration -----------------------------
 
-# Epsilon function
-system.time(epsilon.mat<-epsilon(prob.mat, count.mat))
-system.time(epsilon.bmat<-epsilon(prob.bmat, count.bmat))
+x.counts <- counts(x.mat, target = 1:10)
 
-#' # See data with DT package
-library(DT)
+# Probability matrices -----------------------------------
+x.probs <- probs(x.counts, fac.lap = 0.1)
 
-datatable(data.frame(Scx = t(getEcx(epsilon.mat))[,c(1,2)]),
-    rownames = getName_ID(epsilon.mat)[-c(1,2),1],
-    colnames = getName_ID(epsilon.mat)[c(1,2),1],
-    caption = "Epsilon - laplace factor: 0.1")\%>\%
-    formatRound(1:2,digits = 3)
+# Epsilon parameter -----------------------------------
 
-datatable(data.frame(Scx = t(getEcx(epsilon.bmat))[,c(1,2)]),
-    rownames = getName_ID(epsilon.bmat)[-c(1,2),1],
-    colnames = getName_ID(epsilon.bmat)[c(1,2),1],
-    caption = "Epsilon - laplace factor: 0.1 - Bioclim")\%>\%
-    formatRound(1:2,digits = 3)
+x.eps <- epsilon(x.counts, x.probs)
 
 }
+\references{
+\url{http://species.conabio.gob.mx/}
+}
+\seealso{
+\code{\link[rspeciesdev]{SpNaBaCounts}}, \code{\link[rspeciesdev]{SpNaBaProbs}},
+     \code{\link[rspeciesdev]{SpNaBa-methods}}
+}
 \author{
-Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
+Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
+    based on implemented algortihms in web platform SPECIES (see References).
 }

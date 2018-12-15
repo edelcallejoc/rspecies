@@ -1,37 +1,35 @@
 
 #' Generate a grid from SpatialPolygonsDataFrame.
 #'
-#' @description The grid is generated from pseudo mercator
-#'     or web mercator (epsg:3857) projection system. It is recomended
-#'     to use metrics projection in order to preserve areas. First,
-#'     transform mappol into web mercator projection. Then, the distances
-#'     between the four coordinates given by the bounding box are calculated
-#'     and divided by resolution argument in order to determine the number of
-#'     cells per direction. Finally, \code{\link[sp]{GridTopology}} is applied to
-#'     generate the coordinates that create the final objecto of class
+#' @description The function generates a grid from pseudo mercator or web Mercator
+#'     (epsg:3857) projection system. It is recommended to use metrics projection
+#'     to preserve areas. First, transform mappol into web Mercator projection.
+#'     Then, the distances between the four coordinates given by the bounding box
+#'     are calculated and divided by resolution argument to determine the number
+#'     of cells per direction. Finally, \code{\link[sp]{GridTopology}} is applied
+#'     to generate the coordinates that create the final object of class
 #'     \code{SpatialPolygonsDataFrame}.
 #'
 #' @param mappol A \code{SpatialPolygonsDataFrame} object. \code{bbox(mappol)}
 #'     should be different from NULL. See \code{help(bbox)} for more details.
-#' @param proj4trans A \code{CRS} class object. By default \code{CRS('+init=3857')}.
-#'     se \code{help(CRS)} for more details. See \url{http://spatialreference.org/}
-#'     for more projection system. It is recomended to use a metric
-#'     projection.
-#' @param tol argument pass to \code{gSimplify()}. See \code{help(gSimplify)}
-#'     for more details.
-#' @param TP argument pass to \code{gSimplify()}. See \code{help(gSimplify)}
-#'     for more details.
-#' @param resolution integer. Greater than 0. Units are in Km. Default 20.
-#' @param r.ceiling logical. If \code{TRUE} the distances are ceiling rounded.
+#' @param keep.p4s Logical. If \code{TRUE} (by default) the final grid polygon keep
+#'     proj4string of original polygon. If \code{FALSE} the final grid polygon
+#'     modify the proj4string to \code{sp::CRS("+init=epsg:3857")}.
+#' @param tol Argument pass to \code{gSimplify()}.  By default \code{Tol = 100}.
+#'     See \code{help(gSimplify)} for more details.
+#' @param TP Argument pass to \code{gSimplify()}. This directs to topologyPreserve
+#'     argument in \code{gSimplify} function. See \code{help(gSimplify)} for
+#'     more details.
+#' @param resolution Double greater than 0. Units are in Km. Default \code{resolution = 20}.
+#' @param r.ceiling Logical. If \code{TRUE} the distances are ceiling rounded.
 #'     If \code{FALSE} the distances are floor rounded.
-#' @param g.int logical. If \code{TRUE} the grid's cells that intersects \code{mappol}
+#' @param g.int Logical. If \code{TRUE} the grid's cells that intersects \code{mappol}
 #'     are returned. If \code{FALSE} all grid's cells in the \code{mappol} bounding box
 #'     are returned.
-#' @param pretty.int logical. If \code{g.int=TRUE} and \code{pretty.int=TRUE} the
-#'     grid's cells that intersects \code{mappol}'s boundaries are reshape for
-#'     better visualization. Requires \code{g.int=TRUE}. This option expend more
-#'     computing time.
-#' @param info logical. If \code{TRUE} cell's info is printed. By default is \code{FALSE}.
+#' @param pretty.int Logical (\code{FALSE} by default). If \code{g.int=TRUE} and
+#'     \code{pretty.int=TRUE} the grid's cells that intersects \code{mappol}'s
+#'     boundaries are reshape for better visualization. Requires \code{g.int=TRUE}.
+#'     This option expend more computing time.
 #'
 #' @return A \code{SpatialPolygonsDataFrame} object. It includes all the polygons
 #'     that form the grid. Data slot contains the identifiers for each cells.
@@ -39,6 +37,8 @@
 #' @examples
 #' library(sp)
 #' library(rgeos)
+#' library(rgdal)
+#' library(raster)
 #' data(Mex0)
 #'
 #' # Whithout pretty intersection
@@ -47,6 +47,15 @@
 #' system.time(Mex0.grd<-grd_build(Mex0))
 #' plot(Mex0.grd)
 #' plot(Mex0, add = TRUE)
+#'
+#' # ggplot2 interaction
+#'
+#' library(ggplot2)
+#' library(mapproj)
+#'
+#' ggplot(data = fortify(Mex0.grd), aes(x = long, y = lat, group = group)) +
+#'     geom_polygon(colour = "white") +
+#'     coord_quickmap()
 #'
 #' # leaflet interaction
 #'
@@ -64,22 +73,27 @@
 #' system.time(Mex0.grd.p<-grd_build(Mex0, pretty.int=TRUE))
 #' plot(Mex0.grd.p)
 #'
-#' @details This function generates a grid from \code{SpatialPolygonsDataFrame}.
-#'     The main steps are: projection system transformation, geometry
+#' # ggplot2 interaction
+#'
+#' ggplot(data = fortify(Mex0.grd.p), aes(x = long, y = lat, group = group)) +
+#'     geom_polygon(colour = "white") +
+#'     coord_map(projection = "mercator")
+#'
+#' @details This function generates a grid from \code{SpatialPolygonsDataFrame}
+#'     object. The main steps are: projection system transformation, geometry
 #'     simplification, bounding box extraction, distance calculation,
 #'     calculation of cells per direction (Longitude, Latitude), grid
-#'     topology creation, class reassigment of grid topology into
+#'     topology creation, class reassignment of grid topology into
 #'     \code{SpatialPolygons} object and compute the intersected polygons between
 #'     grid and \code{mappol}. Finally, the returned object is a
-#'     \code{SpatialPolygonsDataFrame}.
+#'     \code{SpatialPolygonsDataFrame} object.
 #'
 #'     \code{\link[sp]{spTransform}} (see \code{help(spTransform)} for more details)
 #'     is applied for transformation of mappol into a metric projection
-#'     (by default web mercator, epsg:3857). The returned object in this
-#'     step is a \code{SpatialPolygonsDataFrame} called \code{mappol.tr}
+#'     (by default web mercator, epsg:3857).
 #'
 #'     \code{\link[rgeos]{gSimplify}} (see \code{help(gSimplify)} for more details)
-#'     is applied for simplify geometry of the transformed mappol in order
+#'     is applied for simplify geometry of transformed polygon in order
 #'     to reduce computation time and memory size.
 #'
 #'     \code{\link[sp]{bbox}} (see \code{help(bbox)} for more details) is applied to
@@ -106,24 +120,23 @@
 #'
 #' @references \url{http://species.conabio.gob.mx/}
 #'
+#' @docType methods
 #' @export
 #'
 #' @import sp rgdal rgeos maptools methods
+#' @importFrom raster compareCRS
 
 
-grd_build<-function(mappol, proj4trans = sp::CRS("+init=epsg:3857"),
-                                tol = 100, TP = TRUE, resolution = 20,
-                                r.ceiling = TRUE, g.int = TRUE, pretty.int = FALSE,
-                                info = FALSE){
+grd_build<-function(mappol, keep.p4s = TRUE, tol = 100, TP = TRUE, resolution = 20,
+                    r.ceiling = TRUE, g.int = TRUE, pretty.int = FALSE){
 
     # Arguments' validation ---------------------------------------------
 
     if (class(mappol) != "SpatialPolygonsDataFrame") {
         stop("Argument mappol must be SpatialPolygonsDataFrame.")
     }
-    logical_args <- list(TP = TP, r.ceiling = r.ceiling,
-                         g.int = g.int, pretty.int = pretty.int,
-                         info = info)
+    logical_args <- list(keep.p4s = keep.p4s, TP = TP, r.ceiling = r.ceiling,
+                         g.int = g.int, pretty.int = pretty.int)
     logical_val <- unlist(lapply(logical_args, is.logical))
     if (!all(logical_val)) {
         stop(paste("Argument ", names(logical_args)[!logical_val],
@@ -138,14 +151,15 @@ grd_build<-function(mappol, proj4trans = sp::CRS("+init=epsg:3857"),
     # Transform to a metric projection system ---------------------------
     # and simplying spatial geometry ------------------------------------
 
-    projmappol <- rgdal::showEPSG(sp::proj4string(mappol))
-    projcompare <- (projmappol == rgdal::showEPSG(rgdal::CRSargs(proj4trans)))
+    proj4trans <- sp::CRS("+init=epsg:3857")
+    projmappol <- sp::proj4string(mappol)
+    projcompare <- raster::compareCRS(projmappol, proj4trans)
 
-    if (!projcompare) {
+    if (projcompare) {
+      mappol.trsim <- rgeos::gSimplify(mappol, tol = tol, topologyPreserve = TRUE)
+    } else {
         mappol.tr <- sp::spTransform(mappol, proj4trans)
         mappol.trsim <- rgeos::gSimplify(mappol.tr, tol = tol, topologyPreserve = TRUE)
-    } else {
-        mappol.trsim <- rgeos::gSimplify(mappol, tol = tol, topologyPreserve = TRUE)
     }
 
     # bounding box and distance calculation -----------------------------
@@ -170,22 +184,16 @@ grd_build<-function(mappol, proj4trans = sp::CRS("+init=epsg:3857"),
 
     sp_pol <- sp::as.SpatialPolygons.GridTopology(mappol.grd, proj4string = CRS(proj4string(mappol.trsim)))
 
-    # Cells info -------------------------------------------------------
+   # Extracting intersections ------------------------------------------
 
-    cs.km <- cs/1000
-
-    cel.inf <- round(c(cs.km, prod(cs.km)), digits = 2)
-
-    # Extracting intersections ------------------------------------------
-
-    if (g.int == T) {
-        intg <- rgeos::gIntersects(mappol.trsim, sp_pol, byid = T)
-        sp_pol_int <- sp_pol[intg]
+    if (g.int) {
+        intg <- rgeos::gIntersects(mappol.trsim, sp_pol, byid = TRUE)
+        sp_pol_int <- sp_pol[apply(intg,1,any)]
 
         if (pretty.int) {
-            contg <- rgeos::gContains(mappol.trsim, sp_pol_int, byid = T)
+            contg <- rgeos::gContains(mappol.trsim, sp_pol_int, byid = TRUE)
             sp_pol_aux <- sp_pol_int[!contg]
-            int.pol <- rgeos::gIntersection(mappol.trsim, sp_pol_aux, byid = T)
+            int.pol <- rgeos::gIntersection(mappol.trsim, sp_pol_aux, byid = TRUE)
             mappol_grd <- maptools::spRbind(sp_pol_int[contg], int.pol)
         } else {
             mappol_grd <- sp_pol_int
@@ -196,21 +204,16 @@ grd_build<-function(mappol, proj4trans = sp::CRS("+init=epsg:3857"),
 
     # Transforming to the original projection system --------------------
 
+    if(keep.p4s){
     mappol_grd <- sp::spTransform(mappol_grd, sp::proj4string(mappol))
+    }
 
-    mappol.df <- data.frame(ID = 1:length(mappol_grd), row.names = sapply(mappol_grd@polygons,
-        methods::slot, name = "ID"))
+    # Converting into SpatialPolygonsDataFrame --------------------------
+    id_names <- sapply(mappol_grd@polygons, methods::slot, name = "ID")
+
+    mappol.df <- data.frame(id = id_names, row.names = id_names, stringsAsFactors = FALSE)
 
     mappol_grd <- sp::SpatialPolygonsDataFrame(mappol_grd, mappol.df, match.ID = TRUE)
-
-    # Print information message -----------------------------------------
-
-    if (info) {
-        cat(paste("Cells info: longitud distance=", cel.inf[1], ", latitud distance=",
-            cel.inf[2], ", Area=", cel.inf[3], ". Units=KM.", sep = ""))
-        cat(paste("All metrics were compute under EPSG:", showEPSG(CRSargs(proj4trans)),
-            " projection system.", sep = ""))
-    }
 
     # Return SpatialPolygonsDataFrame object ----------------------------
 

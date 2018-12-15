@@ -3,53 +3,50 @@
 \docType{methods}
 \name{id_pts}
 \alias{id_pts}
-\title{Identify points coordinates inside each cell of the grid.}
+\title{Identify points coordinates inside each cell of a grid.}
 \usage{
-id_pts(grd, pts, contain = c("simple", "properly"), colnames = NULL)
+id_pts(grd, pts, contain = c("simple", "properly"))
 }
 \arguments{
-\item{grd}{A \code{SpatialPolygonsDataFrame} object from
+\item{grd}{A \code{SpatialPolygonsDataFrame} object from the
 \code{grd_build} function.}
 
 \item{pts}{A \code{SpatialPointsDataFrame} object.}
 
-\item{contain}{A \code{character} object \code{simple} or \code{properly}.
-By default \code{simple}, it implies a simple contain evaluation (see
-\code{\link[rgeos]{gContains}}). \code{properly} implies a properly
-contain evaluation (see \code{\link[rgeos]{gContainsProperly}}).}
-
-\item{colnames}{\code{NULL} or \code{character} vector. If \code{NULL}
-colnames for the resulting matrix are created as a sequence of the form
-F1, F2, \ldots. If \code{character} vector, colnames are
-used to name the columns of the resulting matrix.}
+\item{contain}{Character (\code{simple} or \code{properly}).
+By default \code{simple}, it implies a simple contention
+evaluation (see \code{\link[rgeos]{gContains}})).
+\code{properly} suggests a properly contention evaluation
+(see \code{\link[rgeos]{gContainsProperly}})).}
 }
 \value{
-An object of class BinMat. See \code{\link[rspecies]{BinMat-class}}
-    documentation.
+An object of class \code{SpatialPolygonsDataFrame}. The data slot
+    contains a data.frame with a column "id" and m columns. The \eqn{m}
+    columns represent the sample intensity in each cell of the grid for
+    each factor.
 }
 \description{
-Take a \code{SpatialPointsDataFrame} object and
-    compare each points with the boundaries of each cell in a
-    grid (\code{SpatialPolygonsDataFrame} from \code{grd_build}
-    function.
+This function takes a \code{SpatialPointsDataFrame}
+    object and compares each point with the boundaries of each
+    cell in a grid (\code{SpatialPolygonsDataFrame} from the
+    \code{grd_build} function.
 }
 \details{
-This function creates a binary matrix with N rows associated to the
-    cells ID of \code{grd} object and M columns associated to the factors in
-    the \code{pts} object. The element of the row i and column j is 1 if the
-    cell i of the \code{grd} object contains at least one point of the factor
-    j of the \code{pts} object and 0 otherwise.
-
-    The matrix is created using the functions \code{\link[rgeos]{gContains}}()
-    or \code{\link[rgeos]{gContainsProperly}}() from \code{rgeos} package.
-    \code{\link[base]{sapply}}() function is used to extract the cell's ids from
-    the returned object of \code{\link[rgeos]{gContains}} or \code{gContainsProperly}.
+\code{id_pts()} extract the number of observations per cell
+    for each factor. It uses parallel programing to reduce the computation
+    time. This function depends on \code{parallel}, \code{doParallel} and
+    \code{foreach} packages. By defaul the number of cores for parallel
+    computing is two, but it is posible to extend the number of cores
+    by modify the body of the funtion at line \code{cores <- 2}
 }
 \examples{
 
 library(sp)
 library(rgeos)
+library(rgdal)
+library(raster)
 
+# Loading data
 data(Mex0)
 data(mammals)
 
@@ -59,25 +56,24 @@ Mex0.grd<-grd_build(Mex0)
 # Identification points of mammals
 system.time(x.mat<-id_pts(grd = Mex0.grd, pts = mammals))
 
-# Plot sample density - target default
-plot(Mex0.grd, x.mat,  sou_den = TRUE, leaflet = TRUE)
+# Loading extra libraries for ggplot2
+library(plyr)
+library(ggplot2)
+library(mapproj)
 
-# Plot sample density - target "Linx rufus"
-plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = TRUE, leaflet = TRUE)
+Mex0.grd_for <- fortify(Mex0.grd)
+Mex0.grd_df <- plyr::join(Mex0.grd_for,
+ data.frame(id = rownames(x.mat@freqmatrix ), x.mat@freqmatrix, stringsAsFactors = FALSE), by="id")
 
-# Plot sample - target default
-plot(Mex0.grd, x.mat,  sou_den = FALSE, leaflet = TRUE)
-
-# Plot sample - target "Linx rufus"
-plot(Mex0.grd, x.mat, target="Lynx rufus", sou_den = FALSE, leaflet = TRUE)
+ggplot(data = Mex0.grd_df, aes(x = long, y = lat, group = group, fill = Alouatta_palliata)) +
+    geom_polygon(colour = "gray") +
+    scale_fill_gradient(low = "white", high = "red") +
+    coord_quickmap()
 
 
 }
 \references{
 \url{http://species.conabio.gob.mx/}
-}
-\seealso{
-\code{\link[rspecies:plot-methods]{plot}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

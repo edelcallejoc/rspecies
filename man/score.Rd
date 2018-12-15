@@ -3,93 +3,63 @@
 \docType{methods}
 \name{score}
 \alias{score}
-\alias{score,BinMatProb,BinMatCount-method}
-\alias{score,BinMatProb,BinMatCount,ANY-method}
-\title{Score function for NB classifier for Spatial Data Mining}
+\alias{score,SpNaBaProbs-method}
+\alias{score,SpNaba-methods,score-methods}
+\title{Score function for the Spatial Naive Bayes Model}
 \usage{
-score(prob.mat, count.mat, lap_fac = 0.1, ...)
-
-\S4method{score}{BinMatProb,BinMatCount}(prob.mat, count.mat, lap_fac = 0.1,
-  ...)
+\S4method{score}{SpNaBaProbs}(x.probs)
 }
 \arguments{
-\item{prob.mat}{A \code{BinMatProb} object from \code{\link[rspecies]{probs}}.}
-
-\item{count.mat}{A \code{BinMatCount} object from \code{\link[rspecies]{counts}}.}
-
-\item{lap_fac}{numeric. See \code{\link[rspecies]{laplace}}.}
-
-\item{...}{pass to another methods.}
+\item{x.probs}{A \code{\link[rspeciesdev]{SpNaBaProbs}} object.}
 }
 \value{
-a \code{\link[rspecies:BinMatScore-class]{BinMatScore}} object.
+\code{score}: An object of class \code{\link[rspeciesdev]{SpNaBaScore}}.
 }
 \description{
-Score function for NB classifier for Spatial Data Mining
-}
-\details{
-The elements of the list are defined as follow.
-
-    \strong{Apriori} a numeric vector. The apriori factor
-    \eqn{\ln{\frac{P(C)}{P(C')}}}, where C' is the complement of C.
-
-    \strong{Scx} a numeric matrix. The Score factor of each explanatory variables,
-    \eqn{\ln{\frac{P(X|C)}{P(X|C')}}}. Rows corresponds to X and columns corresponds
-    to C.
-
-    \strong{Scnx} a numeric matrix. The Score factor of X's complement,
-    \eqn{\ln{\frac{P(X'|C)}{P(X'|C')}}}. Rows corresponds to X' and columns corresponds
-    to C.
+\code{score} is a function to estimates score parameter for
+    the Spatial Naive Bayes Model.
 }
 \examples{
+# Using the function id_pts() for spatial data --------
+
 library(sp)
 library(rgeos)
+library(rgdal)
+library(raster)
+
+# Loading data
 data(Mex0)
 data(mammals)
 
 # Generating de grid from Mex0 data
 Mex0.grd<-grd_build(Mex0)
 
-# Identification points of mammals with colnames especified.
-names <- paste("X", 1:nlevels(as.factor(mammals@data$nameID)), sep = "")
+# Identification points of mammals
+x.mat<-id_pts(grd = Mex0.grd, pts = mammals)
 
-x.mat <- id_pts(grd = Mex0.grd, pts = mammals, colnames = names)
-# Counting matrices
-count.mat<-counts(x.mat)
+# Without target declaration --------------------------
 
-# Including bioclim
-# Extracting values from 19 bioclim variables
-library(raster)
-bioclim <- getData('worldclim', var='bio', res=2.5)
-bio.sp <- raster_breaks(bioclim, Mex0.grd)
-bnames <- as.character(levels(as.factor(bio.sp@data$nameID)))
-bio.mat <- id_pts(grd = Mex0.grd, pts = bio.sp, colnames = bnames)
-count.bmat <- counts(x.mat, target = c("X1","X2"), bioclim = bio.mat)
+system.time(x.counts <- counts(x.mat))
 
-# Probability matrices
-prob.mat<-probs(count.mat, lap_fac = 0.1)
-prob.bmat<-probs(count.bmat, lap_fac = 0.1)
+# With target declaration -----------------------------
 
-#score function
-score.mat<-score(prob.mat, count.mat)
-score.bmat<-score(prob.bmat, count.bmat)
+x.counts <- counts(x.mat, target = 1:10)
 
-# See data with DT package
-library(DT)
+# Probability matrices -----------------------------------
+x.probs <- probs(x.counts, fac.lap = 0.1)
 
-datatable(data.frame(Scx = getScx(score.mat)[,c(1,2)]),
-    rownames = getName_ID(score.mat)[,1],
-    colnames = getName_ID(score.mat)[c(1,2),1],
-    caption = "Score - laplace factor: 0.1")\%>\%
-    formatRound(1:2,digits = 3)
+# Score parameter -----------------------------------
 
-datatable(data.frame(Scx = getScx(score.bmat)[,c(1,2)]),
-    rownames = getName_ID(score.bmat)[-c(1,2),1],
-    colnames = getName_ID(score.bmat)[c(1,2),1],
-    caption = "Score - laplace factor: 0.1")\%>\%
-    formatRound(1:2,digits = 3)
+x.score <- score(x.probs)
 
 }
+\references{
+\url{http://species.conabio.gob.mx/}
+}
+\seealso{
+\code{\link[rspeciesdev]{SpNaBaProbs}}, \code{\link[rspeciesdev]{SpNaBa-methods}}
+}
 \author{
-Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
+Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
+    based on implemented algortihms in web platform SPECIES (see References).
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/get_species.R
 \name{get_species_}
 \alias{get_species_}
-\alias{get_species_coords}
 \alias{get_species_names}
+\alias{get_species_coords}
 \alias{get_species_grid}
 \alias{get_species_georel}
-\title{Get data from SPECIES framework}
+\title{Get data from SPECIE framework}
 \usage{
-get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
-
 get_species_names(level = "genus", name = NULL, sublevel, id = TRUE)
+
+get_species_coords(species = NULL, from = "SPECIES", date = TRUE)
 
 get_species_grid(grid_res = 16)
 
@@ -19,14 +19,6 @@ get_species_georel(target, start_level, value, grid_res = 16,
   bioclim = FALSE)
 }
 \arguments{
-\item{species}{a character vector of length 1. The name of the specie desired as
-web SPECIES platform shows.}
-
-\item{from}{The name of web platform to consult data. At this point
-it only works for \url{http://species.conabio.gob.mx}.}
-
-\item{date}{logical. If TRUE the collection date is added.}
-
 \item{level}{a character vector of length 1. The name of the taxonomic rank.
 The allowed values are: "kingdom", "phylum", "class", "order", "family",
 "genus" and "specie". By default "genus".}
@@ -39,6 +31,14 @@ rank sublevel to search names. See examples.}
 
 \item{id}{Logical. If \code{TRUE}, id metada is included in the output. If
 \code{FALSE} only the names of species are display.}
+
+\item{species}{a character vector of length 1. The name of the specie desired as
+web SPECIES platform shows.}
+
+\item{from}{The name of web platform to consult data. At this point
+it only works for \url{http://species.conabio.gob.mx}.}
+
+\item{date}{logical. If TRUE the collection date is added.}
 
 \item{grid_res}{The resolution of the grid in km. The resolution at this momment are 8, 16, 32, and 64 km.}
 
@@ -63,9 +63,9 @@ the taxonomic rank (level argument) as web SPECIES platform shows.}
 \item{bioclim}{logical. If TRUE bioclim data is included in the model.}
 }
 \value{
-\code{get_species_coords()} returns a \code{data.frame} object.
-
 \code{get_species_names()} returns a \code{data.frame} object.
+
+\code{get_species_coords()} returns a \code{data.frame} object.
 
 \code{get_species_grid()} returns a \code{SpatialPolygonsDataFrame} object. It includes all the polygons
     that form the grid. Data slot contains the identifiers for each cells.
@@ -76,28 +76,14 @@ a data.frame object.
 a family functions to extract data from SPECIES WEB framework.
 }
 \note{
+\code{get_species_names}. The data can be very large so proceed with carefull.
+
 \code{get_species_coords}. Only one species per query is allowed. This restriction
     is for memory care purposes. You can use the 'apply' function family to extend
     your search, but it is recommended to do the search one by one to not exceed
     the memory limits.
-
-\code{get_species_names}. The data can be very large so proceed with carefull.
 }
 \examples{
-
-library(httr)
-library(jsonlite)
-
-# get_species_coords() examples
-
-# Lynx rufus
-LR<-get_species_coords(species = "Lynx rufus")
-LR
-
-# Aedes aegypti
-AA<-get_species_coords(species = "Aedes aegypti")
-AA
-
 
 # get_species_names() examples
 
@@ -109,13 +95,30 @@ get_species_names(name = "aedes")
 
 # Cheking names of a level
 # Cheking class' names of Craniata phylum
-get_species_names(level = "phylum", name = "Craniata",
+get_species_names(level = "phylum", name = "Chordata",
  sublevel = "class", id = FALSE)
 
 # Cheking class' names of Animalia kingdom
 get_species_names(level = "kingdom", name = "Animalia",
  sublevel = "class", id = FALSE)
 
+
+
+library(httr)
+library(jsonlite)
+
+# get_species_coords() examples
+
+# Lynx rufus
+
+# Checking names
+
+LR<-get_species_coords(species = "Lynx rufus")
+LR
+
+# Aedes aegypti
+AA<-get_species_coords(species = "Aedes (Stegomyia) aegypti")
+AA
 
 
 # get_species_grid() examples
@@ -127,7 +130,7 @@ system.time(a32 <- get_species_grid(grid_res = 32))
 
 
 
-Model1 <- get_species_georel(target = "Aedes aegypti",
+Model1 <- get_species_georel(target = "Aedes (Stegomyia) albopictus",
     start_level = "class", value = "aves", min_occ = 5)
 
 head(Model1)

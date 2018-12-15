@@ -1,23 +1,20 @@
 
-#' Function to calculate predictions form BinMatScore Class
+
+#' Predict function for Naive Bayes Spatial Model
 #'
-#' @description This function allows to calculate the classifier of each cell in the
-#'     grid of the polygon defined for spatial data mining.
+#' @description This function allows to calculate the classification of each cell in the
+#'     GRID, based on the score function of the naive Bayes model.
+#'     See \code{\link[rspeciesdev]{score}} function.
 #'
-#' @param object A \code{\link[rspecies]{BinMatScore}} object from
-#'     \code{\link[rspecies]{score}} function.
+#' @param object A \code{SpNaBaModel} object from
+#'     \code{\link[rspeciesdev]{NBModel}} function.
 #'
 #' @param apr_inc logical. If TRUE the apriori score is included for
 #'     prediction calculation.
 #'
-#' @param comp_inc logical. If TRUE the complement of explanatory variables
-#'     included for prediction claculation
-#'
-#'
+#' @param ... pass to other methods.
 #'
 #' @author Enrique Del Callejo-Canal (\email{edelcallejoc@@gmail.com}).
-#'
-#' @import leaflet RColorBrewer
 #'
 #'
 #' @examples
@@ -30,74 +27,60 @@
 #' Mex0.grd<-grd_build(Mex0)
 #'
 #' # Identification points of mammals with colnames = NULL.
-#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals, colnames = NULL)
+#' x.mat<-id_pts(grd = Mex0.grd, pts = mammals)
 #'
-#' # Counting matrices
-#' count.mat<-counts(x.mat,  target = c("F.169", "F.272"))
+#' x.model <- NBModel(x.mat, target = 1:10, fac.lap = 0.01)
 #'
-#' # Probability matrices
-#' prob.mat<-probs(count.mat, lap_fac = 0.1)
+#' x.prediction <- predict(x.model, apr_inc = FALSE)
 #'
-#' #score function
-#' score.mat<-score(prob.mat, count.mat)
-#'
-#' # Prediction
-#' pred.mat<-predict(score.mat, apr_inc = FALSE, comp_inc = FALSE)
-#'
-#' # See map with leaflet - "Lynx rufus"
-#'
-#' plot(Mex0.grd, pred.mat, target = "Lynx rufus", leaflet = TRUE)
-#'
-#' # See data with DT package
-#' library(DT)
-#' datatable(data.frame(pred.mat@Prediction[,head(1:ncol(pred.mat@Prediction))]),
-#'     colnames = pred.mat@name_ID[colnames(pred.mat@Prediction),],
-#'     caption = "laplace factor: 0.1")%>%
-#'     formatRound(1:6,digits = 3)
-#'
-#' @name predict-methods
+#' @name predict
 #' @rdname predict
-#' @aliases predict,BinMatScore
 #' @exportMethod predict
 #'
-# Method definition  --------------------------------------------------
+#' @include SpNaBaMatrix.R SpNaBaCounts.R SpNaBaProbs.R
+#' @include SpNaBaEps.R SpNaBaScore.R SpNaBaModel.R NBModel.R
+#'
+#'
 
-setMethod("predict", c("BinMatScore"),
-                    function(object, apr_inc = TRUE, comp_inc = TRUE, ...){
+setGeneric("predict", function(object, apr_inc, ...) standardGeneric("predict"))
 
-         # Argument validation ---------------------------------------------
-         arg_val <- all(all(is.logical(apr_inc), length(apr_inc) == 1),
-                         all(is.logical(comp_inc), length(comp_inc) == 1))
-         if(!arg_val){
-           stop("Arguments: apr_inc and/or comp_inc, are/is not of the correct type.\n
-                see documentation of rspecies predict function.")
-         }
+#' @rdname predict
+#' @aliases predict,SpNaBa-methods,NBModel-methods
+#' @usage NULL
 
-         # -----------------------------------------------------------------
+setMethod("predict", c("SpNaBaModel", "logical"),
+          function(object, apr_inc = FALSE, ...){
 
-         Scx <- getScx(object)
-         BMNB <- getBMNB(object)[,rownames(Scx)]
-         s1 <- crossprod(t(BMNB), replace(Scx, is.na(Scx), 0))
+            # Argument validation -------------------------------------
+            arg_val <- all(all(is.logical(apr_inc), length(apr_inc) == 1))
+            if(!arg_val){
+              stop("Arguments: apr_inc is not of the correct type.\n
+                   see documentation of rspecies predict function.")
+            }
 
-         if(apr_inc){
-           apr <- getApr(object)
-           apr_mat <- matrix(apr, nrow(BMNB), nrow(apr), byrow = T)
-         } else{
-           apr_mat <- 0
-         }
-         if(comp_inc){
-           Scnx <- getScnx(object)
-           s2 <- crossprod(t(1-BMNB), replace(Scnx, is.na(Scnx), 0))
-         } else{
-           s2 <- 0
-         }
+            # Calculate prediccion ------------------------------------
+
+            Scx <- get_Scx(object) # Score matrix
+            BM <- get_BM(object)[, rownames(Scx)] # Binary matrix
+
+            Scx_pred <- crossprod(t(BM), replace(Scx, is.na(Scx), 0))
+
+            # Checking if apriori is required ------------------------
+
+            if(apr_inc){
+              apr <- get_Apriori(object)
+              apr_mat <- matrix(apr, nrow(BM), length(apr), byrow = T)
+              Scx_pred <- apr_mat + Scx_pred
+            }
+
+            # Return the object ---------------------------------------
+
+            output <- SpNaBaPred(Prediction = Scx_pred)
+
+            return(output)
+
+            })
 
 
-         Scell <- apr_mat+s1+s2
-         colnames(Scell) <- colnames(Scx)
-         output<-BinMatPred(name_ID = object@name_ID, DMNB = object@DMNB,
-                     BMNB = object@BMNB, Prediction = Scell)
 
-         return(output)
-})
 

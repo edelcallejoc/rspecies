@@ -1,4 +1,4 @@
-Package: rspecies
+Package: rspeciesdev
 Type: Package
 Title: A Spatial Data Mining Framework for Species Distribution
     Modelling
@@ -6,62 +6,68 @@ Version: 0.0.1
 Authors@R: person("Del Callejo-Canal", "Enrique", email =
     "edelcallejoc@gmail.com", role = c("aut","cre"))
 Maintainer: Enrique Del Callejo-Canal <edelclalejoc@gmail.com>
-Description: An implementation of Spatial Data Mining for Species Distribution
-    Modelling. It combines Spatial Data Mining Philosophy and Bayesian Statistic
-    Theory for handling large volumes of spatial data. It also implements
-    Generalized Naive Bayes algorithms in order to extract useful knowledge from
-    occurrence spatial information. The main goal is to use rspecies with presence/
-    absence and environmental data for species distribution modelling. However, It
-    can use for other modelling purposes.
+Description: An implementation of Spatial Data Mining for
+    Species Distribution Modelling. It combines Spatial Data
+    Mining Philosophy and Bayesian Statistic Theory for
+    handling large volumes of spatial data. It also implements
+    Generalized Naive Bayes algorithms to extract useful
+    knowledge from occurrence spatial information. The primary
+    goal is to use rspecies with presence/absence and
+    environmental data for species distribution modeling.
+    However, It can use for other modeling purposes.
 Depends:
-    R (>= 3.4.3), sp (>= 1.2.7), rgeos (>= 0.3.26), rgdal (>= 1.2.16)
-Imports:
-    maptools,
-    doParallel,
-    foreach,
-    parallel,
-    RColorBrewer,
-    leaflet,
-    DT,
-    methods,
-    httr,
-    raster,
-    jsonlite,
-    stats
+    R (>= 3.5.0), sp (>= 1.2.5), rgeos (>= 0.3.26), rgdal (>= 1.2.16)
 URL: https://github.com/edelcallejoc/rspecies
 BugReports: https://github.com/edelcallejoc/rspecies/issues
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
+Imports:
+    methods,
+    stats,
+    maptools,
+    raster,
+    ggplot2,
+    grid,
+    gridExtra,
+    ggrepel,
+    leaflet,
+    RColorBrewer,
+    parallel,
+    doParallel,
+    foreach,
+    data.table,
+    httr,
+    jsonlite
 Suggests:
     knitr,
     rmarkdown,
-    ggplot2,
-    plotly,
-    testthat
-VignetteBuilder: knitr
-Collate:
-    'BinMat-class.R'
-    'BinMatCount-class.R'
-    'BinMatEps-class.R'
-    'BinMatPred-class.R'
-    'BinMatProb-class.R'
-    'BinMatScore-class.R'
+    testthat,
+    mapproj,
+    plyr
+Collate: 
     'Mex0.R'
-    'counts.R'
+    'SpNaBaScore.R'
+    'SpNaBaEps.R'
+    'SpNaBaProbs.R'
+    'SpNaBaCounts.R'
+    'SpNaBaMatrix.R'
+    'id_pts.R'
+    'grd_build.R'
+    'NBModel.R'
+    'SpNaBaModel.R'
+    'SpNaBaPred.R'
+    'SpNaBa_methods.R'
     'epsilon.R'
     'get-methods.R'
     'get_species.R'
-    'grd_build.R'
-    'id_pts.R'
-    'laplace.R'
     'mammals.R'
-    'plot-methods.R'
     'predict.R'
-    'probs.R'
+    'plot_NBmodel.R'
+    'plot_predict.R'
     'raster_breaks.R'
-    'rspecies.R'
     'score.R'
-    'set-BinMatCount.R'
+    'summary_methods.R'
     'zzz.R'
