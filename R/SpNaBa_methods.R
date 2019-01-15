@@ -105,9 +105,9 @@ setMethod("counts", c("SpNaBaMatrix","ANY"), function(x.mat, target = NULL){
                            Ncx = t(BM) %*% BM)
   }else{
     output <- SpNaBaCounts(N = nrow(BM),
-                           Nc = colSums(BM[,target]),
-                           Nx = colSums(BM[,-target]),
-                           Ncx = t(BM[,target]) %*% BM[,-target])
+                           Nc = colSums(BM[,target, drop = FALSE]),
+                           Nx = colSums(BM[,-target, drop = FALSE]),
+                           Ncx = t(BM[,target, drop = FALSE]) %*% BM[,-target, drop = FALSE])
   }
 
   return(output)
