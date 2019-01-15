@@ -7,8 +7,6 @@
 \usage{
 raster_breaks(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))),
   breaks = NULL, breaks.by = 0.1)
-
-aux_foo(x, breaks, breaks.by, proj4string = sp::proj4string(x))
 }
 \arguments{
 \item{x.ras}{A \code{raster} object (\code{\link[raster:Raster-class]{RasterLayer}},

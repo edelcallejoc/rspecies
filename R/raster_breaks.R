@@ -195,6 +195,7 @@ raster_breaks <- function(x.ras, pol.ext, bb = c(t(sp::bbox(pol.ext))), breaks =
 
 #' @rdname raster_breaks
 #' @aliases aux_foo
+#' @usage NULL
 #' @export
 aux_foo <- function(x, breaks, breaks.by, proj4string = sp::proj4string(x)) {
     nms <- names(x)
