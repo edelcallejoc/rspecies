@@ -71,7 +71,7 @@ x.mat
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspeciesdev]{grd_build}} and \code{\link[rspeciesdev]{id_pts}}.
+\code{\link[rspecies]{grd_build}} and \code{\link[rspecies]{id_pts}}.
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

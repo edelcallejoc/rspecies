@@ -28,11 +28,11 @@ SpNaBaScore is used to store Score's parameters of the Naive Bayes model.
 \describe{
 \item{\code{Apriori}}{\code{vector} with \eqn{S} rows. Each element represents
 the apriori probability \eqn{log(P(C)/P(C')}. See
-\code{\link[rspeciesdev]{score}}.}
+\code{\link[rspecies]{score}}.}
 
 \item{\code{Scx}}{\code{matrix} with \eqn{M} rows and \eqn{S} columns. Each element
 represents the Score function \eqn{S(X)}. See
-\code{\link[rspeciesdev]{score}}.}
+\code{\link[rspecies]{score}}.}
 }}
 
 \examples{

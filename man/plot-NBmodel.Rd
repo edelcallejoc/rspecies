@@ -11,7 +11,7 @@ plotNB(nbmodel, ...)
 }
 \arguments{
 \item{nbmodel}{A \code{SpNaBaModel} object from
-\code{\link[rspeciesdev]{NBModel}} function.}
+\code{\link[rspecies]{NBModel}} function.}
 
 \item{...}{Parameters passed to other functions (See
 \code{\link[graphics]{par}}).}

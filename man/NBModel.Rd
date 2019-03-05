@@ -13,10 +13,10 @@ NBModel(points, map, target = NULL, fac.lap = NULL, isgrid = FALSE,
 }
 \arguments{
 \item{points}{A \code{\link[sp]{SpatialPointsDataFrame}} object or
-a \code{\link[rspeciesdev]{SpNaBaMatrix}} object.}
+a \code{\link[rspecies]{SpNaBaMatrix}} object.}
 
 \item{map}{A \code{\link[sp]{SpatialPolygonsDataFrame}} object or NULL. If NULL, \code{points}
-argument must be a \code{\link[rspeciesdev]{SpNaBaMatrix}} object.}
+argument must be a \code{\link[rspecies]{SpNaBaMatrix}} object.}
 
 \item{target}{\code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 of binmatrix slot to be consired as target factors.}
@@ -35,10 +35,10 @@ evaluation (see \code{\link[rgeos]{gContains}})).
 points argument should be a \code{\link[sp]{SpatialPointsDataFrame}} object
 and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame}} object.}
 
-\item{...}{Arguments pass to \code{grd_build} function. See \code{\link[rspeciesdev]{grd_build}}.}
+\item{...}{Arguments pass to \code{grd_build} function. See \code{\link[rspecies]{grd_build}}.}
 }
 \value{
-\code{NBModel}: An object of class \code{\link[rspeciesdev]{SpNaBaModel}}.
+\code{NBModel}: An object of class \code{\link[rspecies]{SpNaBaModel}}.
 }
 \description{
 \code{NBModel} is a function to fit Spatial Naive Bayes Model.
@@ -76,10 +76,10 @@ x.model <- NBModel(x.mat, target = 1:10, fac.lap = 0.01)
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspeciesdev]{SpNaBaMatrix}}, \code{\link[rspeciesdev]{SpNaBaCounts}},
-    \code{\link[rspeciesdev]{SpNaBaProbs}}, \code{\link[rspeciesdev]{SpNaBa-methods}},
-    \code{\link[rspeciesdev]{SpNaBaEps}}, \code{\link[rspeciesdev]{epsilon}},
-    \code{\link[rspeciesdev]{SpNaBaScore}}, \code{\link[rspeciesdev]{score}}
+\code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaCounts}},
+    \code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}},
+    \code{\link[rspecies]{SpNaBaEps}}, \code{\link[rspecies]{epsilon}},
+    \code{\link[rspecies]{SpNaBaScore}}, \code{\link[rspecies]{score}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

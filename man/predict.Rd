@@ -11,7 +11,7 @@ predict(object, apr_inc, ...)
 }
 \arguments{
 \item{object}{A \code{SpNaBaModel} object from
-\code{\link[rspeciesdev]{NBModel}} function.}
+\code{\link[rspecies]{NBModel}} function.}
 
 \item{apr_inc}{logical. If TRUE the apriori score is included for
 prediction calculation.}
@@ -21,7 +21,7 @@ prediction calculation.}
 \description{
 This function allows to calculate the classification of each cell in the
     GRID, based on the score function of the naive Bayes model.
-    See \code{\link[rspeciesdev]{score}} function.
+    See \code{\link[rspecies]{score}} function.
 }
 \examples{
 library(sp)

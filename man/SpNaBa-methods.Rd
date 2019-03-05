@@ -20,22 +20,22 @@
 \S4method{probs}{SpNaBaCounts}(x.counts, fac.lap = NULL)
 }
 \arguments{
-\item{x.mat}{A \code{\link[rspeciesdev]{SpNaBaMatrix}} object.}
+\item{x.mat}{A \code{\link[rspecies]{SpNaBaMatrix}} object.}
 
 \item{target}{\code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 of binmatrix slot to be consired as target factors.}
 
-\item{x.counts}{A \code{\link[rspeciesdev]{SpNaBaCounts}} object.}
+\item{x.counts}{A \code{\link[rspecies]{SpNaBaCounts}} object.}
 
 \item{fac.lap}{\code{numeric} or \code{NULL}. it indicates the laplace factor to be applied.
 If \code{NULL} or \code{missing} the laplace factor applied is 0.01.}
 }
 \value{
-\code{counts}: An object of class \code{\link[rspeciesdev]{SpNaBaCounts}}.
+\code{counts}: An object of class \code{\link[rspecies]{SpNaBaCounts}}.
 
-\code{laplace}: An object of class \code{\link[rspeciesdev]{SpNaBaCounts}}.
+\code{laplace}: An object of class \code{\link[rspecies]{SpNaBaCounts}}.
 
-\code{probs}: An object of class \code{\link[rspeciesdev]{SpNaBaProbs}}.
+\code{probs}: An object of class \code{\link[rspecies]{SpNaBaProbs}}.
 }
 \description{
 \code{counts} is a function to extract frequency information
@@ -88,7 +88,7 @@ x.probs <- probs(x.counts, fac.lap = 0.1)
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspeciesdev]{SpNaBaCounts}}, \code{SpNaBaMatrix}, \code{grd_build}, \code{id_pts}
+\code{\link[rspecies]{SpNaBaCounts}}, \code{SpNaBaMatrix}, \code{grd_build}, \code{id_pts}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

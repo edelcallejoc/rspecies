@@ -12,8 +12,8 @@
 smp_stats(x)
 }
 \arguments{
-\item{x}{A \code{\link[rspeciesdev]{SpNaBaMatrix}}, \code{\link[rspeciesdev]{SpNaBaEps}},
-\code{\link[rspeciesdev]{SpNaBaScore}} or \code{\link[rspeciesdev]{SpNaBaModel}} object.}
+\item{x}{A \code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaEps}},
+\code{\link[rspecies]{SpNaBaScore}} or \code{\link[rspecies]{SpNaBaModel}} object.}
 }
 \value{
 An object of class \code{\link[data.table]{data.table}}.
@@ -30,7 +30,7 @@ This function takes a \code{SpNaBaMatrix} or \code{SpNaBaEps}
         \item{N:}{ Number of blocks in the partition of the sample space. If the model is not
           for spatial data N represents the number of cases in the model. If the model is
           for spatial data N represents the number of cell in the GRID
-          (see \code{\link[rspeciesdev]{grd_build}}).}
+          (see \code{\link[rspecies]{grd_build}}).}
         \item{Nw:}{ Number of blocks with at least one observation of factor \eqn{w}. If the model
           is not for spatial data Nw represents the number of cases with presences of factor
           \eqn{w}. If the model is for spatial data Nw represents the number of cell in the GRID

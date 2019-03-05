@@ -10,10 +10,10 @@
 \S4method{score}{SpNaBaProbs}(x.probs)
 }
 \arguments{
-\item{x.probs}{A \code{\link[rspeciesdev]{SpNaBaProbs}} object.}
+\item{x.probs}{A \code{\link[rspecies]{SpNaBaProbs}} object.}
 }
 \value{
-\code{score}: An object of class \code{\link[rspeciesdev]{SpNaBaScore}}.
+\code{score}: An object of class \code{\link[rspecies]{SpNaBaScore}}.
 }
 \description{
 \code{score} is a function to estimates score parameter for
@@ -57,7 +57,7 @@ x.score <- score(x.probs)
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspeciesdev]{SpNaBaProbs}}, \code{\link[rspeciesdev]{SpNaBa-methods}}
+\code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

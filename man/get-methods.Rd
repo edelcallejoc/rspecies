@@ -90,14 +90,14 @@ get_Apriori(x.score)
 get_Scx(x.score)
 }
 \arguments{
-\item{x.mat}{A \code{\link[rspeciesdev]{SpNaBaMatrix}} or
-\code{\link[rspeciesdev]{SpNaBaModel}} object.}
+\item{x.mat}{A \code{\link[rspecies]{SpNaBaMatrix}} or
+\code{\link[rspecies]{SpNaBaModel}} object.}
 
-\item{x.counts}{A \code{\link[rspeciesdev]{SpNaBaCounts}} object  or
-\code{\link[rspeciesdev]{SpNaBaModel}} object.}
+\item{x.counts}{A \code{\link[rspecies]{SpNaBaCounts}} object  or
+\code{\link[rspecies]{SpNaBaModel}} object.}
 
-\item{x.probs}{A \code{\link[rspeciesdev]{SpNaBaProbs}} object  or
-\code{\link[rspeciesdev]{SpNaBaModel}} object.}
+\item{x.probs}{A \code{\link[rspecies]{SpNaBaProbs}} object  or
+\code{\link[rspecies]{SpNaBaModel}} object.}
 
 \item{x.eps}{A \code{SpNaBaEps} object, the resulting object of epsilon function
 or A \code{SpNaBaModel} object. The resulting object of NBModel function.}
@@ -255,7 +255,7 @@ Scx <- get_Scx(x.score)
 Scx[1:5, 1:5]
 }
 \seealso{
-\code{\link[rspeciesdev]{SpNaBaMatrix}}
+\code{\link[rspecies]{SpNaBaMatrix}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).

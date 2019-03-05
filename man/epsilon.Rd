@@ -10,12 +10,12 @@
 \S4method{epsilon}{SpNaBaCounts,SpNaBaProbs}(x.counts, x.probs)
 }
 \arguments{
-\item{x.counts}{A \code{\link[rspeciesdev]{SpNaBaCounts}} object.}
+\item{x.counts}{A \code{\link[rspecies]{SpNaBaCounts}} object.}
 
-\item{x.probs}{A \code{\link[rspeciesdev]{SpNaBaProbs}} object.}
+\item{x.probs}{A \code{\link[rspecies]{SpNaBaProbs}} object.}
 }
 \value{
-\code{epsilon}: An object of class \code{\link[rspeciesdev]{SpNaBaEps}}.
+\code{epsilon}: An object of class \code{\link[rspecies]{SpNaBaEps}}.
 }
 \description{
 \code{epsilon} is a function to estimates epsilon parameter for
@@ -59,8 +59,8 @@ x.eps <- epsilon(x.counts, x.probs)
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspeciesdev]{SpNaBaCounts}}, \code{\link[rspeciesdev]{SpNaBaProbs}},
-     \code{\link[rspeciesdev]{SpNaBa-methods}}
+\code{\link[rspecies]{SpNaBaCounts}}, \code{\link[rspecies]{SpNaBaProbs}},
+     \code{\link[rspecies]{SpNaBa-methods}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),

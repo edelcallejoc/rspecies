@@ -20,7 +20,7 @@ An object of class \code{SpNaBaPred}. See slot section for more details.
 }
 \description{
 This is a class associated to prediction methods applied to
-    SpNaBaModel objects (See \code{\link[rspeciesdev]{predict}}).
+    SpNaBaModel objects (See \code{\link[rspecies]{predict}}).
 }
 \section{Slots}{
 
@@ -29,8 +29,8 @@ This is a class associated to prediction methods applied to
 }}
 
 \seealso{
-\code{\link[rspeciesdev]{grd_build}}, \code{\link[rspeciesdev]{id_pts}}
-    \code{\link[rspeciesdev]{NBModel}}, \code{\link[rspeciesdev]{predict}}
+\code{\link[rspecies]{grd_build}}, \code{\link[rspecies]{id_pts}}
+    \code{\link[rspecies]{NBModel}}, \code{\link[rspecies]{predict}}
 }
 \author{
 Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).

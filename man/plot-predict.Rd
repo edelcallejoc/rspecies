@@ -11,10 +11,10 @@ plot_predict(map, prediction, target = NULL, ...)
 }
 \arguments{
 \item{map}{A \code{SpatialPolygonsDataFrame} object from
-\code{\link[rspeciesdev]{grd_build}} function.}
+\code{\link[rspecies]{grd_build}} function.}
 
 \item{prediction}{A \code{\linkS4class{SpNaBaPred}} object from
-\code{\link[rspeciesdev]{predict}} function.}
+\code{\link[rspecies]{predict}} function.}
 
 \item{target}{\code{logical}, \code{character}, \code{numeric} or \code{NULL}.
 A vector with names, position (integer or boolean) that especifies the
