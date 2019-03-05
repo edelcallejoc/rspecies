@@ -12,11 +12,11 @@ NBModel(points, map, target = NULL, fac.lap = NULL, isgrid = FALSE,
   contain, ...)
 }
 \arguments{
-\item{points}{A \code{\link[sp]{SpatialPointsDataFrame}} object or
-a \code{\link[rspecies]{SpNaBaMatrix}} object.}
+\item{points}{A \code{\link[sp]{SpatialPointsDataFrame-class}} object or
+a \code{\link[rspecies]{SpNaBaMatrix-class}} object.}
 
-\item{map}{A \code{\link[sp]{SpatialPolygonsDataFrame}} object or NULL. If NULL, \code{points}
-argument must be a \code{\link[rspecies]{SpNaBaMatrix}} object.}
+\item{map}{A \code{\link[sp]{SpatialPointsDataFrame-class}} object or NULL. If NULL, \code{points}
+argument must be a \code{\link[rspecies]{SpNaBaMatrix-class}} object.}
 
 \item{target}{\code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 of binmatrix slot to be consired as target factors.}
@@ -29,11 +29,11 @@ if is FALSE the grid is calculated based on the bounding box of the map.}
 
 \item{contain}{Character (\code{simple} or \code{properly}).
 By default \code{simple}, it implies a simple contention
-evaluation (see \code{\link[rgeos]{gContains}})).
+evaluation (see \code{\link[rgeos:gContains]{rgeos::gContains()}})).
 \code{properly} suggests a properly contention evaluation
 (see \code{\link[rgeos]{gContainsProperly}})). It requieres that
-points argument should be a \code{\link[sp]{SpatialPointsDataFrame}} object
-and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame}} object.}
+points argument should be a \code{\link[sp]{SpatialPointsDataFrame-class}} object
+and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame-class}} object.}
 
 \item{...}{Arguments pass to \code{grd_build} function. See \code{\link[rspecies]{grd_build}}.}
 }
@@ -76,7 +76,7 @@ x.model <- NBModel(x.mat, target = 1:10, fac.lap = 0.01)
 \url{http://species.conabio.gob.mx/}
 }
 \seealso{
-\code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaCounts}},
+\code{\link[rspecies]{SpNaBaMatrix-class}}, \code{\link[rspecies]{SpNaBaCounts}},
     \code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}},
     \code{\link[rspecies]{SpNaBaEps}}, \code{\link[rspecies]{epsilon}},
     \code{\link[rspecies]{SpNaBaScore}}, \code{\link[rspecies]{score}}

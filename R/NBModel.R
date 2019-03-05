@@ -43,11 +43,11 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #'
 #' @param contain Character (\code{simple} or \code{properly}).
 #'     By default \code{simple}, it implies a simple contention
-#'     evaluation (see \code{\link[rgeos]{gContains}})).
+#'     evaluation (see \code{\link[rgeos:gContains]{rgeos::gContains()}})).
 #'     \code{properly} suggests a properly contention evaluation
 #'     (see \code{\link[rgeos]{gContainsProperly}})). It requieres that
-#'     points argument should be a \code{\link[sp]{SpatialPointsDataFrame}} object
-#'     and map argument should be declared as a \code{\link[sp]{SpatialPointsDataFrame-class}} object.
+#'     points argument should be a \code{\link[sp]{SpatialPointsDataFrame-class}} object
+#'     and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame-class}} object.
 #'
 #' @param ... Arguments pass to \code{grd_build} function. See \code{\link[rspecies]{grd_build}}.
 #'
