@@ -8,15 +8,15 @@
 #' @name SpNaBaPred-class
 #'
 #' @description This is a class associated to prediction methods applied to
-#'     SpNaBaModel objects (See \code{\link[rspeciesdev]{predict}}).
+#'     SpNaBaModel objects (See \code{\link[rspecies]{predict}}).
 #'
 #' @slot Prediction a matrix object.
 #'
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}).
 #'
-#' @seealso \code{\link[rspeciesdev]{grd_build}}, \code{\link[rspeciesdev]{id_pts}}
-#'     \code{\link[rspeciesdev]{NBModel}}, \code{\link[rspeciesdev]{predict}}
+#' @seealso \code{\link[rspecies]{grd_build}}, \code{\link[rspecies]{id_pts}}
+#'     \code{\link[rspecies]{NBModel}}, \code{\link[rspecies]{predict}}
 #'
 #'
 #' @include SpNaBaMatrix.R SpNaBaCounts.R SpNaBaProbs.R

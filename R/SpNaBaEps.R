@@ -6,7 +6,7 @@
 #'
 #' @slot Ecx \code{matrix} with \eqn{S} rows and \eqn{M} columns. Each element
 #'    represents the epsilon parameter \eqn{\epsilon(c|x)}. See
-#'    \code{\link[rspeciesdev]{SpNaBaMatrix}}.
+#'    \code{\link[rspecies]{SpNaBaMatrix}}.
 #'
 #' @name SpNaBaEps-class
 #' @rdname SpNaBaEps-class

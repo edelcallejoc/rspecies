@@ -22,14 +22,14 @@ setGeneric("epsilon", function(x.counts, x.probs) standardGeneric("epsilon"))
 #' @rdname epsilon
 #' @aliases epsilon,SpNaba-methods,epsilon-methods
 #'
-#' @param x.counts A \code{\link[rspeciesdev]{SpNaBaCounts}} object.
+#' @param x.counts A \code{\link[rspecies]{SpNaBaCounts}} object.
 #'
-#' @param x.probs A \code{\link[rspeciesdev]{SpNaBaProbs}} object.
+#' @param x.probs A \code{\link[rspecies]{SpNaBaProbs}} object.
 #'
-#' @return \code{epsilon}: An object of class \code{\link[rspeciesdev]{SpNaBaEps}}.
+#' @return \code{epsilon}: An object of class \code{\link[rspecies]{SpNaBaEps}}.
 #'
-#' @seealso \code{\link[rspeciesdev]{SpNaBaCounts}}, \code{\link[rspeciesdev]{SpNaBaProbs}},
-#'      \code{\link[rspeciesdev]{SpNaBa-methods}}
+#' @seealso \code{\link[rspecies]{SpNaBaCounts}}, \code{\link[rspecies]{SpNaBaProbs}},
+#'      \code{\link[rspecies]{SpNaBa-methods}}
 #'
 #'
 #' @examples

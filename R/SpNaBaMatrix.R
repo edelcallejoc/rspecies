@@ -126,7 +126,7 @@ setMethod("initialize", "SpNaBaMatrix", function(.Object,
 #'
 #' x.mat
 #'
-#' @seealso \code{\link[rspeciesdev]{grd_build}} and \code{\link[rspeciesdev]{id_pts}}.
+#' @seealso \code{\link[rspecies]{grd_build}} and \code{\link[rspecies]{id_pts}}.
 #'
 #' @author Enrique Del Callejo Canal (\email{edelcallejoc@gmail.com}),
 #'     based on implemented algortihms in web platform SPECIES (see References).

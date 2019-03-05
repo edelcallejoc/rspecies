@@ -22,12 +22,12 @@ setGeneric("get_FM", function(x.mat){standardGeneric ("get_FM")})
 #' @aliases get_FM,get-methods
 #' @usage NULL
 #'
-#' @param x.mat A \code{\link[rspeciesdev]{SpNaBaMatrix}} or
-#'     \code{\link[rspeciesdev]{SpNaBaModel}} object.
+#' @param x.mat A \code{\link[rspecies]{SpNaBaMatrix}} or
+#'     \code{\link[rspecies]{SpNaBaModel}} object.
 #'
 #' @return \code{get_FM} return the slot \code{freqmatrix} a \code{SpNaBaMatrix} object.
 #'
-#' @seealso \code{\link[rspeciesdev]{SpNaBaMatrix}}
+#' @seealso \code{\link[rspecies]{SpNaBaMatrix}}
 
 #' @examples
 #' # Using the function id_pts() for spatial data --------
@@ -128,8 +128,8 @@ setGeneric("get_N", function(x.counts){standardGeneric ("get_N")})
 #' @aliases get_N,get-methods
 #' @usage NULL
 #'
-#' @param x.counts A \code{\link[rspeciesdev]{SpNaBaCounts}} object  or
-#'     \code{\link[rspeciesdev]{SpNaBaModel}} object.
+#' @param x.counts A \code{\link[rspecies]{SpNaBaCounts}} object  or
+#'     \code{\link[rspecies]{SpNaBaModel}} object.
 #'
 #' @return \code{get_N} return the slot \code{N} a \code{SpNaBaCounts} object.
 #'
@@ -308,8 +308,8 @@ setGeneric("get_Pc", function(x.probs){standardGeneric ("get_Pc")})
 #' @aliases get_Pc,get-methods
 #' @usage NULL
 #'
-#' @param x.probs A \code{\link[rspeciesdev]{SpNaBaProbs}} object  or
-#'     \code{\link[rspeciesdev]{SpNaBaModel}} object.
+#' @param x.probs A \code{\link[rspecies]{SpNaBaProbs}} object  or
+#'     \code{\link[rspecies]{SpNaBaModel}} object.
 #'
 #' @return \code{get_Pc} return the slot \code{Pc} a \code{SpNaBaProbs} object.
 #'

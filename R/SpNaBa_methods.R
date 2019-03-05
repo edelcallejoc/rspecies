@@ -22,14 +22,14 @@ setGeneric("counts", function(x.mat, target = NULL) standardGeneric("counts"))
 #' @rdname SpNaBa-methods
 #' @aliases counts,SpNaBa-methods
 #'
-#' @param x.mat A \code{\link[rspeciesdev]{SpNaBaMatrix}} object.
+#' @param x.mat A \code{\link[rspecies]{SpNaBaMatrix}} object.
 #'
 #' @param target \code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 #'     of binmatrix slot to be consired as target factors.
 #'
-#' @return \code{counts}: An object of class \code{\link[rspeciesdev]{SpNaBaCounts}}.
+#' @return \code{counts}: An object of class \code{\link[rspecies]{SpNaBaCounts}}.
 #'
-#' @seealso \code{\link[rspeciesdev]{SpNaBaCounts}}, \code{SpNaBaMatrix}, \code{grd_build}, \code{id_pts}
+#' @seealso \code{\link[rspecies]{SpNaBaCounts}}, \code{SpNaBaMatrix}, \code{grd_build}, \code{id_pts}
 #'
 #' @examples
 #' # Using the function id_pts() for spatial data --------
@@ -133,12 +133,12 @@ setGeneric("laplace", function(x.counts, fac.lap = NULL){
 #' @rdname SpNaBa-methods
 #' @aliases laplace,SpNaBa-methods
 #'
-#' @param x.counts A \code{\link[rspeciesdev]{SpNaBaCounts}} object.
+#' @param x.counts A \code{\link[rspecies]{SpNaBaCounts}} object.
 #'
 #' @param fac.lap \code{numeric} or \code{NULL}. it indicates the laplace factor to be applied.
 #'     If \code{NULL} or \code{missing} the laplace factor applied is 0.01.
 #'
-#' @return \code{laplace}: An object of class \code{\link[rspeciesdev]{SpNaBaCounts}}.
+#' @return \code{laplace}: An object of class \code{\link[rspecies]{SpNaBaCounts}}.
 #'
 #' @examples
 #'
@@ -199,7 +199,7 @@ setGeneric("probs", function(x.counts, fac.lap = NULL){
 #' @rdname SpNaBa-methods
 #' @aliases probs,SpNaBa-methods
 #'
-#' @return \code{probs}: An object of class \code{\link[rspeciesdev]{SpNaBaProbs}}.
+#' @return \code{probs}: An object of class \code{\link[rspecies]{SpNaBaProbs}}.
 #'
 #' @examples
 #'

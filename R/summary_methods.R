@@ -19,8 +19,8 @@ setGeneric("smp_stats", function(x) standardGeneric("smp_stats"))
 #' @rdname smp_stats-methods
 #' @aliases smp_stats,SpNaBaMatrix-method
 #'
-#' @param x A \code{\link[rspeciesdev]{SpNaBaMatrix}}, \code{\link[rspeciesdev]{SpNaBaEps}},
-#'     \code{\link[rspeciesdev]{SpNaBaScore}} or \code{\link[rspeciesdev]{SpNaBaModel}} object.
+#' @param x A \code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaEps}},
+#'     \code{\link[rspecies]{SpNaBaScore}} or \code{\link[rspecies]{SpNaBaModel}} object.
 #'
 #' @return An object of class \code{\link[data.table]{data.table}}.
 #'
@@ -32,7 +32,7 @@ setGeneric("smp_stats", function(x) standardGeneric("smp_stats"))
 #'         \item{N:}{ Number of blocks in the partition of the sample space. If the model is not
 #'           for spatial data N represents the number of cases in the model. If the model is
 #'           for spatial data N represents the number of cell in the GRID
-#'           (see \code{\link[rspeciesdev]{grd_build}}).}
+#'           (see \code{\link[rspecies]{grd_build}}).}
 #'         \item{Nw:}{ Number of blocks with at least one observation of factor \eqn{w}. If the model
 #'           is not for spatial data Nw represents the number of cases with presences of factor
 #'           \eqn{w}. If the model is for spatial data Nw represents the number of cell in the GRID

@@ -4,10 +4,10 @@
 #'
 #' @description This function allows to calculate the classification of each cell in the
 #'     GRID, based on the score function of the naive Bayes model.
-#'     See \code{\link[rspeciesdev]{score}} function.
+#'     See \code{\link[rspecies]{score}} function.
 #'
 #' @param object A \code{SpNaBaModel} object from
-#'     \code{\link[rspeciesdev]{NBModel}} function.
+#'     \code{\link[rspecies]{NBModel}} function.
 #'
 #' @param apr_inc logical. If TRUE the apriori score is included for
 #'     prediction calculation.

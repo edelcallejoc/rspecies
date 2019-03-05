@@ -7,7 +7,7 @@
 #' @description A plot methods for class "SpNaBaModel".
 #'
 #' @param nbmodel A \code{SpNaBaModel} object from
-#'     \code{\link[rspeciesdev]{NBModel}} function.
+#'     \code{\link[rspecies]{NBModel}} function.
 #'
 #' @param ... Parameters passed to other functions (See
 #'     \code{\link[graphics]{par}}).

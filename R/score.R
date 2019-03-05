@@ -23,11 +23,11 @@ setGeneric("score", function(x.probs) standardGeneric("score"))
 #' @rdname score
 #' @aliases score,SpNaba-methods,score-methods
 #'
-#' @param x.probs A \code{\link[rspeciesdev]{SpNaBaProbs}} object.
+#' @param x.probs A \code{\link[rspecies]{SpNaBaProbs}} object.
 #'
-#' @return \code{score}: An object of class \code{\link[rspeciesdev]{SpNaBaScore}}.
+#' @return \code{score}: An object of class \code{\link[rspecies]{SpNaBaScore}}.
 #'
-#' @seealso \code{\link[rspeciesdev]{SpNaBaProbs}}, \code{\link[rspeciesdev]{SpNaBa-methods}}
+#' @seealso \code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}}
 #'
 #'
 #' @examples

@@ -27,10 +27,10 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #' @usage NULL
 #'
 #' @param points A \code{\link[sp]{SpatialPointsDataFrame}} object or
-#'     a \code{\link[rspeciesdev]{SpNaBaMatrix}} object.
+#'     a \code{\link[rspecies]{SpNaBaMatrix}} object.
 #'
 #' @param map A \code{\link[sp]{SpatialPolygonsDataFrame}} object or NULL. If NULL, \code{points}
-#'     argument must be a \code{\link[rspeciesdev]{SpNaBaMatrix}} object.
+#'     argument must be a \code{\link[rspecies]{SpNaBaMatrix}} object.
 #'
 #' @param target \code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 #'     of binmatrix slot to be consired as target factors.
@@ -49,14 +49,14 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #'     points argument should be a \code{\link[sp]{SpatialPointsDataFrame}} object
 #'     and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame}} object.
 #'
-#' @param ... Arguments pass to \code{grd_build} function. See \code{\link[rspeciesdev]{grd_build}}.
+#' @param ... Arguments pass to \code{grd_build} function. See \code{\link[rspecies]{grd_build}}.
 #'
-#' @return \code{NBModel}: An object of class \code{\link[rspeciesdev]{SpNaBaModel}}.
+#' @return \code{NBModel}: An object of class \code{\link[rspecies]{SpNaBaModel}}.
 #'
-#' @seealso \code{\link[rspeciesdev]{SpNaBaMatrix}}, \code{\link[rspeciesdev]{SpNaBaCounts}},
-#'     \code{\link[rspeciesdev]{SpNaBaProbs}}, \code{\link[rspeciesdev]{SpNaBa-methods}},
-#'     \code{\link[rspeciesdev]{SpNaBaEps}}, \code{\link[rspeciesdev]{epsilon}},
-#'     \code{\link[rspeciesdev]{SpNaBaScore}}, \code{\link[rspeciesdev]{score}}
+#' @seealso \code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaCounts}},
+#'     \code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}},
+#'     \code{\link[rspecies]{SpNaBaEps}}, \code{\link[rspecies]{epsilon}},
+#'     \code{\link[rspecies]{SpNaBaScore}}, \code{\link[rspecies]{score}}
 #'
 #'
 #' @examples
