@@ -26,11 +26,11 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #' @aliases NBModel,SpNaBa-methods,NBModel-methods
 #' @usage NULL
 #'
-#' @param points A \code{\link[sp]{SpatialPointsDataFrame}} object or
-#'     a \code{\link[rspecies]{SpNaBaMatrix}} object.
+#' @param points A \code{\link[sp]{SpatialPointsDataFrame-class}} object or
+#'     a \code{\link[rspecies]{SpNaBaMatrix-class}} object.
 #'
-#' @param map A \code{\link[sp]{SpatialPolygonsDataFrame}} object or NULL. If NULL, \code{points}
-#'     argument must be a \code{\link[rspecies]{SpNaBaMatrix}} object.
+#' @param map A \code{\link[sp]{SpatialPointsDataFrame-class}} object or NULL. If NULL, \code{points}
+#'     argument must be a \code{\link[rspecies]{SpNaBaMatrix-class}} object.
 #'
 #' @param target \code{character} or \code{numeric} or \code{logical} or NULL. Indicates the columns
 #'     of binmatrix slot to be consired as target factors.
@@ -47,13 +47,13 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #'     \code{properly} suggests a properly contention evaluation
 #'     (see \code{\link[rgeos]{gContainsProperly}})). It requieres that
 #'     points argument should be a \code{\link[sp]{SpatialPointsDataFrame}} object
-#'     and map argument should be declared as a \code{\link[sp]{SpatialPolygonsDataFrame}} object.
+#'     and map argument should be declared as a \code{\link[sp]{SpatialPointsDataFrame-class}} object.
 #'
 #' @param ... Arguments pass to \code{grd_build} function. See \code{\link[rspecies]{grd_build}}.
 #'
 #' @return \code{NBModel}: An object of class \code{\link[rspecies]{SpNaBaModel}}.
 #'
-#' @seealso \code{\link[rspecies]{SpNaBaMatrix}}, \code{\link[rspecies]{SpNaBaCounts}},
+#' @seealso \code{\link[rspecies]{SpNaBaMatrix-class}}, \code{\link[rspecies]{SpNaBaCounts}},
 #'     \code{\link[rspecies]{SpNaBaProbs}}, \code{\link[rspecies]{SpNaBa-methods}},
 #'     \code{\link[rspecies]{SpNaBaEps}}, \code{\link[rspecies]{epsilon}},
 #'     \code{\link[rspecies]{SpNaBaScore}}, \code{\link[rspecies]{score}}
