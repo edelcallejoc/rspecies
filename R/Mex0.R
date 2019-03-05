@@ -13,7 +13,7 @@
 #'         \item{plotOrder}{An integer object with 1 element}
 #'         \item{bbox}{A matrix object with 2 rows (Longitude (\code{x}), Latitude (\code{y}))
 #'             and 2 columns (\code{min}, \code{max}). See \code{\link[sp]{bbox}}}
-#'         \item{proj4string}{A CRS object. See \code{\link[sp]{CRS}}}
+#'         \item{proj4string}{A CRS object. See \code{\link[sp]{CRS-class}}}
 #'     }
 #'
 #' @seealso \code{\link[raster]{getData}} for more details.
