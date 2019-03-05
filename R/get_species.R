@@ -338,7 +338,7 @@ get_species_grid<-function(grid_res = 16){
 get_species_georel<-function(target, start_level, value, grid_res = 16,
                              validation = FALSE, fossil = TRUE, no_date = TRUE,
                              min_occ = 1, bioclim = FALSE){
-
+  browser()
   ## Args validation
 
   if(missing(target)){
@@ -382,7 +382,7 @@ get_species_georel<-function(target, start_level, value, grid_res = 16,
 
 api <- "http://species.conabio.gob.mx/api/niche"
 
-id_target<-get_species_names(level = "specie", name = target)$id
+id_target<-get_species_names(level = "specie", name = target)$id[get_species_names(level = "specie", name = target)$Specie %in% target]
 
 q_list <- list(id = as.numeric(id_target),
                min_occ = as.character(min_occ),

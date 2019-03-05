@@ -2,10 +2,12 @@
 title: "Generate grid from SpatialPolygonsDataFrame"
 author: "Enrique Del Callejo Canal"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  md_document:
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{grd_build}
-  %\VignetteEngine{rmarkdown::render}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -52,7 +54,7 @@ plot(Fra0)
 
 You can add some dynamic interaction using the [leaflet](https://rstudio.github.io/leaflet/) package.
 
-```{r, echo=TRUE, fig.show='asis', fig.align='center'}
+```{r, echo=TRUE, eval = FALSE}
 
 library(leaflet)
 
@@ -215,12 +217,7 @@ Mex0_df <- data.frame(ID = 1:length(Mex0_grd), row.names = sapply(Mex0_grd@polyg
 Mex0_grd <- sp::SpatialPolygonsDataFrame(Mex0_grd, Mex0_df, match.ID = TRUE)
 
 # Leaflet -----------------------------------------------
-leaflet(width = "100%") %>%
-addProviderTiles('OpenStreetMap.BlackAndWhite',
- options = providerTileOptions(noWrap = TRUE))%>%
-addPolygons(data=Mex0_grd, stroke=TRUE, color = '#2ca25f',
-layerId = Mex0_grd, weight = 1, opacity = 1,
-fillColor = '#99d8c9', fillOpacity = 0.6)
+plot(Mex0_grd)
 ```
 
 ## *grd_build* function
@@ -235,23 +232,11 @@ system.time(Mex0_grd1<-grd_build(Mex0)) # creating the GRID with 20Km resolution
 # with pretty options -----------------------------------------------
 system.time(Mex0_grd2<-grd_build(Mex0, pretty.int=T))
 
-# leaflet interaction -----------------------------------------------
+# plots -------------------------------------------------------------
 
-m1 <- leaflet(width = "100%") %>%
-addProviderTiles('OpenStreetMap.BlackAndWhite',
- options = providerTileOptions(noWrap = TRUE))%>%
-addPolygons(data=Mex0_grd1, stroke=TRUE, color = '#2ca25f',
-layerId = Mex0_grd1, weight = 1, opacity = 1,
-fillColor = '#99d8c9', fillOpacity = 0.6)
-m1
+plot(Mex0_grd1)
 
-m2 <- leaflet(width = "100%") %>%
-addProviderTiles('OpenStreetMap.BlackAndWhite',
- options = providerTileOptions(noWrap = TRUE))%>%
-addPolygons(data=Mex0_grd2, stroke=TRUE, color = '#2ca25f',
-layerId = Mex0_grd2, weight = 1, opacity = 1,
-fillColor = '#99d8c9', fillOpacity = 0.6)
-m2
+plot(Mex0_grd2)
 ```
 
 

@@ -24,7 +24,7 @@ This package was build in R version 3.5.1 (2018-07-02).
     ## tz       America/Mexico_City         
     ## date     2018-12-14                  
 
-Intruction for updating R can be found in
+Instruction for updating R can be found in
 [here](https://www.r-statistics.com/2013/03/updating-r-from-r-on-windows-using-the-installr-package/)
 
 You can install the content of this package through the following code.
