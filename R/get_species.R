@@ -338,7 +338,6 @@ get_species_grid<-function(grid_res = 16){
 get_species_georel<-function(target, start_level, value, grid_res = 16,
                              validation = FALSE, fossil = TRUE, no_date = TRUE,
                              min_occ = 1, bioclim = FALSE){
-  browser()
   ## Args validation
 
   if(missing(target)){
