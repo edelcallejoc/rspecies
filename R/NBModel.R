@@ -43,7 +43,7 @@ setGeneric("NBModel", function(points, map, target = NULL,
 #'
 #' @param contain Character (\code{simple} or \code{properly}).
 #'     By default \code{simple}, it implies a simple contention
-#'     evaluation (see \code{\link[rgeos]{gContains}})).
+#'     evaluation (see \code{\link[rgeos]{gContains()}})).
 #'     \code{properly} suggests a properly contention evaluation
 #'     (see \code{\link[rgeos]{gContainsProperly}})). It requieres that
 #'     points argument should be a \code{\link[sp]{SpatialPointsDataFrame-class}} object
