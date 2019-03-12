@@ -18,6 +18,7 @@ workflow
 pruebas.R
 README.rmd
 README.html
+borrar.txt
 
 # knitr and R markdown default cache directories
 /*_cache/
